@@ -19,10 +19,14 @@ class SortieController extends Controller
     /**
      * @Route("", name="sortie_index", methods={"GET"})
      */
-    public function index(SortieRepository $sortieRepository): Response
+    public function index(SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
+
+        $listeSite = $listeParticipant = $entityManager->getRepository('App:Site')->findAll();
+
+
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),
+            'sorties' => $sortieRepository->findAll(), 'ListeSite'=>$listeSite,
         ]);
     }
 

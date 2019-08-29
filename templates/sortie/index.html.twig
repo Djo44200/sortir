@@ -5,6 +5,27 @@
 {% block body %}
     <h1>Sortie index</h1>
 
+    <div class="jour">Date du jour : {{ date('now') | date('d/m/Y') }}</div>
+<br>
+
+<div class="container">
+    <div class="form-group ">
+        <div class="row">
+            <div class="col-6">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Site
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('sortie_index') }}">TOUTES</a>
+                        {% for Site in ListeSite %}
+                            <a class="dropdown-item" href="{{ path('sortie_index') }}?site={{ Site.id }}">{{ Site.nom }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    {% if sorties%}
+
     <table class="table">
         <thead>
             <tr>
@@ -56,6 +77,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+{% endif %}
     <a href="{{ path('sortie_new') }}">Create new</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
