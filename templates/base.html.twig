@@ -1,15 +1,86 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        {{ encore_entry_link_tag('app') }}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-    {{ encore_entry_script_tag('app') }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Accueil{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Play&display=swap" rel="stylesheet">
+    {{ encore_entry_link_tags('app') }}
+</head>
+<body>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<div class="container-fluid" id="containerNav">
+    <header>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <!-- Brand -->
+            <div id="logo">
+                <a class="navbar-brand scroll" href="../"><img alt="logo" class="img-fluid"
+                                                               src="{{ asset('build/images/wine-glasses.svg') }}"></a>
+                <span><strong>Sortir</strong>.com | </span>
+            </div>
+
+            <!-- Bouton responsive -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Liens -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('ville_index') }}">Villes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('site_index') }}">Sites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('user_index') }}">Utilisateurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('sortie_index') }}">Accueil</a>
+                    </li>
+                    {% if app.user %}
+                    <li class="nav-item utilisateur">
+                        {% if app.user.img is empty %}
+                        <img alt="logo" class="avatarPetit" src="{{ asset('build/images/user.svg') }}">
+                        {% else %}
+                        <img alt="logo" class="avatarPetit" src="{{ asset('uploads/photos/') }}{{ app.user.img }}">
+                        {% endif %}
+                        <a class="nav-link nav-link-color scroll" href="{{ url('user_show', { 'id' : app.user.id} )}}">
+                            Bonjour <strong>{{ app.user.pseudo }}</strong> !
+                        </a>
+                        <a class="nav-link nav-link-color scroll" href="{{ path('app_logout') }}">
+                            <img alt="logout" class="logout"  src="{{ asset('build/images/cancel.svg') }}">
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>
+
+<div class="container">
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</div>
+</body>
+
+{{ encore_entry_script_tags('app') }}
 </html>
