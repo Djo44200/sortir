@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site{% endblock %}
+
+{% block body %}
+    <h1>Site</h1>
+<div id="showSite">
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ site.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ site.nom }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button class="bouton"><a href="{{ path('site_index') }}">Retour à la liste</a></button>
+
+    <button class="bouton"><a href="{{ path('site_edit', {'id': site.id}) }}">Modifier</a></button>
+
+</div>
+{% endblock %}

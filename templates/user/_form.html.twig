@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier Profil{% endblock %}
+
+{% block body %}
+
+<h2>Modifier votre profil</h2>
+
+<div id="profil">
+    {{ form_start(form) }}
+    <div id="imgUpload">
+        {% if app.user.img is empty %}
+            {{ form_row(form.img) }}
+        {% else %}
+            <img id="avatar" alt="avatar"  src="{{ asset('uploads/photos/') }}{{ user.img }}">
+            {{ form_row(form.img) }}
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.pseudo) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.telephone) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword) }}
+            {{ form_row(form.villeRattachement) }}
+        </div>
+    </div>
+    <button class="bouton">{{ button_label|default('Enregistrer') }}</button>
+    <button class="bouton"><a href="{{ path('user_show', { 'id' : app.user.id}) }}">Annuler</a></button>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

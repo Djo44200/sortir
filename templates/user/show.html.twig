@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+{% if app.user.id == user.id %}
+    <h2>Votre profil</h2>
+{% else %}
+    <h2>Profil de {{ user.pseudo }}</h2>
+{% endif %}
+<div id="profil">
+    {% if app.user.img is empty %}
+        <img alt="logo" id="avatar" src="{{ asset('build/images/avatar.svg') }}">
+    {% else %}
+        <img id="avatar" alt="avatar"  src="{{ asset('uploads/photos/') }}{{ user.img }}">
+    {% endif %}
+    <div class="infosProfil">
+        <div class="row">
+            <div class="col-6 gauche">
+                <p>Pseudo</p>
+                <p>Prénom</p>
+                <p>Nom</p>
+                <p>Téléphone</p>
+                <p>Email</p>
+                <p>Ville de rattachement</p>
+            </div>
+            <div class="col-6 droit">
+                {% if user.pseudo is empty %}
+                    <p>-</p>
+                {% else %}
+                    <p>{{ user.pseudo }}</p>
+                {% endif %}
+                {% if user.prenom is empty %}
+                    <p>-</p>
+                {% else %}
+                    <p>{{ user.prenom }}</p>
+                {% endif %}
+                {% if user.nom is empty %}
+                    <p>-</p>
+                {% else %}
+                    <p>{{ user.nom }}</p>
+                {% endif %}
+                {% if user.telephone is empty %}
+                    <p>-</p>
+                {% else %}
+                    <p>0{{ user.telephone }}</p>
+                {% endif %}
+                <p>{{ user.email }}</p>
+                {% if user.villeRattachement is empty %}
+                    <p>-</p>
+                {% else %}
+                    <p>{{ user.villeRattachement }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if app.user.id == user.id %}
+        <button class="bouton"><a href="{{ path('user_edit', {'id': user.id}) }}" >Modifier</a></button>
+    {% endif %}
+    <button class="bouton" onclick="javascript:history.back()">Retour</button>
+</div>
+
+{% endblock %}

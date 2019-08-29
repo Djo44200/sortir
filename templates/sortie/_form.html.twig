@@ -1,0 +1,90 @@
+{{ form_start(form) }}
+<div class="container">
+    <div class="form-group ">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-6">
+            {{ form_label(form.nom)}}
+            {{form_widget(form.nom)}}
+            {{ form_errors(form.nom) }}
+
+
+            {{ form_label(form.dateDebut)}}
+            {{form_widget(form.dateDebut)}}
+            {{ form_errors(form.dateDebut) }}
+
+
+            {{ form_label(form.dateCloture)}}
+            {{form_widget(form.dateCloture)}}
+            {{ form_errors(form.dateCloture) }}
+
+
+            {{ form_label(form.nbInscriptionsMax)}}
+            {{form_widget(form.nbInscriptionsMax)}}
+            {{ form_errors(form.nbInscriptionsMax) }}
+
+
+            {{ form_label(form.duree)}}
+            {{form_widget(form.duree)}}
+            {{ form_errors(form.duree) }}
+
+
+            {{ form_label(form.descriptionInfos)}}
+            {{form_widget(form.descriptionInfos)}}
+            {{ form_errors(form.descriptionInfos) }}
+            </div>
+            <div class="col-6">
+            {{ form_label(form.organisateur)}}
+            {{form_widget(form.organisateur)}}
+            {{ form_errors(form.organisateur) }}
+
+
+            {{ form_label(form.site)}}
+            {{form_widget(form.site)}}
+            {{ form_errors(form.site) }}
+
+            {{ form_label(form.lieu)}}
+                <div class="row">
+                    <div class="col-6">
+            {{form_widget(form.lieu)}}
+            {{ form_errors(form.lieu) }}
+                </div>
+                    <div class="col-6">
+                <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="bouton">+</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <div class="row">
+            <div class="col-4">
+        {{ form_row(form.submit) }}
+            </div>
+            <div class="col-4">
+        <button class="bouton">{{ button_label|default('Publier') }}</button>
+            </div>
+            <div class="col-4">
+                <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a>
+            </div>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
+    </div>
+</div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                FORMULAIRE CREATION LIEU
+            </div>
+        </div>
+    </div>
+
+{{ form_end(form) }}
