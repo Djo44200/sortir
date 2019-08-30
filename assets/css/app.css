@@ -7,7 +7,6 @@
 }
 
 body{
-    background-color: #7d5fff;
     font-family: 'Comfortaa', cursive;
 }
 button a{
@@ -19,8 +18,9 @@ button a:hover{
 }
 
 h1{
-    text-align: center !important;
+    text-align: center;
     margin-top: 20px;
+    ;
 }
 h2{
     color: white;
