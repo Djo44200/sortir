@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Entity\User;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
@@ -33,32 +34,8 @@ class SortieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($site){
-                // recherche par site
-                $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
+            if ($site==null && $search==null && $dateDebut==null && $dateFin==null){
 
-                // Recherche par nom et site
-                if ($search and $site){
-                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSiteParRecherche($site,$search);
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                return $this->render('sortie/index.html.twig', [
-                    'sorties' => $listeSortie ,
-                    'form' => $form->createView()
-                ]);
 
             }
         }

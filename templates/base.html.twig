@@ -46,12 +46,14 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
                     </li>
+                    {% if app.user is null  %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('app_login') }}">Connexion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('sortie_index') }}">Accueil</a>
                     </li>
