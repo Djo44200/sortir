@@ -56,7 +56,8 @@ class SortieType extends AbstractType
             ])
             ->add('ville', EntityType::class, [
                 'class'=>Ville::class,
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
