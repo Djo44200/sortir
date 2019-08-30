@@ -26,7 +26,8 @@ class SortieRechercheType extends AbstractType
                 'class'=>Site::class,
                 'label'=>'Site',
                 'trim'=>true,
-                'attr'=> array('class'=>'form-control')
+                'attr'=> array('class'=>'form-control'),
+                'required'=>false
             ])
             ->add('search',SearchType::class,[
                 'label' => ' Le nom de la sortie contient :',
@@ -36,12 +37,14 @@ class SortieRechercheType extends AbstractType
             ->add('dateDebut',DateType::class,[
                 'label' => ' Entre  ',
                 'widget'=>'single_text',
-                'required'=>false
+                'required'=>false,
+                'attr'=> array('class'=>'form-control'),
             ])
             ->add('dateFin',DateType::class,[
                 'label' => ' et ',
                 'widget'=>'single_text',
-                'required'=>false
+                'required'=>false,
+                'attr'=> array('class'=>'form-control')
             ])
             ->add('sortieOrganisateur',CheckboxType::class,[
                 'trim'=>true,

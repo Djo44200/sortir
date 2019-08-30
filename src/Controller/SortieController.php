@@ -23,7 +23,6 @@ class SortieController extends Controller
     public function index(Request $request,SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
 
-
         $form = $this->createForm(SortieRechercheType::class);
         $form->handleRequest($request);
         $site = $form->get('Site')->getData();
@@ -35,17 +34,33 @@ class SortieController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ($site){
-                if ($search){
+                // recherche par site
+                $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
+
+                // Recherche par nom et site
+                if ($search and $site){
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSiteParRecherche($site,$search);
 
                 }
-                $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                return $this->render('sortie/index.html.twig', [
+                    'sorties' => $listeSortie ,
+                    'form' => $form->createView()
+                ]);
+
             }
-
-
-            return $this->render('sortie/index.html.twig', [
-                'sorties' => $listeSortie ,
-                'form' => $form->createView()
-            ]);
         }
 
         $listeSortie = $sortieRepository->findAll();

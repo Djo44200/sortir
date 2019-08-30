@@ -70,7 +70,8 @@
     <div class="container">
         <div class="form-group ">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
+                    <div class="table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
@@ -122,9 +123,11 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
-                    <a href="{{ path('sortie_new') }}">Create new</a>
+                    </div>
+                    <a href="{{ path('sortie_new') }}"><button class="btn bouton">Créer une sortie</button></a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
         {% endblock %}

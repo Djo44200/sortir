@@ -19,7 +19,8 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function rechercheParSite($site){
+    public function rechercheParSite($site)
+    {
         return $this->createQueryBuilder('s')
             ->andWhere('s.site = :site')
             ->setParameter('site', $site)
@@ -27,6 +28,33 @@ class SortieRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
+
+    }
+
+    public function rechercheParSiteParRecherche($site,$search)
+    {
+
+
+        return $this->createQueryBuilder('s')
+            ->where('s.site =:site')
+            ->setParameter('site', $site)
+            ->andWhere('s.nom like :nom')
+            ->setParameter('nom', '%'.$search.'%')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
+    public function recherche($search){
+            return $this->createQueryBuilder('s')
+            ->where('s.nom =:nom')
+            ->setParameter('nom', '%'.$search.'%')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
 
     }
 
