@@ -47,9 +47,27 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
+    public function rechercheSiteNomDateDebut($site,$search,$dateDebut){
+
+        return $this->createQueryBuilder('s')
+            ->where('s.site =:site')
+            ->setParameter('site', $site)
+            ->andWhere('s.nom like :nom')
+            ->setParameter('nom', $search)
+            ->andWhere('s.dateDebut >=: debut')
+            ->setParameter('debut', $dateDebut)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+
+
+    }
+
     public function recherche($search){
             return $this->createQueryBuilder('s')
-            ->where('s.nom =:nom')
+            ->where('s.nom like :nom')
             ->setParameter('nom', '%'.$search.'%')
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
