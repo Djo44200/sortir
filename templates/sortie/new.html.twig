@@ -73,7 +73,37 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                FORMULAIRE CREATION LIEU
+                <div class="modal-body">
+                    <div class="form-group ">
+                        {{ form_start(formLieu) }}
+
+                        {{ form_label(formLieu.nomLieu)}}
+                        {{form_widget(formLieu.nomLieu)}}
+                        {{ form_errors(formLieu.nomLieu) }}
+                        <br>
+                        {{ form_label(formLieu.rue)}}
+                        {{form_widget(formLieu.rue)}}
+                        {{ form_errors(formLieu.rue) }}
+                        <br>
+                        {{ form_label(formLieu.latitude)}}
+                        {{form_widget(formLieu.latitude)}}
+                        {{ form_errors(formLieu.latitude) }}
+                        <br>
+                        {{ form_label(formLieu.longitude)}}
+                        {{form_widget(formLieu.longitude)}}
+                        {{ form_errors(formLieu.longitude) }}
+                        <br>
+
+
+                        {{ form_end(formLieu) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bouton" data-dismiss="modal">Fermer</button>
+
+
+                    <button type="button" class="btn bouton"><a href="{{ path('lieu_new') }}">Ajouter</a></button>
+                </div>
             </div>
         </div>
     </div>

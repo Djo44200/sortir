@@ -7,6 +7,7 @@ use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Entity\User;
+use App\Form\LieuType;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
@@ -118,8 +119,12 @@ class SortieController extends Controller
     public function new(Request $request): Response
     {
         $sortie = new Sortie();
+        $lieu = new Lieu();
         $form = $this->createForm(SortieType::class, $sortie);
+        $formLieu = $this->createForm(LieuType::class,$lieu);
         $form->handleRequest($request);
+        $formLieu->handleRequest($request);
+
 
         //recuperation du site de l'utilisateur qui cree la sortie
         $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
@@ -150,7 +155,8 @@ class SortieController extends Controller
         return $this->render('sortie/new.html.twig', [
             'form' => $form->createView(),
             'sortie' => $sortie,
-            'siteUser' => $siteUser
+            'siteUser' => $siteUser,
+            'formLieu' =>$formLieu->createView()
         ]);
     }
 
