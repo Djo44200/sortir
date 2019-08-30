@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\VilleRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,5 +92,19 @@ class VilleController extends Controller
         }
 
         return $this->redirectToRoute('ville_index');
+    }
+
+    /**
+     * @Route("/recherche/", name="ville_recherche", methods={"GET"})
+     */
+    public function rechercher(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $rechercher = true;
+        $request= Request::createFromGlobals();
+        $recherche= $request->query->get('recherche');
+        $listeVilles = $entityManager->getRepository('App:Ville')->getByMotCle($recherche);
+         return $this->render("ville/index.html.twig", ["listeVilles" => $listeVilles, "rechercher" => $rechercher]);
+
+
     }
 }
