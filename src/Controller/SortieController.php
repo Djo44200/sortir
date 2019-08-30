@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
+use App\Entity\Site;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
@@ -42,6 +45,8 @@ class SortieController extends Controller
 
     /**
      * @Route("/new", name="sortie_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -49,17 +54,36 @@ class SortieController extends Controller
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
+        //recuperation du site de l'utilisateur qui cree la sortie
+        $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
+        //recuperation des villes
+        $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
+        //recuperation des lieux
+        $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('saveAndPublish')->isClicked()) {
+                $sortie->setEtat(Sortie::ETAT_OUVERTE);
+            }
+            if ($form->get('save')->isClicked()) {
+                $sortie->setEtat(Sortie::ETAT_CREE);
+            }
+
+            //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
+            $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
+            //recuperation du site organisateur pour l'ajouter a la sortie en BDD
+            $sortie->setSite($siteUser[0]);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            return $this->redirectToRoute('sortie_index');
+            return $this->redirectToRoute('sortie_index', ['ville'=>$villes, 'lieux'=>$lieux, 'siteUser' => $siteUser]);
         }
-
         return $this->render('sortie/new.html.twig', [
-            'sortie' => $sortie,
             'form' => $form->createView(),
+            'sortie' => $sortie,
+            'siteUser' => $siteUser
         ]);
     }
 

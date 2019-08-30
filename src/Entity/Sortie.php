@@ -6,13 +6,14 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SortieRepository")
  */
 class Sortie
 {
-
+    //constantes d'etat
     const ETAT_CREE = 'CRE';
     const ETAT_OUVERTE = 'OUV';
     const ETAT_EN_COURS = 'ENC';
@@ -28,33 +29,42 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champ doit être renseigné.")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="datetime")
-     *
+     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\DateTime
      */
     private $dateDebut;
 
     /**
-     *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type("integer", message="La durée doit être indiquée en chiffre.")
+     * @Assert\GreaterThan(value=0, message="La durée, si elle est indiquée, doit être supérieur à 0 minutes.")
      */
     private $duree;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\DateTime
      */
     private $dateCloture;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\Type("integer", message="Le nombre de participants maximum doit être indiqué en chiffre.")
+     * @Assert\GreaterThan(value=0, message="Le nombre de participants maximum doit être supérieur à 0.")
      */
     private $nbInscriptionsMax;
 
     /**
      * @ORM\Column(type="string", length=500)
+     * @Assert\NotBlank(message="Le champ doit être renseigné.")
      */
     private $descriptionInfos;
 
@@ -78,7 +88,6 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=3)
-     *
      */
     private $etat;
 

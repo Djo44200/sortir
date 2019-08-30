@@ -3,6 +3,7 @@
 .jour{
     text-align: right;
     clear: both;
+
 }
 
 body{
@@ -19,6 +20,7 @@ button a:hover{
 
 h1{
     text-align: center !important;
+    margin-top: 20px;
 }
 h2{
     color: white;
@@ -84,8 +86,10 @@ h2{
 }
 
 /* ------------------ Main ------------------ */
+
 .form-control-lg{
 }
+
 #imgUpload{
     text-align: center;
     margin-top: 20px;
