@@ -4,9 +4,9 @@
 
 {% block body %}
     <h1>Sortie</h1>
-<div class="form-group ">
-    <div class="row">
-        <div class="col-6">
+    <div class="form-group ">
+        <div class="row">
+            <div class="col-6">
 
                 Nom de la sortie
                 {{ sortie.nom }}
@@ -25,8 +25,8 @@
 
                 Description et infos
                 {{ sortie.descriptionInfos }}
-        </div>
-        <div class="col-6">
+            </div>
+            <div class="col-6">
                 Ville Organisatrice
                 {{ sortie.site.nom }}
 
@@ -44,36 +44,35 @@
 
                 Longitude
                 {{ sortie.lieu.longitude }}
+            </div>
+
         </div>
-
     </div>
-</div>
 
-{% if listeParticipant|length >0 %}
-<div class="table-responsive">
-    <table class="table">
-        <thead>
+    {% if listeParticipant|length >0 %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
 
-        <tr>
-            <th>Pseudo</th>
-            <th>Nom</th>
-        </tr>
-        </thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                </tr>
+                </thead>
 
-        {% for Inscription in listeParticipant %}
+                {% for Inscription in listeParticipant %}
 
-            <tr>
-                <td>{{ Inscription.participant.pseudo }}</td>
-                <td>{{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</td>
-                <td>{{ Ad.cp }}</td>
-                <td>{{ Ad.prix }} €</td>
-                <td>{{ Ad.categorie.getLibelle() }}</td>
-                <td>{{   Ad.dateCreation | date('d/m/Y') }} à {{   Ad.dateCreation | date('H:i:s', "Europe/Paris") }}</td>
-            </tr>
-
-
-
-        {% endfor %}
-    </table>
-
+                    <tr>
+                        <td>{{ Inscription.participant.pseudo }}</td>
+                        <td>{{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</td>
+                        <td>{{ Ad.cp }}</td>
+                        <td>{{ Ad.prix }} €</td>
+                        <td>{{ Ad.categorie.getLibelle() }}</td>
+                        <td>{{ Ad.dateCreation | date('d/m/Y') }}
+                            à {{ Ad.dateCreation | date('H:i:s', "Europe/Paris") }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
 {% endblock %}

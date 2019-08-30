@@ -25,8 +25,8 @@
                 <td>{{ lieu.latitude }}</td>
                 <td>{{ lieu.longitude }}</td>
                 <td>
-                    <a href="{{ path('lieu_show', {'id': lieu.id}) }}">show</a>
-                    <a href="{{ path('lieu_edit', {'id': lieu.id}) }}">edit</a>
+                    <a href="{{ path('lieu_show', {'id': lieu.id}) }}" class="btn btn-primary"><img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
+                    <a href="{{ path('lieu_edit', {'id': lieu.id}) }}" class="btn btn-success"> <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                 </td>
             </tr>
         {% else %}

@@ -46,10 +46,10 @@
                     <p>0{{ user.telephone }}</p>
                 {% endif %}
                 <p>{{ user.email }}</p>
-                {% if user.villeRattachement is empty %}
+                {% if user.site is empty %}
                     <p>-</p>
                 {% else %}
-                    <p>{{ user.villeRattachement }}</p>
+                    <p>{{ user.site }}</p>
                 {% endif %}
             </div>
         </div>
