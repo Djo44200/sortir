@@ -1,6 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-.main {
+.jour{
+    text-align: right;
+    clear: both;
 
 }
 
@@ -26,6 +28,7 @@ h2{
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 /* ------------------ Header ------------------ */
 #containerNav{
     background-color: #353b48;

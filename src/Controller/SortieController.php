@@ -6,6 +6,7 @@ use App\Entity\Lieu;
 use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Form\SortieRechercheType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,10 +23,23 @@ class SortieController extends Controller
     /**
      * @Route("", name="sortie_index", methods={"GET"})
      */
-    public function index(SortieRepository $sortieRepository): Response
+    public function index(Request $request,SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
+
+        $listeSite = $listeParticipant = $entityManager->getRepository('App:Site')->findAll();
+        $form = $this->createForm(SortieRechercheType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('sortie_index');
+        }
+
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),
+            'sorties' => $sortieRepository->findAll(), 'ListeSite'=>$listeSite,
+            'form' => $form->createView()
         ]);
     }
 
