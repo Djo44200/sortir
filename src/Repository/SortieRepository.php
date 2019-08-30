@@ -19,6 +19,63 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function rechercheParSite($site)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.site = :site')
+            ->setParameter('site', $site)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
+    public function rechercheParSiteParRecherche($site,$search)
+    {
+
+
+        return $this->createQueryBuilder('s')
+            ->where('s.site =:site')
+            ->setParameter('site', $site)
+            ->andWhere('s.nom like :nom')
+            ->setParameter('nom', '%'.$search.'%')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
+    public function rechercheSiteNomDateDebut($site,$search,$dateDebut){
+
+        return $this->createQueryBuilder('s')
+            ->where('s.site =:site')
+            ->setParameter('site', $site)
+            ->andWhere('s.nom like :nom')
+            ->setParameter('nom', $search)
+            ->andWhere('s.dateDebut >=: debut')
+            ->setParameter('debut', $dateDebut)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+
+
+    }
+
+    public function recherche($search){
+            return $this->createQueryBuilder('s')
+            ->where('s.nom like :nom')
+            ->setParameter('nom', '%'.$search.'%')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
