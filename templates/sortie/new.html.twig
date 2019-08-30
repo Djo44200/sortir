@@ -3,9 +3,83 @@
 {% block title %}Nouvelle sortie{% endblock %}
 
 {% block body %}
+
     <h1>Création d'une sortie</h1>
 
-    {{ include('sortie/_form.html.twig') }}
+    {{ form_errors(form) }}
+    <div class="container mt-4">
+        <div class="form-group">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_label(form.dateDebut) }}
+                    {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_label(form.dateCloture) }}
+                    {{ form_widget(form.dateCloture, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_label(form.nbInscriptionsMax) }}
+                    {{ form_widget(form.nbInscriptionsMax, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_label(form.duree) }}
+                    {{ form_widget(form.duree, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_label(form.descriptionInfos) }}
+                    {{ form_widget(form.descriptionInfos, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="col-6">
+                    <label id="organisateur">Ville Organisatrice : </label>
+                    <br>
+                    {% for site in siteUser %}
+                        {{ site.nom }}
+                    {% endfor %}
+                    <br><br>
+                    {{ form_label(form.ville) }}
+                    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+
+                    {{ form_label(form.lieu) }}
+                    <div class="row">
+                        <div class="col-10">
+                            {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="col-1">
+                            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn bouton">+</button>
+                        </div>
+                    </div>
+                    <label id="rue">Rue :</label>
+                    <br><br>
+                    <label id="rue">Code Postal :</label>
+                    <br><br>
+                    <label id="rue">Latitude :</label>
+                    <br><br>
+                    <label id="rue">Longitude :</label>
+                </div>
+            </div>
+            <br><br>
+            <div id="boutons">
+                <div class="row justify-content-center">
+                    {{ form_widget(form.save) }} &nbsp &nbsp &nbsp
+                    {{ form_widget(form.saveAndPublish) }}  &nbsp &nbsp &nbsp
+                    <button class="btn bouton" id="annuler" name="annuler" value="Annuler">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- pour le bouton '+' de Lieu et modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                FORMULAIRE CREATION LIEU
+            </div>
+        </div>
+    </div>
+            {{ form_end(form) }}
+
+
 
 
 {% endblock %}

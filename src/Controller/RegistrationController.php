@@ -14,6 +14,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends Controller
 {
+
     /**
      * @Route("/register", name="app_register")
      */
