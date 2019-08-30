@@ -18,24 +18,40 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends Controller
 {
     /**
-     * @Route("", name="sortie_index", methods={"GET"})
+     * @Route("", name="sortie_index")
      */
     public function index(Request $request,SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
 
-        $listeSite = $listeParticipant = $entityManager->getRepository('App:Site')->findAll();
+
         $form = $this->createForm(SortieRechercheType::class);
         $form->handleRequest($request);
+        $site = $form->get('Site')->getData();
+        $search = $form->get('search')->getData();
+        $dateDebut = $form->get('dateDebut')->getData();
+        $dateFin = $form->get('dateFin')->getData();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
 
-            return $this->redirectToRoute('sortie_index');
+            if ($site){
+                if ($search){
+
+                }
+                $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
+            }
+
+
+            return $this->render('sortie/index.html.twig', [
+                'sorties' => $listeSortie ,
+                'form' => $form->createView()
+            ]);
         }
 
+        $listeSortie = $sortieRepository->findAll();
+
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(), 'ListeSite'=>$listeSite,
+            'sorties' => $listeSortie ,
             'form' => $form->createView()
         ]);
     }
