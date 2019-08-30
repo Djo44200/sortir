@@ -3,13 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Lieu;
-use App\Entity\Site;
 use App\Entity\Sortie;
-use App\Entity\User;
+use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,60 +27,51 @@ class SortieType extends AbstractType
                 'attr'=> array('class'=>'form-control')
             ])
             ->add('dateDebut',DateTimeType::class,[
-                'label'=>'Date et heure de sortie'
-
+                'label'=>'Date et heure de sortie',
+                'widget' => 'single_text'
             ])
-            ->add('dateCloture',DateTimeType::class,[
-                'label'=>'Date limite d\'inscription'
+            ->add('dateCloture',DateType::class,[
+                'label'=>'Date limite d\'inscription',
+                'widget' => 'single_text'
             ])
             ->add('nbInscriptionsMax',IntegerType::class,[
                 'label'=>'Nombre de places',
                 'attr'=> array('class'=>'form-control')
             ])
-            ->add('duree',DateType::class,[
+            ->add('duree', IntegerType::class,[
                 'label'=>'Durée en minutes'
             ])
             ->add('descriptionInfos',TextareaType::class,[
-                'label'=>'Descriptionet infos',
+                'label'=>'Description et informations',
                 'trim'=>true,
                 'attr'=> array('class'=>'form-control')
             ])
-
-            ->add('organisateur',EntityType::class,[
-                'class'=>User::class,
-                'label'=>'Organisateur',
-                'trim'=>true,
-                'attr'=> array('class'=>'form-control')
-            ])
-            ->add('site',EntityType::class,[
-                'class'=>Site::class,
-                'choice_label'=>'nom',
-                'label'=>'Organisme',
-                'trim'=>true,
-                'attr'=> array('class'=>'form-control')
-            ])
-
             ->add('lieu',EntityType::class,[
                 'class'=>Lieu::class,
                 'choice_label'=>'nomLieu',
                 'label'=>'Lieu',
                 'trim'=>true,
-                'attr'=> array('class'=>'form-control')
+                'attr'=> array('class'=>'form-control'),
+                'required' => false
             ])
-            ->add('submit', SubmitType::class, [
-                'attr'=> array('class'=>'bouton'),
-                "label" => "Enregistrer",]);
-
+            ->add('ville', EntityType::class, [
+                'class'=>Ville::class,
+                'mapped' => false
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr' => array('class' => 'btn bouton')
+            ])
+            ->add('saveAndPublish', SubmitType::class, [
+                'label' => 'Publier',
+                'attr' => array('class' => 'btn bouton')
+            ]);
     }
-
-
-
-
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sortie::class,
+            'data_class' => Sortie::class
         ]);
     }
 }
