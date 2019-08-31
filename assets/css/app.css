@@ -89,6 +89,12 @@ h2{
 
 /* ------------------ Main ------------------ */
 
+.card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px; /* largeur obligatoire pour être centré */
+}
+
 .form-control-lg{
 }
 
