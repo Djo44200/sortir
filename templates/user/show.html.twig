@@ -6,7 +6,7 @@
 {% if app.user.id == user.id %}
     <h2>Votre profil</h2>
 {% else %}
-    <h2>Profil de {{ user.pseudo }}</h2>
+    <h1 class="text-muted">Profil de {{ user.pseudo }}</h1>
 {% endif %}
 <div id="profil">
     {% if app.user.img is empty %}
