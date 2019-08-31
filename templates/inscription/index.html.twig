@@ -3,7 +3,7 @@
 {% block title %}Inscription index{% endblock %}
 
 {% block body %}
-    <h1 class="text-muted">Inscription index</h1>
+    <h1 class="text-muted">Liste des inscriptions</h1>
 
     <table class="table">
         <thead>
@@ -25,11 +25,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Oups ! Aucune incription</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('inscription_new') }}">Create new</a>
+    <a href="{{ path('inscription_new') }}"><button class="btn bouton">Créer une inscription</button></a>
 {% endblock %}

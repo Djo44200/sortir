@@ -72,7 +72,7 @@ class UserController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
+            $this->addFlash("success", "Votre profil vient d'être modifiée");
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
@@ -91,7 +91,7 @@ class UserController extends Controller
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
+        $this->addFlash("danger", "L'utilisateur vient d'être supprimée");
         return $this->redirectToRoute('user_index');
     }
 }

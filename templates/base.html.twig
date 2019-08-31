@@ -9,13 +9,6 @@
     {{ encore_entry_link_tags('app') }}
 </head>
 <body>
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert-{{ label }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endfor %}
 <div class="container-fluid" id="containerNav">
     <header>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -47,41 +40,46 @@
                         <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
                     </li>
                     {% if app.user is null  %}
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('app_login') }}">Connexion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('app_login') }}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
+                        </li>
                     {% endif %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('sortie_index') }}">Accueil</a>
                     </li>
                     {% if app.user %}
-                    <li class="nav-item utilisateur">
-                        {% if app.user.img is empty %}
-                        <img alt="logo" class="avatarPetit" src="{{ asset('build/images/user.svg') }}">
-                        {% else %}
-                        <img alt="logo" class="avatarPetit" src="{{ asset('uploads/photos/') }}{{ app.user.img }}">
-                        {% endif %}
-                        <a class="nav-link nav-link-color scroll" href="{{ url('user_show', { 'id' : app.user.id} )}}">
-                            Bonjour <strong>{{ app.user.pseudo }}</strong> !
-                        </a>
-                        <a class="nav-link nav-link-color scroll" href="{{ path('app_logout') }}">
-                            <img alt="logout" class="logout"  src="{{ asset('build/images/cancel.svg') }}">
-                        </a>
-                    </li>
+                        <li class="nav-item utilisateur">
+                            {% if app.user.img is empty %}
+                                <a><img alt="logo" class="avatarPetit" src="{{ asset('build/images/user.svg') }}"></a>
+                            {% else %}
+                                <img alt="logo" class="avatarPetit" src="{{ asset('uploads/photos/') }}{{ app.user.img }}">
+                            {% endif %}
+                            <a class="nav-link nav-link-color scroll" href="{{ url('user_show', { 'id' : app.user.id} )}}">
+                                Bonjour <strong>{{ app.user.pseudo }}</strong> !
+                            </a>
+                            <a class="nav-link nav-link-color scroll" href="{{ path('app_logout') }}">
+                                <img alt="logout" class="logout"  src="{{ asset('build/images/cancel.svg') }}">
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
     </header>
 </div>
-
-<div class="container">
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
-</div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+    {% block body %}
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
 </body>
 
 {{ encore_entry_script_tags('app') }}
