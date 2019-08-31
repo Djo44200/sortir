@@ -38,7 +38,7 @@ class InscriptionController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($inscription);
             $entityManager->flush();
-
+            $this->addFlash("success", "L'inscription vient d'être ajoutée");
             return $this->redirectToRoute('inscription_index');
         }
 
@@ -68,7 +68,7 @@ class InscriptionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "L'inscription vient d'être modifiée");
             return $this->redirectToRoute('inscription_index');
         }
 
@@ -87,6 +87,7 @@ class InscriptionController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($inscription);
             $entityManager->flush();
+            $this->addFlash("danger", "L'inscription vien d'être supprimée");
         }
 
         return $this->redirectToRoute('inscription_index');

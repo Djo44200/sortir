@@ -3,9 +3,9 @@
 {% block title %}New Inscription{% endblock %}
 
 {% block body %}
-    <h1 class="text-muted">Create new Inscription</h1>
+    <h1 class="text-muted">Nouvelle inscription</h1>
 
     {{ include('inscription/_form.html.twig') }}
 
-    <a href="{{ path('inscription_index') }}">back to list</a>
+    <a href="{{ path('inscription_index') }}"><button class="btn bouton">Retour à lal liste</button></a>
 {% endblock %}

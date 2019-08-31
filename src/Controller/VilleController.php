@@ -40,7 +40,7 @@ class VilleController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ville);
             $entityManager->flush();
-
+            $this->addFlash("success", "La ville vient d'être ajoutée");
             return $this->redirectToRoute('ville_index');
         }
 
@@ -70,7 +70,7 @@ class VilleController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "La ville vient d'être modifiée");
             return $this->redirectToRoute('ville_index');
         }
 
@@ -90,7 +90,7 @@ class VilleController extends Controller
             $entityManager->remove($ville);
             $entityManager->flush();
         }
-
+        $this->addFlash("danger", "La ville vient d'être supprimée");
         return $this->redirectToRoute('ville_index');
     }
 

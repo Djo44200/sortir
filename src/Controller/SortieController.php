@@ -149,7 +149,7 @@ class SortieController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sortie);
             $entityManager->flush();
-
+            $this->addFlash("info", "La sortie vient d'être créée");
             return $this->redirectToRoute('sortie_index', ['ville'=>$villes, 'lieux'=>$lieux, 'siteUser' => $siteUser]);
         }
         return $this->render('sortie/new.html.twig', [
@@ -187,7 +187,7 @@ class SortieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "La sortie vient d'être modifiée");
             return $this->redirectToRoute('sortie_index');
         }
 
@@ -206,6 +206,7 @@ class SortieController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($sortie);
             $entityManager->flush();
+            $this->addFlash("danger", "La sortie vient d'être supprimée");
         }
 
         return $this->redirectToRoute('sortie_index');
