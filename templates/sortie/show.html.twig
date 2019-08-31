@@ -43,30 +43,13 @@
             <div class="col-6">
 
                 {% if listeParticipant|length >0 %}
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-
-                            <tr>
-                                <th>Pseudo</th>
-                                <th>Nom</th>
-                            </tr>
-                            </thead>
-
-                            {% for Inscription in listeParticipant %}
-
-                                <tr>
-                                    <td>{{ Inscription.participant.pseudo }}</td>
-                                    <td>{{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</td>
-                                    <td>{{ Ad.cp }}</td>
-                                    <td>{{ Ad.prix }} €</td>
-                                    <td>{{ Ad.categorie.getLibelle() }}</td>
-                                    <td>{{ Ad.dateCreation | date('d/m/Y') }}
-                                        à {{ Ad.dateCreation | date('H:i:s', "Europe/Paris") }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
+                <div class="card border-success mb-3" style="max-width: 30rem;">
+                    <div class="card-header bg-transparent border-success text-muted text-center">Liste des participants {{ listeParticipant|length }}/ {{ sortie.nbInscriptionsMax }} </div>
+                    <div class="card-body text-success">
+                        {% for Inscription in listeParticipant %}
+                        <p class="card-text text-center"> {{ Inscription.participant.pseudo }} | {{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</strong></p>
                     </div>
+                    {% endfor %}
                 {% endif %}
 
             </div>
