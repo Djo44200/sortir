@@ -1,5 +1,13 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+#effet {
+    font-family: 'Waiting for the Sunrise', cursive;
+    font-size:30px;
+    margin: 10px 50px;
+    letter-spacing: 6px;
+    font-weight: bold;
+}
+
 .jour{
     text-align: right;
     clear: both;

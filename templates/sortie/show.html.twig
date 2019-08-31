@@ -43,11 +43,11 @@
             <div class="col-6">
 
                 {% if listeParticipant|length >0 %}
-                <div class="card border-success mb-3" style="max-width: 30rem;">
+                <div class="card border-success mb-3 " style="max-width: 30rem;">
                     <div class="card-header bg-transparent border-success text-muted text-center">Liste des participants {{ listeParticipant|length }}/ {{ sortie.nbInscriptionsMax }} </div>
                     <div class="card-body text-success">
                         {% for Inscription in listeParticipant %}
-                        <p class="card-text text-center"> {{ Inscription.participant.pseudo }} | {{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</strong></p>
+                        <p class="card-text text-center "> {{ Inscription.participant.pseudo }} | {{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</strong></p>
                     </div>
                     {% endfor %}
                 {% endif %}
@@ -64,4 +64,64 @@
             </a>
         </div>
     </div>
+
+    <div id="accordeon">
+        <div class="card ">
+            <div class="card-body ">
+                <h4 class="card-title">{{ sortie.nom }}</h4>
+            </div>
+            <div class="card-header">
+                <a href="#item1" class="card-link" data-toggle="collapse" data-parent="#accordeon">Informations sur la sortie</a>
+            </div>
+            <div class="collapse show" id="item1">
+                <div class="card-body">
+                    <p class="card-text text-center"> <u>Date limite de l'inscription </u>: <strong>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i') : '' }}</strong></p>
+                    <p class="card-text text-center"> <u>Nombre de places </u>: <strong>{{ sortie.nbInscriptionsMax }}</strong></p>
+                    <p class="card-text text-center"> <u>Durée </u>: <strong>{{ sortie.duree }} minutes</strong></p>
+                    <p class="card-text text-center"> <u>Description et infos </u>: <strong>{{ sortie.descriptionInfos }}</strong></p>
+                    <p class="card-text text-center"> <u>Ville Organisatrice </u>: <strong>{{ sortie.site.nom }}</strong></p>
+                    <p class="card-text text-center"> <u>Lieu </u>: <strong>{{ sortie.lieu.nomLieu }}</strong></p>
+                    <p class="card-text text-center"> <u>Rue </u>: <strong>{{ sortie.lieu.rue }}</strong></p>
+                    <p class="card-text text-center"> <u>Code Postal </u>: <strong>{{ sortie.lieu.ville.codePostal }}</strong></p>
+                    <p class="card-text text-center"> <u>Latitude </u>: <strong>{{ sortie.lieu.latitude }}</strong></p>
+                    <p class="card-text text-center"> <u>Longitude </u>: <strong> {{ sortie.lieu.longitude }}</strong></p>
+                </div>
+            </div>
+            {% if listeParticipant|length >0 %}
+            <div class="card-header">
+                <a href="#item2" class="card-link" data-toggle="collapse" data-parent="#accordeon">Liste des participants {{ listeParticipant|length }}/ {{ sortie.nbInscriptionsMax }} </a>
+            </div>
+            <div class="collapse" id="item2">
+                <div class="card-body">
+                    {% for Inscription in listeParticipant %}
+                    <p class="card-text text-center "> {{ Inscription.participant.pseudo }} | {{ Inscription.participant.nom }} {{ Inscription.participant.prenom }}</strong></p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="card-header">
+                <a href="#item3" class="card-link" data-toggle="collapse" data-parent="#accordeon">Modifications</a>
+            </div>
+            <div class="collapse" id="item3">
+                <div class="card-body">
+                        <div class="d-inline-block align-items-center">
+                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-success">
+                                <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
+                            <div class="d-inline-block">
+                                <form method="post" action="{{ path('sortie_delete', {'id': sortie.id}) }}"
+                                      onsubmit="return confirm('Êtes vous sur de vouloir supprimer cette sortie ?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
+                                    <button class="btn btn-danger"><img alt="plus" class="plus"
+                                                                        src="{{ asset('build/images/close.svg') }}">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
 {% endblock %}
