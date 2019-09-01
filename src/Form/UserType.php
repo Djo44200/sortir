@@ -59,6 +59,7 @@ class UserType extends AbstractType
             "required" => false,
             'attr' => array('class' => 'form-control form-control-lg'),
         ]);
+
         $builder->add('email', EmailType::class, [
             "error_bubbling" => true,
             "trim" => true,
