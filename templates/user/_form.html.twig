@@ -2,7 +2,7 @@
 {% block title %}Modifier Profil{% endblock %}
 
 {% block body %}
-
+    {% if app.user.id == user.id %}
 <h1  class="text-muted">Modifier votre profil</h1>
 
 <div id="profil">
@@ -28,9 +28,20 @@
             {{ form_row(form.site) }}
         </div>
     </div>
+    <div class="row">
+        <div class="col-6">
     <button class="bouton">{{ button_label|default('Enregistrer') }}</button>
-    <button class="bouton"><a href="{{ path('user_show', { 'id' : app.user.id}) }}">Annuler</a></button>
-    {{ form_end(form) }}
-</div>
 
+    {{ form_end(form) }}
+        </div>
+        <div class="col-6">
+    <button class="bouton"><a href="{{ path('user_show', { 'id' : app.user.id}) }}">Annuler</a></button>
+        </div>
+    </div>
+</div>
+    {% else %}
+
+        <img  class="align-items-center" src="{{ asset('build/images/geek.jpg') }}" alt="Mon Image"/>
+
+    {% endif %}
 {% endblock %}

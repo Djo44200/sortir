@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Site;
 use App\Entity\User;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -44,6 +45,14 @@ class RegistrationFormType extends AbstractType
 
                 ],
 
+            ])
+            ->add('site',EntityType::class, [
+                'class'=>Site::class,
+                'choice_label'=>'nom',
+                'label'=>'Organisme de rattachement',
+                'trim'=>true,
+                'required'=>false,
+                'attr'=> array('class'=>'form-control')
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
