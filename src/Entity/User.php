@@ -39,9 +39,9 @@ class User implements UserInterface
     private $pseudo;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @var string The hashed password

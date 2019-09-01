@@ -83,6 +83,65 @@
     {% block body %}
     {% endblock %}
     {% block javascripts %}{% endblock %}
+<br><br><br>
+<footer class="page-footer font-small blue" >
+    <div class="container">
+
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded "data-toggle="modal" data-target="#confidence">La politique de confidentialité</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded">CGU</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded">Contact</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded">Qui sommes nous ?</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded">Qui sommes nous ?</a>
+            </li>
+        </ul>
+        <!-- Call to action -->
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3 ">© 2019 Copyright:
+        <a href="{{ path('sortie_index') }}"> Sortir.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="confidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Politique de confidentialité</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 </body>
 
 {{ encore_entry_script_tags('app') }}
