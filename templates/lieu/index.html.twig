@@ -27,6 +27,16 @@
                 <td>
                     <a href="{{ path('lieu_show', {'id': lieu.id}) }}" class="btn btn-primary"><img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
                     <a href="{{ path('lieu_edit', {'id': lieu.id}) }}" class="btn btn-success"> <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
+                    <div class="d-inline-block">
+                        <form method="post" action="{{ path('lieu_delete', {'id': lieu.id}) }}"
+                              onsubmit="return confirm('Êtes vous sur de vouloir supprimer ce lieu ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lieu.id) }}">
+                            <button class="btn btn-danger"><img alt="plus" class="plus"
+                                                                src="{{ asset('build/images/close.svg') }}">
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         {% else %}
