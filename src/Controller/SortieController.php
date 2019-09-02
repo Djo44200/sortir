@@ -6,17 +6,19 @@ use App\Entity\Lieu;
 use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Entity\Ville;
-use App\Entity\User;
 use App\Form\LieuType;
 use App\Form\SortieCancelType;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
+use App\Form\SortieRechercheType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \Symfony\Component\Form\FormInterface;
+use \Symfony\Component\Form\ClickableInterface;
 
 /**
  * @Route("/sortie")
@@ -94,8 +96,6 @@ class SortieController extends Controller
                 'sorties' => $listeSortie,
                 'form' => $form->createView()
             ]);
-
-
         }
 
         $listeSortie = $sortieRepository->findAll();
@@ -113,13 +113,16 @@ class SortieController extends Controller
      */
     public function new(Request $request): Response
     {
+        //pour formulaire sortie
         $sortie = new Sortie();
-        $lieu = new Lieu();
         $form = $this->createForm(SortieType::class, $sortie);
         $formLieu = $this->createForm(LieuType::class, $lieu);
-        $form->handleRequest($request);
-        $formLieu->handleRequest($request);
 
+        $form->handleRequest($request);
+       //pour formulaire lieu dans la modal
+        $lieu = new Lieu();
+        $formLieu = $this->createForm(LieuType::class,$lieu);
+        $formLieu->handleRequest($request);
 
         //recuperation du site de l'utilisateur qui cree la sortie
         $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
@@ -128,6 +131,7 @@ class SortieController extends Controller
         //recuperation des lieux
         $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
 
+        //validation formulaire sortie
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('saveAndPublish')->isClicked()) {
                 $sortie->setEtat(Sortie::ETAT_OUVERTE);
@@ -135,7 +139,6 @@ class SortieController extends Controller
             if ($form->get('save')->isClicked()) {
                 $sortie->setEtat(Sortie::ETAT_CREE);
             }
-
 
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
             $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
@@ -148,11 +151,25 @@ class SortieController extends Controller
             $this->addFlash("info", "La sortie vient d'être créée");
             return $this->redirectToRoute('sortie_index', ['ville' => $villes, 'lieux' => $lieux, 'siteUser' => $siteUser]);
         }
+
+        dump($lieu);
+        //validation formulaire lieu
+        //si creation de lieu avec la modale, ajout en BDD
+        if ($formLieu->isSubmitted() && $formLieu->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($lieu);
+            $entityManager->flush();
+            $this->addFlash("info", "Le lieu vient d'être créé");
+            // essai de redirection vers page precedente : return $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
         return $this->render('sortie/new.html.twig', [
             'form' => $form->createView(),
             'sortie' => $sortie,
             'siteUser' => $siteUser,
-            'formLieu' => $formLieu->createView()
+            'formLieu' =>$formLieu->createView(),
+            'lieu'=>$lieu
         ]);
     }
 

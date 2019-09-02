@@ -48,7 +48,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type("integer", message="La durée doit être indiquée en chiffre.")
+     * @Assert\Type("integer", message="La durée doit être indiquée en chiffres.")
      * @Assert\GreaterThan(value=0, message="La durée, si elle est indiquée, doit être supérieur à 0 minutes.")
      */
     private $duree;
