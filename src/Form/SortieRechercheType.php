@@ -9,6 +9,7 @@ use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -46,31 +47,18 @@ class SortieRechercheType extends AbstractType
                 'required'=>false,
                 'attr'=> array('class'=>'form-control')
             ])
-            ->add('sortieOrganisateur',CheckboxType::class,[
-                'trim'=>true,
-                'label'=> 'Sortie dont je suis l\'organisateur',
-                'attr'=> array('class'=>'form-check-label'),
-                'required'=>false
-            ])
-            ->add('sortieInscris',CheckboxType::class,[
-                'trim'=>true,
-                'label'=> 'Sortie auquelles je suis inscris',
-                'attr'=> array('class'=>'form-check-label'),
-                'required'=>false
-            ])
-            ->add('sortieNonInscris',CheckboxType::class,[
-                'trim'=>true,
-                'label'=> 'Sortie auquelles je ne suis pas inscris',
-                'attr'=> array('class'=>'form-check-label'),
-                'required'=>false
-            ])
-            ->add('sortiePassees',CheckboxType::class,[
-                'trim'=>true,
-                'label'=> 'Sortie passées',
-                'attr'=> array('class'=>'form-check-label'),
-                'required'=>false
-            ])
 
+            ->add('check',ChoiceType::class,[
+                'choices' => [
+                    'Sortie dont je suis l\'organisateur' => 'userOrgan',
+                    'Sortie auquelles je suis inscris' => 'userInscris',
+                    'Sortie auquelles je ne suis pas inscris' => 'userNonInscris',
+                    'Sortie passées' => 'sortiePassee',
+                ],
+                'expanded'=>true,
+                'multiple'=>true,
+                'required'=>false
+            ])
 
 
             ->add('submit', SubmitType::class, [

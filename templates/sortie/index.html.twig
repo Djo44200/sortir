@@ -39,23 +39,11 @@
                     <br>
                 </div>
                 <div class="col-4 col-xl mt-xl-auto align-self-center">
-                    {{ form_widget(form.sortieOrganisateur) }}
-                    {{ form_label(form.sortieOrganisateur) }}
-                    {{ form_errors(form.sortieOrganisateur) }}
-                    <br>
-                    {{ form_widget(form.sortieInscris) }}
-                    {{ form_label(form.sortieInscris) }}
-                    {{ form_errors(form.sortieInscris) }}
-                    <br>
-                    {{ form_widget(form.sortieNonInscris) }}
-                    {{ form_label(form.sortieNonInscris) }}
-                    {{ form_errors(form.sortieNonInscris) }}
-                    <br>
-                    {{ form_widget(form.sortiePassees) }}
-                    {{ form_label(form.sortiePassees) }}
-                    {{ form_errors(form.sortiePassees) }}
-                    <br>
-
+                            {{ form_widget(form.check ) }}
+                            {{ form_label(form.check) }}
+                            {{ form_errors(form.check) }}
+                            <br>
+                        </div>
                 </div>
                 <div class="col-4 col-xl mt-xl-auto align-self-center">
                     {{ form_label(form.submit) }}
@@ -108,31 +96,44 @@
                                         </td>
                                         <td>
                                             {% if sortie.estInscris(app.user) == false %}
-                                                <a href="{{ path('inscription_new', {'id': sortie.id}) }}"class="btn btn-success">
-                                                    <img alt="plus" class="plus" src="{{ asset('build/images/clic.png') }}"></a>
+                                                <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
+                                                   class="btn btn-success">
+                                                    <img alt="plus" class="plus"
+                                                         src="{{ asset('build/images/clic.png') }}"></a>
                                             {% endif %}
                                             {% if sortie.estInscris(app.user) %}
-                                                <form method="post" action="{{ path('inscription_delete', {'id': sortie.id}) }}" onsubmit="return confirm('Voulez vous vraiment vous désinscrire ?');">
+                                                <form method="post"
+                                                      action="{{ path('inscription_delete', {'id': sortie.id}) }}"
+                                                      onsubmit="return confirm('Voulez vous vraiment vous désinscrire ?');">
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
+                                                    <input type="hidden" name="_token"
+                                                           value="{{ csrf_token('delete' ~ sortie.id) }}">
                                                     <button class="btn btn-danger"><img alt="plus" class="plus"
-                                                                                        src="{{ asset('build/images/close.svg') }}"></button>
+                                                                                        src="{{ asset('build/images/close.svg') }}">
+                                                    </button>
                                                 </form>
                                             {% endif %}
                                         </td>
                                         <td>{{ sortie.organisateur }}</td>
                                         <td>
-                                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}"class="btn btn-primary">
+                                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                                               class="btn btn-primary">
                                                 <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"class="btn btn-success">
-                                                <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
+                                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                                               class="btn btn-success">
+                                                <img alt="plus" class="plus"
+                                                     src="{{ asset('build/images/update.svg') }}"></a>
                                             {% if sortie.organisateur == app.user %}
                                             <div class="d-inline-block">
-                                                <form method="post" action="{{ path('sortie_delete', {'id': sortie.id}) }}" onsubmit="return confirm('Voulez-vous supprimer cette sortie ??');">
+                                                <form method="post"
+                                                      action="{{ path('sortie_delete', {'id': sortie.id}) }}"
+                                                      onsubmit="return confirm('Voulez-vous supprimer cette sortie ??');">
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
+                                                    <input type="hidden" name="_token"
+                                                           value="{{ csrf_token('delete' ~ sortie.id) }}">
                                                     <button class="btn btn-danger"><img alt="plus" class="plus"
-                                                                                    src="{{ asset('build/images/close.svg') }}"></button>
+                                                                                        src="{{ asset('build/images/close.svg') }}">
+                                                    </button>
                                                 </form>
                                                 {% endif %}
                                             </div>

@@ -38,67 +38,25 @@ class SortieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($site===null && $search==null && $dateDebut == null && $dateFin == null){
+            if ($site || $search || $dateDebut || $dateFin){
 
-                    //$listeSortie= $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
-                $listeSortie = $sortieRepository->findAll();
-                return $this->render('sortie/index.html.twig', [
-                    'sorties' => $listeSortie ,
-                    'form' => $form->createView()
-                ]);
-            }elseif ($site && $search && $dateDebut && $dateFin){
+                    $listeSortie= $entityManager->getRepository('App:Sortie')->rechecheFormulaire($site,$search,$dateDebut,$dateFin);
 
-                    // A modifier
-                    $listeSortie=$entityManager->getRepository('App:Sortie')->findAll();
-
-                    return $this->render('sortie/index.html.twig', [
-                        'sorties' => $listeSortie ,
-                        'form' => $form->createView()
-                    ]);
-                }elseif ($site && $search && $dateDebut && $dateFin==null){
-
-
-
-                // A modifier
-                $listeSortie=$entityManager->getRepository('App:Sortie')->rechercheSiteNomDateDebut($site,$search,$dateDebut);
+                    dump($listeSortie);
 
                 return $this->render('sortie/index.html.twig', [
                     'sorties' => $listeSortie ,
                     'form' => $form->createView()
                 ]);
-
-
-            }elseif ($site && $search && $dateDebut==null && $dateFin==null){
-
-
-
-                // Liste des sites par nom recherché
-                $listeSortie=$entityManager->getRepository('App:Sortie')->rechercheParSiteParRecherche($site,$search);
-
-                return $this->render('sortie/index.html.twig', [
-                    'sorties' => $listeSortie ,
-                    'form' => $form->createView()
-                ]);
-
-
-            }elseif ($site && $search==null && $dateDebut==null && $dateFin==null){
-
-                // Liste des sites
-                $listeSortie=$entityManager->getRepository('App:Sortie')->rechercheParSite($site);
-
-                return $this->render('sortie/index.html.twig', [
-                    'sorties' => $listeSortie ,
-                    'form' => $form->createView()
-                ]);
-
-
             }
 
 
+            $listeSortie = $sortieRepository->findAll();
 
-
-
-
+            return $this->render('sortie/index.html.twig', [
+                'sorties' => $listeSortie ,
+                'form' => $form->createView()
+            ]);
 
 
         }
@@ -126,6 +84,8 @@ class SortieController extends Controller
         $formLieu->handleRequest($request);
 
 
+
+
         //recuperation du site de l'utilisateur qui cree la sortie
         $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
         //recuperation des villes
@@ -140,6 +100,10 @@ class SortieController extends Controller
             if ($form->get('save')->isClicked()) {
                 $sortie->setEtat(Sortie::ETAT_CREE);
             }
+
+
+
+
 
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
             $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());

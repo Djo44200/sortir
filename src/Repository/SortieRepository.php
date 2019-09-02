@@ -19,6 +19,51 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+
+    public function rechecheFormulaire($site,$search,$dateDebut,$dateFin){
+
+        if ($site){
+            $liste=$this->createQueryBuilder('s')
+                ->andWhere('s.site = :site')
+                ->setParameter('site', $site)
+                ->orderBy('s.nom', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+        if ($search){
+            $liste = $this->createQueryBuilder('s')
+                ->where('s.nom like :nom')
+                ->setParameter('nom', '%'.$search.'%')
+                ->orderBy('s.nom', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+        if ($dateDebut){
+
+            $liste = $this ->createQueryBuilder('s')
+                ->where('s.dateDebut >= :date')
+                ->setParameter('date',$dateDebut)
+                ->orderBy('s.nom', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+
+        if ($dateFin){
+
+        $liste = $this ->createQueryBuilder('s')
+            ->where('s.dateDebut <= :date')
+            ->setParameter('date',$dateFin)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+        return $liste;
+    }
+
     public function rechercheParSite($site)
     {
         return $this->createQueryBuilder('s')
