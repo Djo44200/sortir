@@ -28,6 +28,10 @@ class SortieType extends AbstractType
             ])
             ->add('dateDebut',DateTimeType::class,[
                 'label'=>'Date et heure de sortie',
+
+                'attr' => array(
+                    'min' => (new \DateTime('now'))->format('d/m/Y H:i')
+                )
             ])
             ->add('dateCloture',DateType::class,[
                 'label'=>'Date limite d\'inscription',
