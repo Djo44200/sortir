@@ -8,6 +8,7 @@ use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Entity\User;
 use App\Form\LieuType;
+use App\Form\SortieCancelType;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
@@ -187,6 +188,31 @@ class SortieController extends Controller
         }
 
         return $this->render('sortie/edit.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/cancel", name="sortiecancel", methods={"GET","POST"})
+     */
+    public function cancel(Request $request, Sortie $sortie): Response
+    {
+        $form = $this->createForm(SortieCancelType::class, $sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $sortie->setEtat(Sortie::ETAT_ANNULLE);
+
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "La sortie vient d'être annulée");
+
+
+            return $this->redirectToRoute('sortie_index');
+        }
+
+        return $this->render('sortie/cancel.html.twig', [
             'sortie' => $sortie,
             'form' => $form->createView(),
         ]);

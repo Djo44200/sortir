@@ -34,6 +34,12 @@ class Sortie
     private $nom;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     */
+    private $motif;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="Le champ doit être renseigné.")
      * @Assert\DateTime
@@ -304,6 +310,26 @@ class Sortie
         }
         return $inscris;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+    /**
+     * @param mixed $motif
+     */
+    public function setMotif($motif): void
+    {
+        $this->motif = $motif;
+    }
+
+
+
+
 
     public function __toString(): ?string
     {
