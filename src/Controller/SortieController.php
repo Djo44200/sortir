@@ -10,7 +10,6 @@ use App\Form\LieuType;
 use App\Form\SortieCancelType;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
-use App\Form\SortieRechercheType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
