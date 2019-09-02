@@ -219,7 +219,7 @@ class SortieController extends Controller
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
             $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
             //recuperation du site organisateur pour l'ajouter a la sortie en BDD
-            $sortie->setSite($siteUser[0]);
+            
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();

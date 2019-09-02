@@ -32,9 +32,9 @@
                 <div class="col-6">
                     <label id="organisateur">Ville Organisatrice : </label>
                     <br>
-                    {% for site in siteUser %}
-                        {{ site.nom }}
-                    {% endfor %}
+
+                        {{ sortie.site.nom }}
+
                     <br><br>
                     {{ form_label(form.ville) }}
                     {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}

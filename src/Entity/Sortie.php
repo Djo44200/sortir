@@ -29,19 +29,19 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\NotBlank(message="Le nom de la sortie doit être renseigné.")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     *
      */
     private $motif;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\NotBlank(message="La date de début doit être renseignée.")
      * @Assert\DateTime
      */
     private $dateDebut;
@@ -49,13 +49,14 @@ class Sortie
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type("integer", message="La durée doit être indiquée en chiffres.")
+     * @Assert\NotBlank(message="La durée doit être renseignée.")
      * @Assert\GreaterThan(value=0, message="La durée, si elle est indiquée, doit être supérieur à 0 minutes.")
      */
     private $duree;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\NotBlank(message="La date de clôture doit être renseignée.")
      * @Assert\DateTime
      */
     private $dateCloture;
@@ -70,7 +71,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=500)
-     * @Assert\NotBlank(message="Le champ doit être renseigné.")
+     * @Assert\NotBlank(message="La description doit être renseignée.")
      */
     private $descriptionInfos;
 
