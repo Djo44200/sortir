@@ -50,10 +50,10 @@ class SortieRechercheType extends AbstractType
 
             ->add('check',ChoiceType::class,[
                 'choices' => [
-                    'Sortie dont je suis l\'organisateur' => 'userOrgan',
-                    'Sortie auquelles je suis inscris' => 'userInscris',
-                    'Sortie auquelles je ne suis pas inscris' => 'userNonInscris',
-                    'Sortie passées' => 'sortiePassee',
+                    'Sorties dont je suis l\'organisateur' => 'userOrgan',
+                    'Sorties auquelles je suis inscris' => 'userInscris',
+                    'Sorties auquelles je ne suis pas inscris' => 'userNonInscris',
+                    'Sorties passées' => 'sortiePassee',
                 ],
                 'expanded'=>true,
                 'multiple'=>true,

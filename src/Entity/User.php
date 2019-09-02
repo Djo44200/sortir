@@ -108,6 +108,11 @@ class User implements UserInterface
      */
     private $inscriptions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur", orphanRemoval=true)
+     */
+    private $orgaSortie;
+
 
     public function __construct()
     {
@@ -324,6 +329,43 @@ class User implements UserInterface
     {
         $this->img = $img;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getInscriptions()
+    {
+        return $this->inscriptions;
+    }
+
+    /**
+     * @param mixed $inscriptions
+     */
+    public function setInscriptions($inscriptions): void
+    {
+        $this->inscriptions = $inscriptions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrgaSortie()
+    {
+        return $this->orgaSortie;
+    }
+
+    /**
+     * @param mixed $orgaSortie
+     */
+    public function setOrgaSortie($orgaSortie): void
+    {
+        $this->orgaSortie = $orgaSortie;
+    }
+
+    
+
+
+
 
 
     public function __toString(): ?string

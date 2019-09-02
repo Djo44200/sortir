@@ -25,7 +25,7 @@ class SortieController extends Controller
     /**
      * @Route("", name="sortie_index")
      */
-    public function index(Request $request,SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
 
         $form = $this->createForm(SortieRechercheType::class);
@@ -34,18 +34,52 @@ class SortieController extends Controller
         $search = $form->get('search')->getData();
         $dateDebut = $form->get('dateDebut')->getData();
         $dateFin = $form->get('dateFin')->getData();
-
+        $check = $form->get('check')->getData();
+        $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($site || $search || $dateDebut || $dateFin){
+            if ($site || $search || $dateDebut || $dateFin || $check) {
+                // Recherche par site
+                if ($site) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
 
-                    $listeSortie= $entityManager->getRepository('App:Sortie')->rechecheFormulaire($site,$search,$dateDebut,$dateFin);
+                }
+                // Recherche par nom ( contient )
+                if ($search) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParNom($search);
+                }
+                // Recherche par date de début de la sortie
+                if ($dateDebut) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateDebut($dateDebut);
+                }
+                // Recherche par date de fin de sortie
+                if ($dateFin) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateFin($dateFin);
+                }
+                if ($dateDebut&&$dateFin){
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut,$dateFin);
+                }
+                // Recherche par check user est organisateur
+                if (in_array('userOrgan', $check)) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserOrga($userId);
+                }
+                // Recherche par check user est inscris à une sortie
+                if (in_array('userInscris', $check)) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserInscris($userId);
+                }
+                // Recherche par check user est nom incris à une sortie
+                if (in_array('userNonInscris', $check)) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserNonInscris($userId);
+                }
+                // Recherche par check d'une sortie passée
+                if (in_array('sortiePassee', $check)) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSortiePassee();
+                }
 
-                    dump($listeSortie);
 
                 return $this->render('sortie/index.html.twig', [
-                    'sorties' => $listeSortie ,
+                    'sorties' => $listeSortie,
                     'form' => $form->createView()
                 ]);
             }
@@ -54,7 +88,7 @@ class SortieController extends Controller
             $listeSortie = $sortieRepository->findAll();
 
             return $this->render('sortie/index.html.twig', [
-                'sorties' => $listeSortie ,
+                'sorties' => $listeSortie,
                 'form' => $form->createView()
             ]);
 
@@ -64,7 +98,7 @@ class SortieController extends Controller
         $listeSortie = $sortieRepository->findAll();
 
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $listeSortie ,
+            'sorties' => $listeSortie,
             'form' => $form->createView()
         ]);
     }
@@ -79,11 +113,9 @@ class SortieController extends Controller
         $sortie = new Sortie();
         $lieu = new Lieu();
         $form = $this->createForm(SortieType::class, $sortie);
-        $formLieu = $this->createForm(LieuType::class,$lieu);
+        $formLieu = $this->createForm(LieuType::class, $lieu);
         $form->handleRequest($request);
         $formLieu->handleRequest($request);
-
-
 
 
         //recuperation du site de l'utilisateur qui cree la sortie
@@ -102,9 +134,6 @@ class SortieController extends Controller
             }
 
 
-
-
-
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
             $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
             //recuperation du site organisateur pour l'ajouter a la sortie en BDD
@@ -114,22 +143,22 @@ class SortieController extends Controller
             $entityManager->persist($sortie);
             $entityManager->flush();
             $this->addFlash("info", "La sortie vient d'être créée");
-            return $this->redirectToRoute('sortie_index', ['ville'=>$villes, 'lieux'=>$lieux, 'siteUser' => $siteUser]);
+            return $this->redirectToRoute('sortie_index', ['ville' => $villes, 'lieux' => $lieux, 'siteUser' => $siteUser]);
         }
         return $this->render('sortie/new.html.twig', [
             'form' => $form->createView(),
             'sortie' => $sortie,
             'siteUser' => $siteUser,
-            'formLieu' =>$formLieu->createView()
+            'formLieu' => $formLieu->createView()
         ]);
     }
 
     /**
      * @Route("/{id}", name="sortie_show", methods={"GET"})
      */
-    public function show(Sortie $sortie,EntityManagerInterface $entityManager): Response
+    public function show(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
-        $id=$sortie->getId();
+        $id = $sortie->getId();
         //  Avoir la liste des participants d'une sortie
 
         $listeParticipant = $entityManager->getRepository('App:Inscription')->findBy(['sortie' => $sortie]);
@@ -137,7 +166,7 @@ class SortieController extends Controller
 
         //$listeParticipant = $entityManager->getRepository('User')->findBy(['inscriptions' => ])
         return $this->render('sortie/show.html.twig', [
-            'sortie' => $sortie,'listeParticipant'=>$listeParticipant
+            'sortie' => $sortie, 'listeParticipant' => $listeParticipant
         ]);
     }
 
@@ -166,7 +195,7 @@ class SortieController extends Controller
      */
     public function delete(Request $request, Sortie $sortie): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $sortie->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($sortie);
             $entityManager->flush();
