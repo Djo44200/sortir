@@ -25,11 +25,11 @@ class LieuType extends AbstractType
                 'label'=>'Rue',
                 'attr'=> array('class'=>'form-control')
             ])
-            ->add('latitude', NumberType::class,[
+            ->add('latitude', TextType::class,[
                 'label'=>'Latitude',
                 'attr'=> array('class'=>'form-control')
             ])
-            ->add('longitude', NumberType::class,[
+            ->add('longitude', TextType::class,[
                 'label'=>'Longitude',
                 'attr'=> array('class'=>'form-control')
             ])
@@ -38,13 +38,10 @@ class LieuType extends AbstractType
                     'choice_label'=>'nom',
                     'label'=>'Ville',
                     'attr'=> array('class'=>'form-control')])
-            ->add('submit','Submit')
-
             ->add('submit',SubmitType::class,[
                 'label'=> 'Enregistrer',
                 'attr' => array('class' => 'btn bouton')
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

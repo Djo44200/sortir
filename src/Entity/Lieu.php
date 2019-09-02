@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LieuRepository")
@@ -29,12 +30,12 @@ class Lieu
     private $rue;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=100)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=100)
      */
     private $longitude;
 
@@ -85,24 +86,24 @@ class Lieu
         return $this;
     }
 
-    public function getLatitude(): ?int
+    public function getLatitude(): ?String
     {
         return $this->latitude;
     }
 
-    public function setLatitude(int $latitude): self
+    public function setLatitude(String $latitude): self
     {
         $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitude(): ?int
+    public function getLongitude(): ?String
     {
         return $this->longitude;
     }
 
-    public function setLongitude(int $longitude): self
+    public function setLongitude(String $longitude): self
     {
         $this->longitude = $longitude;
 

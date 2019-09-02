@@ -61,11 +61,16 @@
             <br><br>
             <div id="boutons">
                 <div class="row justify-content-center">
-                    {{ form_widget(form.save) }} &nbsp &nbsp &nbsp
-                    {{ form_widget(form.saveAndPublish) }}  &nbsp &nbsp &nbsp
-                    <button class="btn bouton" id="annuler" name="annuler" value="Annuler">Annuler</button>
+                    <div> {{ form_widget(form.save) }} &nbsp &nbsp &nbsp </div>
+                    <div> {{ form_widget(form.saveAndPublish) }}  &nbsp &nbsp &nbsp </div>
+                    {{ form_end(form) }}
+                    <div> <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a> </div>
+
                 </div>
             </div>
+
+
+
         </div>
     </div>
 
@@ -75,39 +80,36 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="form-group ">
+                        {{ form_errors(formLieu) }}
                         {{ form_start(formLieu) }}
 
                         {{ form_label(formLieu.nomLieu)}}
                         {{form_widget(formLieu.nomLieu)}}
-                        {{ form_errors(formLieu.nomLieu) }}
                         <br>
                         {{ form_label(formLieu.rue)}}
                         {{form_widget(formLieu.rue)}}
-                        {{ form_errors(formLieu.rue) }}
                         <br>
                         {{ form_label(formLieu.latitude)}}
                         {{form_widget(formLieu.latitude)}}
-                        {{ form_errors(formLieu.latitude) }}
                         <br>
                         {{ form_label(formLieu.longitude)}}
                         {{form_widget(formLieu.longitude)}}
-                        {{ form_errors(formLieu.longitude) }}
                         <br>
-
-
-                        {{ form_end(formLieu) }}
+                        {{ form_label(formLieu.ville)}}
+                        {{form_widget(formLieu.ville)}}
+                        <br>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    {{ form_widget(formLieu.submit) }} &nbsp &nbsp &nbsp
                     <button type="button" class="btn bouton" data-dismiss="modal">Fermer</button>
-
-
-                    <button type="button" class="btn bouton"><a href="{{ path('lieu_new') }}">Ajouter</a></button>
                 </div>
+                    {{ form_end(formLieu) }}
+
             </div>
         </div>
     </div>
-            {{ form_end(form) }}
+
 
 
 

@@ -28,6 +28,7 @@ class SortieType extends AbstractType
             ])
             ->add('dateDebut',DateTimeType::class,[
                 'label'=>'Date et heure de sortie',
+                'widget' => 'single_text'
             ])
             ->add('dateCloture',DateType::class,[
                 'label'=>'Date limite d\'inscription',
