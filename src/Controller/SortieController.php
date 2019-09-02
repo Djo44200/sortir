@@ -66,7 +66,9 @@ class SortieController extends Controller
                 }
                 // Recherche par check user est inscris à une sortie
                 if (in_array('userInscris', $check)) {
+
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserInscris($userId);
+
                 }
                 // Recherche par check user est nom incris à une sortie
                 if (in_array('userNonInscris', $check)) {

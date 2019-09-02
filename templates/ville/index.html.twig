@@ -4,6 +4,12 @@
 
 {% block body %}
     <h1 class="text-muted">Liste des villes</h1>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" action="{{ path('ville_recherche') }}" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+        </form>
+    </nav>
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -21,8 +27,6 @@
                 <td>{{ ville.nom }}</td>
                 <td>{{ ville.codePostal }}</td>
                 <td>
-                    <a href="{{ path('ville_show', {'id': ville.id}) }}"class="btn btn-primary">
-                        <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
                     <a href="{{ path('ville_edit', {'id': ville.id}) }}"class="btn btn-success">
                         <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                     <div class="d-inline-block">
