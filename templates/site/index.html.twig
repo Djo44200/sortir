@@ -5,18 +5,12 @@
 {% block body %}
     <h1 class="text-muted">Liste des sites</h1>
     <h3>Filtrer les sites</h3>
-    <form action="{{ path('site_recherche') }}" method="GET">
-        <div class="d-inline-block">
-            <label for="recherche">Le nom contient</label>
-        </div>
-        <div class="d-inline-block">
-            <input type="text" name="recherche" class="form-control">
-        </div>
-        <div class="d-inline-block">
-            <input type="submit" value="Rechercher">
-        </div>
-
-    </form>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" action="{{ path('site_recherche') }}" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+        </form>
+    </nav>
 
     {% if rechercher is defined %}
         <div id="site">
@@ -34,10 +28,6 @@
                     <td>{{ site.id }}</td>
                     <td>{{ site.nom }}</td>
                     <td>
-                        <div class="d-inline-block">
-                            <a href="{{ path('site_show', {'id': site.id}) }}" class="btn btn-primary">
-                                <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                        </div>
                         <div class="d-inline-block">
                             <a href="{{ path('site_edit', {'id': site.id}) }}" class="btn btn-success">
                                 <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>

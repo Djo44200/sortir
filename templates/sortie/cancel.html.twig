@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuler une Sortie{% endblock %}
+
+{% block body %}
+    <h1 class="text-muted">Annuler la sortie</h1>
+
+    {{ form_start(form) }}
+
+
+    <div class="container-fluid">
+    <div class="row">
+
+        <div class="card border-success mb-3" style="max-width: 30rem;">
+            <div class="card-header bg-transparent border-success text-muted text-center">Nom de la sortie : {{ sortie.nom }}</div>
+            <div class="card-body text-success">
+                <p class="card-text"> <u>Nom de la sortie </u>: <strong>{{ sortie.nom }}</strong></p>
+                <p class="card-text"> <u> Date de la sortie </u>: <strong>{{ sortie.dateDebut | date('Y-m-d H:i:s', "Europe/Paris")}}</strong></p>
+                <p class="card-text"> <u>Ville organisatrice </u>: <strong>{{ sortie.site }}</strong></p>
+                <p class="card-text"> <u>Lieu </u>: <strong> {{ sortie.lieu.nomLieu }}</strong></p>
+                <p class="card-text"> {{ sortie.lieu.rue }} - {{ sortie.lieu.ville.codePostal }} - {{ sortie.lieu.ville.nom }}</strong></p>
+                <p class="card-text"> <u>{{ form_label(form.motif)}}</u>: <strong>{{form_widget(form.motif)}} {{ form_errors(form.motif) }}</strong></p>
+
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <div class="d-inline-block align-items-center">
+                    {{form_widget(form.cancel)}}
+                    {{ form_end(form) }}
+                </div>
+                <div class="d-inline-block align-items-center">
+                    <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
+
+
+            </div>
+            <div class="col-6">
+
+
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+
+            </div>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+
+        </div>
+    </div>
+{% endblock %}

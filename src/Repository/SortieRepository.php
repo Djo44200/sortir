@@ -19,6 +19,93 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function rechercheParNom($search){
+
+        return $this->createQueryBuilder('s')
+            ->where('s.nom like :nom')
+            ->setParameter('nom', '%'.$search.'%')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function rechercheParDateDebut($dateDebut){
+
+        return $this ->createQueryBuilder('s')
+            ->where('s.dateDebut >= :date')
+            ->setParameter('date',$dateDebut)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function rechercheParDateFin($dateFin){
+
+        return $this ->createQueryBuilder('s')
+            ->where('s.dateDebut <= :date')
+            ->setParameter('date',$dateFin)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    public function recherchePardateDebutDateFin($dateDebut,$dateFin){
+        return $this ->createQueryBuilder('s')
+            ->where('s.dateDebut <= :dateF')
+            ->setParameter('dateF',$dateFin)
+            ->andWhere('s.dateDebut >= :dateD')
+            ->setParameter('dateD',$dateDebut)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function rechercheParUserOrga($userId){
+
+        return $this->createQueryBuilder('s')
+            ->where('s.organisateur =:orga')
+            ->setParameter('orga',$userId)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    public function rechercheParUserInscris($userId){
+        dump($this->createQueryBuilder('s')
+            ->innerJoin('App:Inscription', 'i', 'WITH', 'i.participant =:inscris')
+            ->setParameter('inscris',$userId)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery());
+        return $this->createQueryBuilder('s')
+            ->innerJoin('App:Inscription', 'i', 'WITH', 'i.participant =:inscris')
+            ->setParameter('inscris',$userId)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function rechercheParUserNonInscris($userId){
+
+        return $this->createQueryBuilder('s')
+            ->where('s.inscriptions != inscris')
+            ->setParameter('inscris',$userId)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    public function rechercheParSortiePassee(){
+
+        return $this->createQueryBuilder('s')
+            ->where('s.etat =: etat')
+            ->setParameter('etat','PAS')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+    }
     public function rechercheParSite($site)
     {
         return $this->createQueryBuilder('s')
@@ -31,39 +118,6 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
-    public function rechercheParSiteParRecherche($site,$search)
-    {
-
-
-        return $this->createQueryBuilder('s')
-            ->where('s.site =:site')
-            ->setParameter('site', $site)
-            ->andWhere('s.nom like :nom')
-            ->setParameter('nom', '%'.$search.'%')
-            ->orderBy('s.nom', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-
-    }
-
-    public function rechercheSiteNomDateDebut($site,$search,$dateDebut){
-
-        return $this->createQueryBuilder('s')
-            ->where('s.site =:site')
-            ->setParameter('site', $site)
-            ->andWhere('s.nom like :nom')
-            ->setParameter('nom', $search)
-            ->andWhere('s.dateDebut >=: debut')
-            ->setParameter('debut', $dateDebut)
-            ->orderBy('s.nom', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-
-
-
-    }
 
     public function recherche($search){
             return $this->createQueryBuilder('s')

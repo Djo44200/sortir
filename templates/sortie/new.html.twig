@@ -61,11 +61,11 @@
             <br><br>
             <div id="boutons">
                 <div class="row justify-content-center">
+
                     <div> {{ form_widget(form.save) }} &nbsp &nbsp &nbsp </div>
                     <div> {{ form_widget(form.saveAndPublish) }}  &nbsp &nbsp &nbsp </div>
                     {{ form_end(form) }}
                     <div> <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a> </div>
-
                 </div>
             </div>
 
@@ -97,11 +97,17 @@
                         <br>
                         {{ form_label(formLieu.ville)}}
                         {{form_widget(formLieu.ville)}}
-                        <br>
+
+                        {{ form_errors(formLieu.ville) }}
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {{ form_widget(formLieu.submit) }} &nbsp &nbsp &nbsp
+                    {{ form_widget(formLieu.submit) }}
+                    {{ form_widget(formLieu.submit) }}
+
+                    {{ form_end(formLieu) }}
+
                     <button type="button" class="btn bouton" data-dismiss="modal">Fermer</button>
                 </div>
                     {{ form_end(formLieu) }}

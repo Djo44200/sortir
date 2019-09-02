@@ -10,6 +10,7 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>Pseudo</th>
             <th>Prénom</th>
             <th>Nom</th>
             <th>Téléphone</th>
@@ -23,6 +24,7 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
+                <td>{{ user.pseudo }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.nom }}</td>
                 <td>0{{ user.telephone }}</td>
@@ -30,10 +32,6 @@
                 <td>{{ user.site }}</td>
                 <td>{{ user.roles | json_encode }}</td>
                 <td>
-                    <div class="d-inline-block">
-                        <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-primary">
-                            <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                    </div>
                     <div class="d-inline-block">
                         <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success">
                             <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
