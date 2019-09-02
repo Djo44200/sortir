@@ -6,6 +6,7 @@ use App\Entity\Inscription;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,6 +21,10 @@ class InscriptionType extends AbstractType
             ])
             ->add('participant')
             ->add('sortie')
+            ->add('submit',SubmitType::class,[
+                'label'=> 'Enregistrer',
+                'attr' => array('class' => 'btn bouton')
+            ])
         ;
     }
 
