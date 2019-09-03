@@ -84,7 +84,7 @@ class SortieRepository extends ServiceEntityRepository
     public function rechercheParUserNonInscris($userId){
 
         return $this->createQueryBuilder('s')
-            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant !=:inscris')
+            ->InnerJoin('s.inscriptions', 'i', 'WITH', 'i.participant !=:inscris')
             ->setParameter('inscris',$userId)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
