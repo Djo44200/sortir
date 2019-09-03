@@ -70,6 +70,7 @@
         </nav>
     </header>
 </div>
+<br>
 {% for label, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert-{{ label }}">
@@ -77,6 +78,7 @@
         </div>
     {% endfor %}
 {% endfor %}
+<br>
     {% block body %}
     {% endblock %}
     {% block javascripts %}{% endblock %}
