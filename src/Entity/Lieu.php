@@ -30,12 +30,12 @@ class Lieu
     private $rue;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=200)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=200)
      */
     private $longitude;
 

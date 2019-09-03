@@ -176,7 +176,13 @@ button{
 
 
 
+
+.message_erreur {
+    color: red;
+}
+
 /* ------------------ Footer ------------------ */
+
 
 footer{
 background-color: #E2E3E9;

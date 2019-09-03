@@ -36,9 +36,17 @@
                         {{ sortie.site.nom }}
 
                     <br><br>
+                    {# modal creation ville #}
                     {{ form_label(form.ville) }}
-                    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
-
+                    <div class="row">
+                        <div class="col-10">
+                            {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="col-1">
+                            <button type="button" data-toggle="modal" data-target="#modalVille" class="btn bouton">+</button>
+                        </div>
+                    </div>
+                    {# modal creation lieu #}
                     {{ form_label(form.lieu) }}
                     <div class="row">
                         <div class="col-10">
@@ -60,14 +68,13 @@
             <br><br>
             <div id="boutons">
                 <div class="row justify-content-center">
-
                     <div> {{ form_widget(form.modifier) }} &nbsp &nbsp &nbsp
+
                     {{ form_end(form) }}
                     </div>
                     <div> <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a> </div>
                 </div>
             </div>
-
 
 
         </div>
@@ -111,6 +118,39 @@
                 </div>
                 {{ form_end(formLieu) }}
 
+            </div>
+        </div>
+    </div>
+
+    <!-- pour le bouton '+' de Ville et modal -->
+    <div class="modal fade" id="modalVille" tabindex="-1" role="dialog" aria-labelledby="modalVilleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-group ">
+                        {{ form_start(formVille) }}
+
+                        {{ form_label(formVille.nom) }}
+                        {{ form_widget(formVille.nom) }}
+                        <div class="message_erreur">
+                            {{ form_errors(formVille.nom) }}
+                        </div>
+                        <br>
+                        {{ form_label(formVille.codePostal) }}
+                        {{ form_widget(formVille.codePostal) }}
+                        <div class="message_erreur">
+                            {{ form_errors(formVille.codePostal) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {{ form_widget(formVille.submit) }}
+                    {{ form_widget(formVille.submit) }}
+
+                    {{ form_end(formVille) }}
+
+                    <button type="button" class="btn bouton" data-dismiss="modal">Fermer</button>
+                </div>
             </div>
         </div>
     </div>
