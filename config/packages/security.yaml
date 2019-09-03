@@ -39,7 +39,8 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
        # - { path: ^/, roles: ROLE_USER }
         - { path: ^/sortie, roles: ROLE_USER }
-        - { path: ^/ville, roles: ROLE_ADMIN }
+        - { path: ^/ville/, roles: ROLE_ADMIN }
+        - { path: ^/ville/new, roles: ROLE_USER }
         - { path: ^/lieu/new, roles: ROLE_USER }
         - { path: ^/lieu/, roles: ROLE_ADMIN }
         - { path: ^/lieu/edit, roles: ROLE_ADMIN }
