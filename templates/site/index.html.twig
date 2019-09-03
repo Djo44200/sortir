@@ -17,10 +17,11 @@
         </div>
     </form>
     <br>
+
     <div id="resultat">
         {% if rechercher is defined %}
-        <div id="site" class="table-responsive">
-            <table class="table">
+        <div class="text-center table-responsive">
+            <table class="table ">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -35,6 +36,10 @@
                         <td>{{ site.nom }}</td>
                         <td>
                             <div class="d-inline-block">
+                                <a href="{{ path('site_show', {'id': site.id}) }}" class="btn btn-primary">
+                                    <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
+                            </div>
+                            <div class="d-inline-block">
                                 <a href="{{ path('site_edit', {'id': site.id}) }}" class="btn btn-success">
                                     <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                             </div>
@@ -48,7 +53,7 @@
             </table>
 
             {% else %}
-            <div id="site" class="table-responsive">
+            <div class="text-center table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
@@ -86,12 +91,11 @@
 
                 {% endif %}
 
-
-                <a href="{{ path('site_new') }}" class="bouton">
-                    <img alt="plus" class="plus" src="{{ asset('build/images/add.svg') }}"> Ajouter un site
-                </a>
             </div>
         </div>
     </div>
-    </div>
+    <a href="{{ path('site_new') }}">
+        <button class="btn bouton">Créer un Site</button>
+    </a>
+
 {% endblock %}

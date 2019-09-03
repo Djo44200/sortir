@@ -23,6 +23,7 @@ class SiteController extends Controller
     public function index(SiteRepository $siteRepository): Response
     {
         return $this->render('site/index.html.twig', [
+
             'sites' => $siteRepository->findAll(),
         ]);
     }
