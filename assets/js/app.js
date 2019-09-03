@@ -31,3 +31,18 @@ require('bootstrap-star-rating');
 // require 2 CSS files needed
 require('bootstrap-star-rating/css/star-rating.css');
 require('bootstrap-star-rating/themes/krajee-svg/theme.css');
+
+//Ajax recherches
+$("#rechercheDeVille").keyup(function () {
+    let recherche = $('#rechercher').val();
+    var path = $("#path_adrVille").attr("data-path");
+    $.ajax({
+        url: path, // La ressource ciblée
+        type: 'GET', // Le type de la requête HTTP.
+        data: 'recherche=' + recherche,
+        success: function (response) {
+            $('#resultat').html($('.text-center',response));
+        },
+
+    });
+});
