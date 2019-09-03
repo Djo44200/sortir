@@ -22,14 +22,19 @@
         <br>
         <div class="row">
             <div class="col-4">
-    {{form_widget(form.submit)}}
+                {{form_widget(form.submit)}}
             </div>
-            <div class="col-8">
-                <a href="{{ path('ville_index') }}"><button class="btn bouton">Retour à la liste</button></a>
-
-    {{ form_end(form) }}
-            </div>
+            {{ form_end(form) }}
         </div>
-
     </div>
+
+    <br>
+
+    {# bouton annuler du formulaire principal - creation ville #}
+    <div class="col-4">
+        <a href="{{ path('ville_index') }}">
+            <button class="btn bouton">Retour à la liste</button>
+        </a>
+    </div>
+
 {% endblock %}

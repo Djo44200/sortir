@@ -30,9 +30,7 @@ class SortieType extends AbstractType
                 'label'=>'Date et heure de sortie',
                 'widget' => 'single_text',
                 'attr' => array(
-                    'min' => (new \DateTime('now'))->format('d/m/Y H:i')
-                )
-                
+                    'min' => (new \DateTime('now'))->format('d/m/Y H:i') )
             ])
             ->add('dateCloture',DateType::class,[
                 'label'=>'Date limite d\'inscription',
@@ -74,7 +72,7 @@ class SortieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sortie::class
+            'data_class' => Sortie::class,
         ]);
     }
 }

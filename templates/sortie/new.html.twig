@@ -79,17 +79,19 @@
                 </div>
             </div>
             <br><br>
-            <div id="boutons">
-                <div class="row justify-content-center">
-                    <div> {{ form_widget(form.save) }} &nbsp &nbsp &nbsp </div>
-                    <div> {{ form_widget(form.saveAndPublish) }}  &nbsp &nbsp &nbsp </div>
-                    {{ form_end(form) }}
-                    <div> <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a> </div>
-                </div>
+            <div class="row justify-content-center">
+                <div> {{ form_widget(form.save) }} &nbsp &nbsp &nbsp </div>
+                <div> {{ form_widget(form.saveAndPublish) }}  &nbsp &nbsp &nbsp </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
-
+    {# bouton annuler du formulaire principal - creation sortie #}
+    <div class="text-center">
+        <a href="{{ path('sortie_index') }}">
+            <button class="btn bouton">Retour à la liste</button>
+        </a>
+    </div>
 
     <!-- pour le bouton '+' de Lieu et modal -->
     <div class="modal fade"  id="modalLieu" tabindex="-1" role="dialog" aria-labelledby="modalLieuLabel" aria-hidden="true">
