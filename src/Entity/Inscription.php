@@ -88,7 +88,7 @@ class Inscription
         return $this->sortie;
     }
 
-    public function setSortie(?Sortie $sortie): self
+    public function setSortie(?Sortie $sortie)
     {
         $this->sortie = $sortie;
 

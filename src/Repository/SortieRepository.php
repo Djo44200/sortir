@@ -72,8 +72,9 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function rechercheParUserInscris($userId){
+        dump($userId);
         return $this->createQueryBuilder('s')
-            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant =: inscris')
+            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant =:inscris')
             ->setParameter('inscris',$userId)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
@@ -83,7 +84,7 @@ class SortieRepository extends ServiceEntityRepository
     public function rechercheParUserNonInscris($userId){
 
         return $this->createQueryBuilder('s')
-            ->where('s.inscriptions != inscris')
+            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant !=:inscris')
             ->setParameter('inscris',$userId)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
@@ -92,7 +93,11 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function rechercheParSortiePassee(){
-
+    dump($this->createQueryBuilder('s')
+        ->where('s.etat =: etat')
+        ->setParameter('etat','PAS')
+        ->orderBy('s.nom', 'ASC')
+        ->getQuery());
         return $this->createQueryBuilder('s')
             ->where('s.etat =: etat')
             ->setParameter('etat','PAS')

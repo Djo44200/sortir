@@ -15,12 +15,7 @@ class InscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateInscription',DateType::class,[
-                'label'=>'Date inscription',
-                'widget' => 'single_text'
-            ])
-            ->add('participant')
-            ->add('sortie')
+
             ->add('submit',SubmitType::class,[
                 'label'=> 'Enregistrer',
                 'attr' => array('class' => 'btn bouton')
