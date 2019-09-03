@@ -41,7 +41,7 @@ $("#rechercheDeVille").keyup(function () {
         type: 'GET', // Le type de la requête HTTP.
         data: 'recherche=' + recherche,
         success: function (response) {
-            $('#resultat').html($('.text-center',response));
+            $('#resultat').html($('.table-responsive',response));
         },
 
     });
@@ -56,7 +56,7 @@ $("#rechercheDeSite").keyup(function () {
         type: 'GET', // Le type de la requête HTTP.
         data: 'recherche=' + recherche,
         success: function (response) {
-            $('#resultat').html($('.text-center',response));
+            $('#resultat').html($('.table-responsive',response));
         },
 
     });
