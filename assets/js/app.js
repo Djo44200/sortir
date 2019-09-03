@@ -60,5 +60,19 @@ $("#rechercheDeSite").keyup(function () {
     });
 });
 
+$("#afficherLieu").keyup(function () {
+    let recherche = $('#rechercher').val();
+    var path = $("#path_SortieLieu").attr("data-path");
+    $.ajax({
+        url: path, // La ressource ciblée
+        type: 'GET', // Le type de la requête HTTP.
+        data: 'lieu=' + recherche,
+        success: function (response) {
+            $('#resultat').html($('.table-responsive',response));
+        },
+
+    });
+});
+
 
 

@@ -59,23 +59,29 @@
                         </div>
                     </div>
                     {# modal creation lieu #}
+                    <div id="path_SortieLieu" data-path="{{ path('lieu_search') }}">
                     {{ form_label(form.lieu) }}
-                    <div class="row">
+
+                    </div>
+                        <div class="row">
                         <div class="col-10">
-                            {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
+                            <form id="afficherLieu">
+                            {{ form_widget(form.lieu, {'attr': {'class': 'form-control','id': 'rechercher'}}) }}
+                            </form>
                         </div>
                         <div class="col-1">
                             <button type="button" data-toggle="modal" data-target="#modalLieu" class="btn bouton">+</button>
                         </div>
                     </div>
-
-                    <label id="rue">Rue :</label>
+                    <div id="resultat">
+                    <label id="rue">Rue : </label>
                     <br><br>
                     <label id="rue">Code Postal :</label>
                     <br><br>
                     <label id="rue">Latitude :</label>
                     <br><br>
                     <label id="rue">Longitude :</label>
+                    </div>
                 </div>
             </div>
             <br><br>

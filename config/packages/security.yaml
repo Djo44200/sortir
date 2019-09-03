@@ -48,5 +48,6 @@ security:
         - { path: ^/user/index, roles: ROLE_ADMIN }
         - { path: ^/user/, roles: ROLE_USER }
         - { path: ^/logout, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 

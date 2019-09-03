@@ -26,6 +26,17 @@ class LieuController extends Controller
     }
 
     /**
+     * @Route("/search", name="lieu_search", methods={"GET"})
+     */
+    public function lieu_search(LieuRepository $lieuRepository): Response
+    {
+
+        return $this->render('lieu/index.html.twig', [
+            'lieus' => $lieuRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="lieu_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
