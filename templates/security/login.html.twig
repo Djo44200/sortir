@@ -1,8 +1,11 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Connexion !{% endblock %}
-
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {{ encore_entry_link_tags('app') }}
+    <title>Connexion</title>
+</head>
+<body>
 
     <div class="container-fluid">
         <form method="post">
@@ -52,8 +55,6 @@
     </div>
 
 
-
-
-
-
-{% endblock %}
+    {{ encore_entry_script_tags('app') }}
+</body>
+</html>
