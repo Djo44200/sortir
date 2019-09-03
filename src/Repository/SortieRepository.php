@@ -72,13 +72,8 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function rechercheParUserInscris($userId){
-        dump($this->createQueryBuilder('s')
-            ->innerJoin('App:Inscription', 'i', 'WITH', 'i.participant =:inscris')
-            ->setParameter('inscris',$userId)
-            ->orderBy('s.nom', 'ASC')
-            ->getQuery());
         return $this->createQueryBuilder('s')
-            ->innerJoin('App:Inscription', 'i', 'WITH', 'i.participant =:inscris')
+            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant =: inscris')
             ->setParameter('inscris',$userId)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
