@@ -93,13 +93,9 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function rechercheParSortiePassee(){
-    dump($this->createQueryBuilder('s')
-        ->where('s.etat =: etat')
-        ->setParameter('etat','PAS')
-        ->orderBy('s.nom', 'ASC')
-        ->getQuery());
+
         return $this->createQueryBuilder('s')
-            ->where('s.etat =: etat')
+            ->where('s.etat =:etat')
             ->setParameter('etat','PAS')
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
