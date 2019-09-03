@@ -6,6 +6,7 @@
     <title>{% block title %}Accueil{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Comfortaa|Play&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {{ encore_entry_link_tags('app') }}
 </head>
 <body>
@@ -80,60 +81,124 @@
     {% endblock %}
     {% block javascripts %}{% endblock %}
 <br><br><br>
-<footer class="page-footer font-small blue" >
-    <div class="container">
 
-        <!-- Call to action -->
-        <ul class="list-unstyled list-inline text-center py-2">
-            <li class="list-inline-item">
-                <a href="#" class="btn btn-outline-white btn-rounded "data-toggle="modal" data-target="#confidence">La politique de confidentialité</a>
-            </li>
-            <li class="list-inline-item">
-                <a href="#" class="btn btn-outline-white btn-rounded">CGU</a>
-            </li>
-            <li class="list-inline-item">
-                <a href="#" class="btn btn-outline-white btn-rounded">Contact</a>
-            </li>
-            <li class="list-inline-item">
-                <a href="#" class="btn btn-outline-white btn-rounded">Qui sommes nous ?</a>
-            </li>
-        </ul>
-        <!-- Call to action -->
 
-    </div>
+<footer class="page-footer font-small blue-grey lighten-5">
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3 ">© 2019 Copyright:
-        <a href="{{ path('sortie_index') }}"> Sortir.com</a>
-    </div>
-    <!-- Copyright -->
+            <div class="container">
 
-</footer>
+                <!-- Call to action -->
+                <ul class="list-unstyled list-inline text-center py-2">
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-outline-white btn-rounded " data-toggle="modal"
+                           data-target="#confidence">La politique de confidentialité</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-outline-white btn-rounded"data-toggle="modal"
+                           data-target="#condition">CGU</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="mailto:info@exemple.com">Envoyez-nous un e-mail !</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-outline-white btn-rounded"data-toggle="modal"
+                           data-target="#qui">Qui sommes nous ?</a>
+                    </li>
+                </ul>
+                <!-- Call to action -->
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3 ">© 2019 Copyright:
+                <a href="{{ path('sortie_index') }}"> Sortir.com</a>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+
+            </div>
+
+            <!-- Copyright -->
+
+
+        </footer>
 
 <!-- Modal -->
-<div class="modal fade" id="confidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Politique de confidentialité</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        <div class="modal fade" id="confidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Politique de confidentialité</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
+                            libero ut eleifend facilisis. Vivamus rutrum nec sapien id fermentum.
+                            Mauris laoreet, sem vulputate fringilla egestas, libero elit viverra elit,
+                            quis venenatis metus dolor id erat. Vestibulum feugiat urna at eros accumsan,
+                            et pellentesque dui laoreet. Nam sed vestibulum lectus, in auctor orci.
+                            Vestibulum sed lacus at mauris ornare luctus. Mauris in scelerisque velit,
+                            eget consequat dui. Phasellus pulvinar non tortor semper convallis.
+                            Ut sit amet tempor lorem. Proin bibendum eros in lectus luctus, id bibendum erat consequat..</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
+        <div class="modal fade" id="condition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">CGU</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Les présentes Conditions Générales d’Utilisation (CGU)
+                            déterminent les règles d’accès et les modalités d’utilisation
+                            du service intitulé  Sortir.com accessible depuis le site web
+                            https://www. Sortir.com, et sur smartphones Android et iPhone
+                            ainsi que sur les autres supports fonctionnants avec les mêmes
+                            systèmes d’exploitation. L’utilisateur du service Sortir.com
+                            reconnait accepter, sans restriction ni réserve, l’ensemble des CGU qui vont suivre. </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-
-
+        <div class="modal fade" id="qui" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Qui sommes nous ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Fondé en 2019 par la société ENI, Sortir.com est une plateforme Web développée
+                            pour ses stagiaires actifs ainsi que ses anciens stagiaires.
+                            Notre amibtion est de permettre au stagiaires de crérer
+                            du lien extra-formation et ainsi développer la cohésion sociale.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 
