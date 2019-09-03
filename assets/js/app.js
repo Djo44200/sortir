@@ -46,3 +46,21 @@ $("#rechercheDeVille").keyup(function () {
 
     });
 });
+
+
+$("#rechercheDeSite").keyup(function () {
+    let recherche = $('#rechercher').val();
+    var path = $("#path_adrSite").attr("data-path");
+    $.ajax({
+        url: path, // La ressource ciblée
+        type: 'GET', // Le type de la requête HTTP.
+        data: 'recherche=' + recherche,
+        success: function (response) {
+            $('#resultat').html($('.text-center',response));
+        },
+
+    });
+});
+
+
+
