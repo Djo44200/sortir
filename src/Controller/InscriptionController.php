@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Inscription;
+use App\Entity\Sortie;
 use App\Form\InscriptionType;
 use App\Repository\InscriptionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,25 +27,33 @@ class InscriptionController extends Controller
     }
 
     /**
-     * @Route("/new", name="inscription_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="inscription_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,Sortie $sortie): Response
     {
+
         $inscription = new Inscription();
+
+        $id = $sortie->getId();
         $form = $this->createForm(InscriptionType::class, $inscription);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $inscription->setDateInscription((new \DateTime('now')));
+            $inscription->setSortie($sortie);
+            $inscription->setParticipant($this->get('security.token_storage')->getToken()->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($inscription);
             $entityManager->flush();
             $this->addFlash("success", "L'inscription vient d'être ajoutée");
-            return $this->redirectToRoute('inscription_index');
+            return $this->redirectToRoute('sortie_index');
         }
 
         return $this->render('inscription/new.html.twig', [
             'inscription' => $inscription,
             'form' => $form->createView(),
+            'sortie' => $sortie
         ]);
     }
 
