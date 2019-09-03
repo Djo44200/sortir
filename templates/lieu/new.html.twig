@@ -8,29 +8,38 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-6">
+                {{ form_errors(form) }}
                 {{ form_start(form) }}
 
                 {{ form_label(form.nomLieu)}}
                 {{form_widget(form.nomLieu, {'attr': {'class':'form-control'}})}}
-                {{ form_errors(form.nomLieu) }}
+                <div class="message_erreur">
+                    {{ form_errors(form.nomLieu) }}
+                </div>
 
                 {{ form_label(form.ville)}}
                 {{form_widget(form.ville, {'attr': {'class':'form-control'}})}}
-                {{ form_errors(form.ville) }}
+                <div class="message_erreur">
+                    {{ form_errors(form.ville) }}
+                </div>
 
                 {{ form_label(form.rue)}}
                 {{form_widget(form.rue, {'attr': {'class':'form-control'}})}}
-                {{ form_errors(form.rue) }}
+                <div class="message_erreur">
+                    {{ form_errors(form.rue) }}
+                </div>
 
                 {{ form_label(form.longitude)}}
                 {{form_widget(form.longitude, {'attr': {'class':'form-control'}})}}
-                {{ form_errors(form.longitude) }}
+                <div class="message_erreur">
+                    {{ form_errors(form.longitude) }}
+                </div>
 
                 {{ form_label(form.latitude)}}
                 {{form_widget(form.latitude, {'attr': {'class':'form-control'}})}}
-                {{ form_errors(form.latitude) }}
-
-
+                <div class="message_erreur">
+                    {{ form_errors(form.latitude) }}
+                </div>
             </div>
         </div>
         <br>

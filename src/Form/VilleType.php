@@ -26,8 +26,7 @@ class VilleType extends AbstractType
             ->add('submit',SubmitType::class,[
                 'label'=> 'Enregistrer',
                 'attr' => array('class' => 'btn bouton')
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

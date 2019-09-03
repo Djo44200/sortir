@@ -43,6 +43,7 @@ class Sortie
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de début doit être renseignée.")
      * @Assert\DateTime
+     * @Assert\GreaterThanOrEqual("today", message="La date doit être supérieur ou égale à la date du jour.")
      */
     private $dateDebut;
 
@@ -58,6 +59,7 @@ class Sortie
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="La date de clôture doit être renseignée.")
      * @Assert\DateTime
+     * @Assert\GreaterThanOrEqual("today", message="La date doit être supérieur ou égale à la date du jour.")
      */
     private $dateCloture;
 

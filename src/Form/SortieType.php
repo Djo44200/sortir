@@ -55,13 +55,11 @@ class SortieType extends AbstractType
                 'choice_label'=>'nomLieu',
                 'label'=>'Lieu',
                 'trim'=>true,
-                'attr'=> array('class'=>'form-control'),
-                'required' => false
+                'attr'=> array('class'=>'form-control')
             ])
             ->add('ville', EntityType::class, [
                 'class'=>Ville::class,
-                'mapped' => false,
-                'required' => false
+                'mapped' => false
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
