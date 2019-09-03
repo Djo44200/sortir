@@ -36,12 +36,17 @@ class SortieController extends Controller
         $search = $form->get('search')->getData();
         $dateDebut = $form->get('dateDebut')->getData();
         $dateFin = $form->get('dateFin')->getData();
-        $check = $form->get('check')->getData();
+        $userOrgan = $form->get('userOrgan')->getData();
+        $userInscris = $form->get('userInscris')->getData();
+        $userNonInscri = $form->get('userNonInscris')->getData();
+        $sortiePassee = $form->get('sortiePassee')->getData();
+
+
         $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($site || $search || $dateDebut || $dateFin || $check) {
+            if ($site || $search || $dateDebut || $dateFin || $userOrgan || $userInscris || $userNonInscri || $sortiePassee) {
                 // Recherche par site
                 if ($site) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
@@ -63,21 +68,21 @@ class SortieController extends Controller
                     $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut,$dateFin);
                 }
                 // Recherche par check user est organisateur
-                if (in_array('userOrgan', $check)) {
+                if ($userOrgan) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserOrga($userId);
                 }
                 // Recherche par check user est inscris à une sortie
-                if (in_array('userInscris', $check)) {
+                if ($userInscris) {
 
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserInscris($userId);
 
                 }
                 // Recherche par check user est nom incris à une sortie
-                if (in_array('userNonInscris', $check)) {
+                if ($userNonInscri) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserNonInscris($userId);
                 }
                 // Recherche par check d'une sortie passée
-                if (in_array('sortiePassee', $check)) {
+                if ($sortiePassee) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSortiePassee();
                 }
 
@@ -109,7 +114,7 @@ class SortieController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,EntityManagerInterface $entityManager): Response
     {
         //pour formulaire sortie
         $sortie = new Sortie();
@@ -128,6 +133,7 @@ class SortieController extends Controller
 
         //recuperation du site de l'utilisateur qui cree la sortie
         $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
+
         //recuperation des villes
         $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
         //recuperation des lieux

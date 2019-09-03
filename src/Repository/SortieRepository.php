@@ -72,7 +72,6 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function rechercheParUserInscris($userId){
-        dump($userId);
         return $this->createQueryBuilder('s')
             ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant =:inscris')
             ->setParameter('inscris',$userId)
@@ -123,6 +122,16 @@ class SortieRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+
+    }
+
+    public function rechercheUserSite($id){
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.site', 'i', 'WITH', 'i.users =:user')
+            ->setParameter('user', $id)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
 
     }
 

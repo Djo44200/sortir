@@ -48,17 +48,23 @@ class SortieRechercheType extends AbstractType
                 'attr'=> array('class'=>'form-control')
             ])
 
-            ->add('check',ChoiceType::class,[
-                'choices' => [
-                    'Sorties dont je suis l\'organisateur' => 'userOrgan',
-                    'Sorties auquelles je suis inscris' => 'userInscris',
-                    'Sorties auquelles je ne suis pas inscris' => 'userNonInscris',
-                    'Sorties passées' => 'sortiePassee',
-                ],
-                'expanded'=>true,
-                'multiple'=>true,
-                'required'=>false
+            ->add('userOrgan', CheckboxType::class, [
+                'label'    => 'Sorties dont je suis l\'organisateur',
+                'required' => false,
             ])
+            ->add('userInscris', CheckboxType::class, [
+                'label'    => 'Sorties auquelles je suis inscris',
+                'required' => false,
+            ])
+            ->add('userNonInscris', CheckboxType::class, [
+                'label'    => 'Sorties auquelles je ne suis pas inscris',
+                'required' => false,
+            ])
+            ->add('sortiePassee', CheckboxType::class, [
+                'label'    => 'Sorties passées',
+                'required' => false,
+            ])
+
 
 
             ->add('submit', SubmitType::class, [
