@@ -26,8 +26,9 @@
 
             <!-- Liens -->
             <div class="collapse navbar-collapse " id="collapsibleNavbar">
-                {% if app.user %}
+
                 <ul class="navbar-nav">
+                    {% if app.user.roles==["ROLE_ADMIN"] %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('ville_index') }}">Villes</a>
                     </li>
@@ -37,16 +38,17 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('user_index') }}">Utilisateurs</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
                     </li>
                     {% endif %}
                     {% if app.user is null  %}
                         <li class="nav-item">
                             <a class="nav-link nav-link-color" href="{{ path('app_login') }}">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
                         </li>
                     {% endif %}
                     {% if app.user %}
