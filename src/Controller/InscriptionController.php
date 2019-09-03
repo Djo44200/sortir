@@ -42,8 +42,8 @@ class InscriptionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $inscription->setDateInscription((new \DateTime('now')));
-            $inscription->setSortie($id);
-            $inscription->setParticipant($this->get('security.token_storage')->getToken()->getUser()->getId());
+            $inscription->setSortie($sortie);
+            $inscription->setParticipant($this->get('security.token_storage')->getToken()->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($inscription);
