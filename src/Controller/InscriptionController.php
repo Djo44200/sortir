@@ -38,8 +38,6 @@ class InscriptionController extends Controller
         $form = $this->createForm(InscriptionType::class, $inscription);
         $form->handleRequest($request);
 
-        dump($id);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $inscription->setDateInscription((new \DateTime('now')));
             $inscription->setSortie($sortie);
