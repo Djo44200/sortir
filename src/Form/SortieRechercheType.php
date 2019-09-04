@@ -53,11 +53,11 @@ class SortieRechercheType extends AbstractType
                 'required' => false,
             ])
             ->add('userInscris', CheckboxType::class, [
-                'label'    => 'Sorties auquelles je suis inscris',
+                'label'    => 'Sorties auxquelles je suis inscris',
                 'required' => false,
             ])
             ->add('userNonInscris', CheckboxType::class, [
-                'label'    => 'Sorties auquelles je ne suis pas inscris',
+                'label'    => 'Sorties auxquelles je ne suis pas inscris',
                 'required' => false,
             ])
             ->add('sortiePassee', CheckboxType::class, [

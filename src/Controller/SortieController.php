@@ -89,6 +89,7 @@ class SortieController extends Controller
                     if ($sortiePassee) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSortiePassee();
                     }
+
                     return $this->render('sortie/index.html.twig', [
                         'sorties' => $listeSortie,
                         'form' => $form->createView()
@@ -107,12 +108,8 @@ class SortieController extends Controller
                 'form' => $form->createView()
             ]);
         }
-        // Affiche la liste de toutes les sorties
-        $listeSortie = $sortieRepository->findAll();
-        return $this->render('sortie/index.html.twig', [
-            'sorties' => $listeSortie,
-            'form' => $form->createView()
-        ]);
+
+        return $this->addFlash("info", "Aucunes sorties trouvées !");
     }
 
     /**
