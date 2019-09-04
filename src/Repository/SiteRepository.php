@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Site;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Site|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,6 +28,8 @@ class SiteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Site::class);
     }
+
+
 
     // /**
     //  * @return Site[] Returns an array of Site objects

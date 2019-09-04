@@ -44,8 +44,8 @@
                 <div class="col-6">
                     <label id="organisateur">Ville Organisatrice : </label>
                     <br>
-                    {% for site in siteUser %}
-                        {{ site.nom }}
+                    {% for user in siteUser %}
+                        {{ user.site }}
                     {% endfor %}
                     <br><br>
                     {# modal creation ville #}
