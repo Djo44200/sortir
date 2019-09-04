@@ -116,9 +116,30 @@
                                         {% endif %}
                                     </td>
                                     <td class="text-center">
-                                        {% if sortie.estInscris(app.user) %}
-                                            X
-                                        {% endif %}
+                                        <div>
+
+                                            {% if app.user != sortie.organisateur %}
+                                                {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
+                                                    {% if sortie.estInscris(app.user) == false %}
+                                                        <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
+                                                           class="btn btn-success">
+                                                            <img alt="plus" class="plus"
+                                                                 src="{{ asset('build/images/clic.png') }}"></a>
+                                                    {% endif %}
+                                                    {% if sortie.estInscris(app.user) %}
+                                                        <form method="post"
+                                                              action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token"
+                                                                   value="{{ csrf_token('delete' ~ sortie.id) }}">
+                                                            <button class="btn btn-danger"><img alt="plus" class="plus"
+                                                                                                src="{{ asset('build/images/close.svg') }}">
+                                                            </button>
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
                                     </td>
                                     <td><a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
                                         >{{ sortie.organisateur }}</a></td>
@@ -140,27 +161,6 @@
                                                      src="{{ asset('build/images/poubelle.png') }}"></a>
                                             {% endif %}
                                             {% endif %}
-                                            {% endif %}
-                                        </div>
-                                        <div>
-                                            {% if app.user != sortie.organisateur %}
-                                                {% if sortie.estInscris(app.user) == false %}
-                                                    <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
-                                                       class="btn btn-success">
-                                                        <img alt="plus" class="plus"
-                                                             src="{{ asset('build/images/clic.png') }}"></a>
-                                                {% endif %}
-                                                {% if sortie.estInscris(app.user) %}
-                                                    <form method="post"
-                                                          action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="_token"
-                                                               value="{{ csrf_token('delete' ~ sortie.id) }}">
-                                                        <button class="btn btn-danger"><img alt="plus" class="plus"
-                                                                                            src="{{ asset('build/images/close.svg') }}">
-                                                        </button>
-                                                    </form>
-                                                {% endif %}
                                             {% endif %}
                                         </div>
                                     </td>
