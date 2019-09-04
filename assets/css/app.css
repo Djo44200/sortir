@@ -116,7 +116,7 @@ h2 {
 }
 
 .bouton {
-    background-color: #535c68;
+    background-color: #5bbdff;
     padding: 15px;
     color: white;
     border-radius: 5px;
@@ -125,7 +125,7 @@ h2 {
 }
 
 .bouton:hover {
-    background-color: #353b48;
+    background-color: #74fcff;
     color: white;
 }
 

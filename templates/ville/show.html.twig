@@ -18,14 +18,7 @@
                             <a href="{{ path('ville_edit', {'id': ville.id}) }}" class="btn btn-success">
                                 <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                             <div class="d-inline-block">
-                                <form method="post" action="{{ path('ville_delete', {'id': ville.id}) }}"
-                                      onsubmit="return confirm('Êtes vous sur de vouloir supprimer cette ville ?');">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
-                                    <button class="btn btn-danger"><img alt="plus" class="plus"
-                                                                        src="{{ asset('build/images/close.svg') }}">
-                                    </button>
-                                </form>
+
                             </div>
                         </div>
                     </div>
