@@ -29,7 +29,7 @@ class SortieController extends Controller
      */
     public function index(Request $request, SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
-
+        $sortie = new Sortie();
         $form = $this->createForm(SortieRechercheType::class);
         $form->handleRequest($request);
         $site = $form->get('Site')->getData();
@@ -40,6 +40,20 @@ class SortieController extends Controller
         $userInscris = $form->get('userInscris')->getData();
         $userNonInscri = $form->get('userNonInscris')->getData();
         $sortiePassee = $form->get('sortiePassee')->getData();
+
+        //Check des sorties à supprimer
+        $listeSortieACloturer = $entityManager->getRepository('App:Sortie')->rechercheParCloture();
+        // Mettre la liste des sorties en état PAS
+
+        if ($listeSortieACloturer) {
+            foreach ($listeSortieACloturer as $sortie) {
+                $sortie->setEtat('PAS');
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+
+            }
+
+
 
 
         $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
@@ -64,8 +78,8 @@ class SortieController extends Controller
                 if ($dateFin) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateFin($dateFin);
                 }
-                if ($dateDebut&&$dateFin){
-                    $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut,$dateFin);
+                if ($dateDebut && $dateFin) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut, $dateFin);
                 }
                 // Recherche par check user est organisateur
                 if ($userOrgan) {
@@ -73,9 +87,7 @@ class SortieController extends Controller
                 }
                 // Recherche par check user est inscris à une sortie
                 if ($userInscris) {
-
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserInscris($userId);
-
                 }
                 // Recherche par check user est nom incris à une sortie
                 if ($userNonInscri) {
@@ -85,6 +97,7 @@ class SortieController extends Controller
                 if ($sortiePassee) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSortiePassee();
                 }
+
 
                 return $this->render('sortie/index.html.twig', [
                     'sorties' => $listeSortie,
@@ -101,12 +114,18 @@ class SortieController extends Controller
             ]);
         }
 
-        $listeSortie = $sortieRepository->findAll();
 
-        return $this->render('sortie/index.html.twig', [
-            'sorties' => $listeSortie,
-            'form' => $form->createView()
-        ]);
+
+
+
+
+            // Affiche la liste de toutes les sorties
+            $listeSortie = $sortieRepository->findAll();
+            return $this->render('sortie/index.html.twig', [
+                'sorties' => $listeSortie,
+                'form' => $form->createView()
+            ]);
+        }
     }
 
     /**

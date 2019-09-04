@@ -101,6 +101,24 @@ class SortieRepository extends ServiceEntityRepository
             ->getResult();
 
     }
+
+
+    public function rechercheParCloture(){
+
+        $date = new \DateTime('now');
+
+        return $this->createQueryBuilder('s')
+            ->where('s.dateCloture <=:date')
+            ->setParameter('date',$date)
+            ->andWhere('s.etat !=:etat')
+            ->setParameter('etat','ANN')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
+
     public function rechercheParSite($site)
     {
         return $this->createQueryBuilder('s')
