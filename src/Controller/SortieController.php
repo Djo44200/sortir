@@ -135,7 +135,10 @@ class SortieController extends Controller
         $formVille = $this->createForm(VilleType::class, $ville);
         $formVille->handleRequest($request);
         //recuperation du site de l'utilisateur qui cree la sortie
-        $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
+        $userId = [$this->get('security.token_storage')->getToken()->getUser()->getId()];
+        $siteUser = $entityManager->getRepository('App:User')->rechercheSiteUser($userId[0]);
+
+
         //recuperation des villes
         $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
         //recuperation des lieux
@@ -148,10 +151,13 @@ class SortieController extends Controller
             if ($form->get('save')->isClicked()) {
                 $sortie->setEtat(Sortie::ETAT_CREE);
             }
+
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
-            $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
+            $sortie->setOrganisateur($this->getUser());
             //recuperation du site organisateur pour l'ajouter a la sortie en BDD
-            $sortie->setSite($siteUser[0]);
+
+
+            $sortie->setSite($this->getUser()->getSite());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sortie);
             $entityManager->flush();

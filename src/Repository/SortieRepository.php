@@ -143,15 +143,6 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
-    public function rechercheUserSite($id){
-        return $this->createQueryBuilder('s')
-            ->innerJoin('s.site', 'i', 'WITH', 'i.users =:user')
-            ->setParameter('user', $id)
-            ->orderBy('s.nom', 'ASC')
-            ->getQuery()
-            ->getResult();
-
-    }
 
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
