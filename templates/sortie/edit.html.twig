@@ -73,8 +73,9 @@
                 <div class="row justify-content-center">
                     <div> {{ form_widget(form.modifier) }} &nbsp &nbsp &nbsp
                         {% if sortie.etat == 'CRE' %}
+
                             <a href="{{ path('sortie_edit', {'id': sortie.id }) }}">
-                                <button class="bouton" name="publier">Publier</button>
+                                 <button class="bouton" name="publier">Publier</button>
                             </a>&nbsp &nbsp &nbsp
                         {% endif %}
                         {{ form_end(form) }}
