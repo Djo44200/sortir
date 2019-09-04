@@ -291,4 +291,9 @@ class SortieController extends Controller
         }
         return $this->redirectToRoute('sortie_index');
     }
+
+
+
+
+
 }
