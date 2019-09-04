@@ -116,32 +116,6 @@
                                         {% endif %}
                                     </td>
                                     <td class="text-center">
-                                        {% if sortie.estInscris(app.user) %}
-                                            X
-                                        {% endif %}
-                                    </td>
-                                    <td><a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
-                                        >{{ sortie.organisateur }}</a></td>
-                                    <td>
-
-                                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
-                                           class="btn btn-primary">
-                                            <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                                        {% if sortie.organisateur == app.user %}
-                                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
-                                           class="btn btn-success">
-                                            <img alt="plus" class="plus"
-                                                 src="{{ asset('build/images/update.svg') }}"></a>
-                                        {% if sortie.etat != "PAS" %}{% if sortie.etat != "ANN" %}
-                                        <div class="d-inline-block">
-                                            <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
-                                               class="btn btn-danger">
-                                                <img alt="plus" class="plus"
-                                                     src="{{ asset('build/images/poubelle.png') }}"></a>
-                                            {% endif %}
-                                            {% endif %}
-                                            {% endif %}
-                                        </div>
                                         <div>
 
                                             {% if app.user != sortie.organisateur %}
@@ -164,6 +138,29 @@
                                                         </form>
                                                     {% endif %}
                                                 {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td><a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
+                                        >{{ sortie.organisateur }}</a></td>
+                                    <td>
+
+                                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                                           class="btn btn-primary">
+                                            <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
+                                        {% if sortie.organisateur == app.user %}
+                                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                                           class="btn btn-success">
+                                            <img alt="plus" class="plus"
+                                                 src="{{ asset('build/images/update.svg') }}"></a>
+                                        {% if sortie.etat != "PAS" %}{% if sortie.etat != "ANN" %}
+                                        <div class="d-inline-block">
+                                            <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
+                                               class="btn btn-danger">
+                                                <img alt="plus" class="plus"
+                                                     src="{{ asset('build/images/poubelle.png') }}"></a>
+                                            {% endif %}
+                                            {% endif %}
                                             {% endif %}
                                         </div>
                                     </td>
