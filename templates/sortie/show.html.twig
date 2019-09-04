@@ -5,6 +5,7 @@
 {% block body %}
     <h1 class="text-muted">{{ sortie.nom }}</h1>
     <br>
+    <div class="container-fluid">
     <div id="accordeon">
         <div class="card border-success mb-3">
             <div class="card-header border-success mb-3">
@@ -51,9 +52,30 @@
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
                                 <button class="btn btn-danger"><img alt="plus" class="plus"
-                                                                    src="{{ asset('build/images/close.svg') }}">
+                                                                    src="{{ asset('build/images/poubelle.png') }}">
                                 </button>
                             </form>
+                            {% if app.user != sortie.organisateur %}
+                                {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
+                                    {% if sortie.estInscris(app.user) == false %}
+                                        <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
+                                           class="btn btn-success">
+                                            <img alt="plus" class="plus"
+                                                 src="{{ asset('build/images/clic.png') }}"></a>
+                                    {% endif %}
+                                    {% if sortie.estInscris(app.user) %}
+                                        <form method="post"
+                                              action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token"
+                                                   value="{{ csrf_token('delete' ~ sortie.id) }}">
+                                            <button class="btn btn-danger"><img alt="plus" class="plus"
+                                                                                src="{{ asset('build/images/close.svg') }}">
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -62,7 +84,6 @@
     </div>
     </div>
     <br>
-
 
     <div class="row">
         <div class="col-auto align-items-center">

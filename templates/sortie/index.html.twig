@@ -129,9 +129,7 @@
                                                     {% if sortie.estInscris(app.user) %}
                                                         <form method="post"
                                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token"
-                                                                   value="{{ csrf_token('delete' ~ sortie.id) }}">
+                                                            <input type="hidden" name="_method" value="POST">
                                                             <button class="btn btn-danger"><img alt="plus" class="plus"
                                                                                                 src="{{ asset('build/images/close.svg') }}">
                                                             </button>

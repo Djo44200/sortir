@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+
 use App\Entity\Inscription;
 use App\Entity\Sortie;
 use App\Form\InscriptionType;
@@ -31,18 +32,18 @@ class InscriptionController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="inscription_deleteUser", methods={"DELETE"})
+     * @Route("/delete/{id}", name="inscription_deleteUser", methods={"POST"})
      */
-    public function delete(Request $request, Inscription $inscription): Response
+    public function delete(Request $request): Response
     {
-
+/*
         if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($inscription);
             $entityManager->flush();
             $this->addFlash("danger", "L'inscription vient d'être supprimée");
         }
-
+*/
         return $this->redirectToRoute('sortie_index');
     }
 
@@ -58,7 +59,7 @@ class InscriptionController extends Controller
         $form = $this->createForm(InscriptionType::class, $inscription);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
             $inscription->setDateInscription((new \DateTime('now')));
             $inscription->setSortie($sortie);
             $inscription->setParticipant($this->get('security.token_storage')->getToken()->getUser());
@@ -68,13 +69,8 @@ class InscriptionController extends Controller
             $entityManager->flush();
             $this->addFlash("success", "L'inscription vient d'être ajoutée");
             return $this->redirectToRoute('sortie_index');
-        }
 
-        return $this->render('inscription/new.html.twig', [
-            'inscription' => $inscription,
-            'form' => $form->createView(),
-            'sortie' => $sortie
-        ]);
+
     }
 
     /**
