@@ -31,11 +31,9 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Le champ pseudo ne peut pas être vide !")
      * @ORM\Column(type="string", length=180, nullable=true)
      * @return mixed
      */
-
     private $pseudo;
 
     /**
@@ -81,7 +79,6 @@ class User implements UserInterface
      */
     private $telephone;
 
-
     /**
      * @var string
      * @ORM\Column(name="img", type="string", nullable=true)
@@ -113,13 +110,11 @@ class User implements UserInterface
      */
     private $orgaSortie;
 
-
     public function __construct()
     {
         // Roles des utilisateurs
         $this->roles = ['ROLE_USER'];
         $this->actif = 1;
-
     }
 
     /**
@@ -136,16 +131,13 @@ class User implements UserInterface
     public function setSite(?Site $site): self
     {
         $this->site = $site;
-
         return $this;
     }
-
 
     public function getPseudo()
     {
         return $this->pseudo;
     }
-
 
     /**
      * @param mixed $pseudo
@@ -174,7 +166,6 @@ class User implements UserInterface
 
     /**
      * A visual identifier that represents this user.
-     *
      * @see UserInterface
      */
 
@@ -194,7 +185,6 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -209,7 +199,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -229,7 +218,6 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         $this->plainPassword = null;
     }
-
 
     /**
      * @return string|null
@@ -273,7 +261,6 @@ class User implements UserInterface
     public function setNom(string $nom): self
     {
         $this->nom = strtoupper($nom);
-
         return $this;
     }
 
@@ -285,7 +272,6 @@ class User implements UserInterface
     public function setPrenom(string $prenom): self
     {
         $this->prenom = strtoupper($prenom);
-
         return $this;
     }
 
@@ -297,7 +283,6 @@ class User implements UserInterface
     public function setTelephone(int $telephone): self
     {
         $this->telephone = $telephone;
-
         return $this;
     }
 
@@ -309,7 +294,6 @@ class User implements UserInterface
     public function setActif($actif): self
     {
         $this->actif = $actif;
-
         return $this;
     }
 

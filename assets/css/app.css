@@ -6,9 +6,7 @@
 }
 
 body{
-
-    background: darksalmon;
-
+    background: white;
     font-family: 'Comfortaa', cursive;
 }
 button a{
@@ -31,21 +29,16 @@ h2{
 
 /* ------------------ Header ------------------ */
 #containerNav{
-    background-image: linear-gradient(to right, blue, darkgrey);
-
-   /* background-color: #234b94;*/
-   /* font-family: 'Play', sans-serif;*/
+    background-image: linear-gradient(to right, #96c8ff, #e3fdff);
+    margin-bottom: 20px;
 }
 .navbar-dark{
-    background-image: linear-gradient(to right, blue, darkgray);
-
-   /* background-color: #234b94;*/
+    background-image: linear-gradient(to right, #96c8ff, #e3fdff);
 }
 
 #logo img{
-        transform: scale(0.8) ;
-        width: 90px;
-
+    transform: scale(0.5) ;
+    width: 90px;
 }
 
 .nav-link-color{
@@ -174,6 +167,12 @@ button{
 
 /* ------------------ Footer ------------------ */
 
-footer{
-background-color: #E2E3E9;
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-image: linear-gradient(to right, #96c8ff, #e3fdff);
+    margin-top: 20px;
 }

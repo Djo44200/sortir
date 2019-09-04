@@ -27,11 +27,6 @@ class RegistrationFormType extends AbstractType
                 'label'=>'Email',
                 'trim'=>true
             ])
-            ->add('pseudo', TextType::class,[
-                'label'=>'Pseudo',
-                'trim'=>true,
-                'required'=>false
-            ])
             ->add('roles', CollectionType::class, [
                 'entry_type'   => ChoiceType::class,
                 'label' => 'Role de l\'utilisateur',
@@ -44,7 +39,6 @@ class RegistrationFormType extends AbstractType
                                     ,'attr'=> array('class'=>'form-control'),
 
                 ],
-
             ])
             ->add('site',EntityType::class, [
                 'class'=>Site::class,
@@ -73,12 +67,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-
             ->add('submit', SubmitType::class, [
-
-                "label" => "Inscrire",]);
-
-        ;
+                "label" => "Inscrire"
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

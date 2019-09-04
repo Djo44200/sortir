@@ -52,11 +52,8 @@ class Inscription
     public function setId($id): self
     {
         $this->id = $id;
-
         return $this;
     }
-
-
 
 
     public function getDateInscription(): ?DateTimeInterface
@@ -67,7 +64,6 @@ class Inscription
     public function setDateInscription(DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
-
         return $this;
     }
 
@@ -79,7 +75,6 @@ class Inscription
     public function setParticipant(?User $participant): self
     {
         $this->participant = $participant;
-
         return $this;
     }
 
@@ -91,7 +86,6 @@ class Inscription
     public function setSortie(?Sortie $sortie)
     {
         $this->sortie = $sortie;
-
         return $this;
     }
 
