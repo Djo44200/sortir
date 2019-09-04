@@ -26,8 +26,8 @@ class SortieController extends Controller
 {
     /**
      * @Route("", name="sortie_index")
-     * @return Response
      * @param Request $request
+     * @return Response
      */
     public function index(Request $request, SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
@@ -51,6 +51,7 @@ class SortieController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
             }
+        }
             $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
             if ($form->isSubmitted() && $form->isValid()) {
                 if ($site || $search || $dateDebut || $dateFin || $userOrgan || $userInscris || $userNonInscri || $sortiePassee) {
@@ -107,9 +108,8 @@ class SortieController extends Controller
                 'sorties' => $listeSortie,
                 'form' => $form->createView()
             ]);
-        }
 
-        return $this->addFlash("info", "Aucunes sorties trouvées !");
+
     }
 
     /**
@@ -297,9 +297,6 @@ class SortieController extends Controller
         }
         return $this->redirectToRoute('sortie_index');
     }
-
-
-
 
 
 }
