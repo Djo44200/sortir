@@ -58,7 +58,7 @@ class InscriptionController extends Controller
         $form = $this->createForm(InscriptionType::class, $inscription);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
             $inscription->setDateInscription((new \DateTime('now')));
             $inscription->setSortie($sortie);
             $inscription->setParticipant($this->get('security.token_storage')->getToken()->getUser());
@@ -68,13 +68,8 @@ class InscriptionController extends Controller
             $entityManager->flush();
             $this->addFlash("success", "L'inscription vient d'être ajoutée");
             return $this->redirectToRoute('sortie_index');
-        }
 
-        return $this->render('inscription/new.html.twig', [
-            'inscription' => $inscription,
-            'form' => $form->createView(),
-            'sortie' => $sortie
-        ]);
+
     }
 
     /**
