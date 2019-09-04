@@ -29,11 +29,11 @@ h2{
 
 /* ------------------ Header ------------------ */
 #containerNav{
-    background-image: linear-gradient(to right, #96c8ff, #e3fdff);
+    background-image: linear-gradient(to right, #5bbdff, #94dfff);
     margin-bottom: 20px;
 }
 .navbar-dark{
-    background-image: linear-gradient(to right, #96c8ff, #e3fdff);
+    background-image: linear-gradient(to right, #5bbdff, #94dfff));
 }
 
 #logo img{
@@ -173,6 +173,6 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    background-image: linear-gradient(to right, #96c8ff, #e3fdff);
+    background-image: linear-gradient(to right, #5bbdff, #94dfff);
     margin-top: 20px;
 }
