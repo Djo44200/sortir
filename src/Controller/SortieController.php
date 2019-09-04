@@ -210,6 +210,7 @@ class SortieController extends Controller
         //pour formulaire sortie
         $form = $this->createForm(SortieModificationType::class, $sortie);
         $form->handleRequest($request);
+        $boutonPublier = $request->get("name");
         //pour formulaire lieu dans la modal
         $lieu = new Lieu();
         $formLieu = $this->createForm(LieuType::class, $lieu);
@@ -226,6 +227,9 @@ class SortieController extends Controller
         $lieux = $this->getDoctrine()->getRepository(Lieu::class)->findAll();
         //validation formulaire sortie
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($boutonPublier) {
+                $sortie->setEtat(Sortie::ETAT_CREE);
+            }
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
             $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
             $entityManager = $this->getDoctrine()->getManager();

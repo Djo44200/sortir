@@ -33,7 +33,7 @@
                     <label id="organisateur">Ville Organisatrice : </label>
                     <br>
 
-                        {{ sortie.site.nom }}
+                    {{ sortie.site.nom }}
 
                     <br><br>
                     {# modal creation ville #}
@@ -43,7 +43,8 @@
                             {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="col-1">
-                            <button type="button" data-toggle="modal" data-target="#modalVille" class="btn bouton">+</button>
+                            <button type="button" data-toggle="modal" data-target="#modalVille" class="btn bouton">+
+                            </button>
                         </div>
                     </div>
                     {# modal creation lieu #}
@@ -53,7 +54,9 @@
                             {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="col-1">
-                            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn bouton">+</button>
+                            <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                    class="btn bouton">+
+                            </button>
                         </div>
                     </div>
                     <label id="rue">Rue :</label>
@@ -69,10 +72,16 @@
             <div id="boutons">
                 <div class="row justify-content-center">
                     <div> {{ form_widget(form.modifier) }} &nbsp &nbsp &nbsp
-
-                    {{ form_end(form) }}
+                        {% if sortie.etat == 'CRE' %}
+                            <a href="{{ path('sortie_edit', {'id': sortie.id }) }}">
+                                <button class="bouton" name="publier">Publier</button>
+                            </a>&nbsp &nbsp &nbsp
+                        {% endif %}
+                        {{ form_end(form) }}
                     </div>
-                    <div> <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a> </div>
+                    <div><a href="{{ path('sortie_index') }}">
+                            <button class="bouton">Annuler</button>
+                        </a></div>
                 </div>
             </div>
 
@@ -81,7 +90,8 @@
     </div>
 
     <!-- pour le bouton '+' de Lieu et modal -->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
@@ -89,20 +99,20 @@
                         {{ form_errors(formLieu) }}
                         {{ form_start(formLieu) }}
 
-                        {{ form_label(formLieu.nomLieu)}}
-                        {{form_widget(formLieu.nomLieu)}}
+                        {{ form_label(formLieu.nomLieu) }}
+                        {{ form_widget(formLieu.nomLieu) }}
                         <br>
-                        {{ form_label(formLieu.rue)}}
-                        {{form_widget(formLieu.rue)}}
+                        {{ form_label(formLieu.rue) }}
+                        {{ form_widget(formLieu.rue) }}
                         <br>
-                        {{ form_label(formLieu.latitude)}}
-                        {{form_widget(formLieu.latitude)}}
+                        {{ form_label(formLieu.latitude) }}
+                        {{ form_widget(formLieu.latitude) }}
                         <br>
-                        {{ form_label(formLieu.longitude)}}
-                        {{form_widget(formLieu.longitude)}}
+                        {{ form_label(formLieu.longitude) }}
+                        {{ form_widget(formLieu.longitude) }}
                         <br>
-                        {{ form_label(formLieu.ville)}}
-                        {{form_widget(formLieu.ville)}}
+                        {{ form_label(formLieu.ville) }}
+                        {{ form_widget(formLieu.ville) }}
 
                         {{ form_errors(formLieu.ville) }}
 
@@ -111,6 +121,7 @@
                 <div class="modal-footer">
                     {{ form_widget(formLieu.submit) }}
                     {{ form_widget(formLieu.submit) }}
+
 
                     {{ form_end(formLieu) }}
 
@@ -123,7 +134,8 @@
     </div>
 
     <!-- pour le bouton '+' de Ville et modal -->
-    <div class="modal fade" id="modalVille" tabindex="-1" role="dialog" aria-labelledby="modalVilleLabel" aria-hidden="true">
+    <div class="modal fade" id="modalVille" tabindex="-1" role="dialog" aria-labelledby="modalVilleLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
