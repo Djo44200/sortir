@@ -1,10 +1,12 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-.jour{
+.jour {
     text-align: right;
     clear: both;
+    margin-top: 30px;
 }
-body{
+
+body {
     position: relative;
     margin: 0;
     padding-bottom: 6rem;
@@ -13,18 +15,21 @@ body{
     background: white;
     font-family: 'Comfortaa', cursive;
 }
-button a{
+
+button a {
     text-decoration: none !important;
     color: white;
 }
+
 button a:hover{
     color: white !important;
 }
 
-h1{
+h1 {
     text-align: center !important;
 }
-h2{
+
+h2 {
     color: white;
     text-align: center !important;
     margin-top: 20px;
@@ -32,45 +37,51 @@ h2{
 }
 
 /* ------------------ Header ------------------ */
-#containerNav{
+#containerNav {
     background-image: linear-gradient(to right, #5bbdff, #94dfff);
     margin-bottom: 20px;
 }
-.navbar-dark{
+
+.navbar-dark {
     background-image: linear-gradient(to right, #5bbdff, #94dfff);
 }
 
-#logo img{
+#logo img {
     transform: scale(0.5) ;
     width: 90px;
 }
 
-.nav-link-color{
-    color: #ffffffff !important;
+.nav-link-color {
+    color: white !important;
     opacity: 0.8;
     transition: opacity 0.2s;
 }
-.nav-link-color:hover{
+
+.nav-link-color:hover {
     opacity: 1;
 }
-.utilisateur{
+
+.utilisateur {
     position: absolute;
     right: 15px;
 }
-.avatarPetit{
+
+.avatarPetit {
     width: 40px;
     height: 40px;
     opacity: 0.5;
     border-radius: 50px;
 }
-.logout{
+
+.logout {
     width: 20px;
     opacity: 0.7;
 }
 .utilisateur a{
     display: inline;
 }
-.utilisateur:hover{
+
+.utilisateur:hover {
     opacity: 1;
 }
 
@@ -82,25 +93,29 @@ h2{
     width: 100%;
 }
 
-#imgUpload{
+#imgUpload {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-#profil{
+
+#profil {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
 }
-#profil button{
+
+#profil button {
     margin-top: 50px;
 }
-#avatar{
+
+#avatar {
     width: 150px;
     margin-bottom: 30px;
 }
-.bouton{
+
+.bouton {
     background-color: #535c68;
     padding: 15px;
     color: white;
@@ -108,37 +123,47 @@ h2{
     text-decoration: none !important;
     transition: background-color 0.3s;
 }
-.bouton:hover{
+
+.bouton:hover {
     background-color: #353b48;
     color: white;
 }
-button{
+
+button {
     border: none !important;
 }
-.labelProfil{
+
+.labelProfil {
     background-color: #353b48;
     padding: 5px;
     color: white;
 }
-.gauche{
+
+.gauche {
     text-align: right;
 }
-.droit{
+
+.droit {
     text-align: left;
 }
-.plus{
+
+.plus {
     width: 15px;
 }
-#site{
+
+#site {
     text-align: center;
 }
-#showSite{
+
+#showSite {
     text-align: center;
 }
-#utilisateur{
+
+#utilisateur {
     text-align: center;
 }
-#inscription{
+
+#inscription {
     text-align: center;
 }
 
