@@ -17,14 +17,18 @@
         </div>
     </form>
     <br>
-
+    <a href="{{ path('ville_new') }}">
+        <button class="btn bouton">Créer une ville</button>
+    </a>
+    <br>
+    <br>
     <div id="resultat">
         {% if rechercher is defined %}
-        <div class="text-center table-responsive">
+        <div class="text-center table-responsive-xl">
             <table class="table ">
                 <thead>
                 <tr>
-                    <th>Id</th>
+
                     <th>Nom</th>
                     <th>Code Postal</th>
                     <th>actions</th>
@@ -33,20 +37,13 @@
                 <tbody>
                 {% for ville in listeVilles %}
                     <tr>
-                        <td>{{ ville.id }}</td>
+
                         <td>{{ ville.nom }}</td>
                         <td>{{ ville.codePostal }}</td>
                         <td>
                             <div class="d-inline-block">
-                                <a href="{{ path('ville_show', {'id': ville.id}) }}" class="btn btn-primary">
-                                    <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                            </div>
-                            <div class="d-inline-block">
                                 <a href="{{ path('ville_edit', {'id': ville.id}) }}" class="btn btn-success">
                                     <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
-                            </div>
-                            <div class="d-inline-block">
-                                {{ include('ville/_delete_form.html.twig') }}
                             </div>
                         </td>
                     </tr>
@@ -55,11 +52,11 @@
             </table>
 
             {% else %}
-            <div class="text-center table-responsive">
+            <div class="text-center table-responsive-xl">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Id</th>
+
                         <th>Nom</th>
                         <th>Code Postal</th>
                         <th>actions</th>
@@ -68,21 +65,15 @@
                     <tbody>
                     {% for ville in villes %}
                         <tr>
-                            <td>{{ ville.id }}</td>
+
                             <td>{{ ville.nom }}</td>
                             <td>{{ ville.codePostal }}</td>
                             <td>
                                 <div class="d-inline-block">
-                                    <a href="{{ path('ville_show', {'id': ville.id}) }}" class="btn btn-primary">
-                                        <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                                </div>
-                                <div class="d-inline-block">
                                     <a href="{{ path('ville_edit', {'id': ville.id}) }}" class="btn btn-success">
                                         <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                                 </div>
-                                <div class="d-inline-block">
-                                    {{ include('ville/_delete_form.html.twig') }}
-                                </div>
+
                             </td>
                         </tr>
                     {% else %}
@@ -98,7 +89,5 @@
             </div>
         </div>
     </div>
-    <a href="{{ path('ville_new') }}">
-        <button class="btn bouton">Créer une ville</button>
-    </a>
+
 {% endblock %}

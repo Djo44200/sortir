@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     {{ encore_entry_link_tags('app') }}
-    <title>Connexion</title>
+    <title>{% block title %}Connexion{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa|Play&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -43,9 +43,11 @@
                             <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
                         </li>
                     {% endif %}
+                    {% if app.user.roles == ["ROLE_USER"] %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('sortie_index') }}">Accueil</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item utilisateur">
                         {% if app.user.img is empty %}
                             <a><img alt="logo" class="avatarPetit" src="{{ asset('build/images/iconebar.svg') }}"></a>

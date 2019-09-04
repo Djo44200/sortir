@@ -6,10 +6,10 @@
     <h1  class="text-muted">Liste des utilisateurs</h1>
 
     <div id="utilisateur">
-    <table class="table">
+    <table class="table table-responsive-xl">
         <thead>
         <tr>
-            <th>Id</th>
+
             <th>Pseudo</th>
             <th>Prénom</th>
             <th>Nom</th>
@@ -23,7 +23,7 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
+
                 <td>{{ user.pseudo }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.nom }}</td>

@@ -54,6 +54,11 @@ class InscriptionController extends Controller
      */
     public function new(Request $request ,Sortie $sortie): Response
     {
+        if ($sortie->getnbInscriptions()==$sortie->getNbInscriptionsMax()){
+
+            $this->addFlash("danger", "Quota d'inscription atteind !");
+            return $this->redirectToRoute('sortie_index');
+        }
 
         $inscription = new Inscription();
 

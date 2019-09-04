@@ -3,6 +3,7 @@
 {% block title %}Modifier une sortie{% endblock %}
 
 {% block body %}
+    {% if sortie.organisateur == app.user and app.user.roles == ['ROLE_ADMIN']%}
     <h1 class="text-muted">Modifier la sortie</h1>
 
     {{ form_errors(form) }}
@@ -71,7 +72,9 @@
             <br><br>
             <div id="boutons">
                 <div class="row justify-content-center">
+                    {% if sortie.organisateur == app.user and sortie.etat != "ENC"  %}
                     <div> {{ form_widget(form.modifier) }} &nbsp &nbsp &nbsp
+                        {% endif %}
                         {% if sortie.etat == 'CRE' %}
 
                             <a href="{{ path('sortie_edit', {'id': sortie.id }) }}">
@@ -167,5 +170,8 @@
             </div>
         </div>
     </div>
-
+        {% else %}
+            <h1>Retente ta chance !</h1><br>
+            <img src="{{ asset('build/images/shame.gif') }}" alt="shame"/>
+{% endif %}
 {% endblock %}

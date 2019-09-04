@@ -91,7 +91,7 @@ class UserController extends Controller
             $entityManager->remove($user);
             $entityManager->flush();
         }
-        $this->addFlash("danger", "L'utilisateur vient d'être supprimée");
+        $this->addFlash("danger", "L'utilisateur vient d'être supprimé");
         return $this->redirectToRoute('user_index');
     }
 }
