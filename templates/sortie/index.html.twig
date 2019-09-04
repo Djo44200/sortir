@@ -98,7 +98,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-12">
-                    <div class="table-responsive">
+                    <div class="">
                         {{ sorties |length }} sorties trouvées.
                         <table class="table">
                             <thead>
@@ -117,8 +117,8 @@
                             {% for sortie in sorties %}
                                 <tr>
                                     <td>{{ sortie.nom }}</td>
-                                    <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s', "Europe/Paris") : '' }}</td>
-                                    <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s', "Europe/Paris") : '' }}</td>
+                                    <td>{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i', "Europe/Paris") : '' }}</td>
+                                    <td>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i', "Europe/Paris") : '' }}</td>
                                     <td>{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
                                     <td>
                                         {% if sortie.etat == 'CRE' %}
