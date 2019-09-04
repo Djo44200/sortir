@@ -8,6 +8,7 @@ use App\Entity\Inscription;
 use App\Entity\Sortie;
 use App\Form\InscriptionType;
 use App\Repository\InscriptionRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -33,17 +34,18 @@ class InscriptionController extends Controller
 
     /**
      * @Route("/delete/{id}", name="inscription_deleteUser", methods={"POST"})
+     *
      */
-    public function delete(Request $request): Response
+    public function delete(Request $request, Inscription $inscription): Response
     {
-/*
+
         if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($inscription);
             $entityManager->flush();
             $this->addFlash("danger", "L'inscription vient d'être supprimée");
         }
-*/
+
         return $this->redirectToRoute('sortie_index');
     }
 
