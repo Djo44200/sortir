@@ -23,7 +23,7 @@ class Inscription
     private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="inscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="inscriptions",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $participant;
@@ -88,7 +88,7 @@ class Inscription
         return $this->sortie;
     }
 
-    public function setSortie(?Sortie $sortie): self
+    public function setSortie(?Sortie $sortie)
     {
         $this->sortie = $sortie;
 

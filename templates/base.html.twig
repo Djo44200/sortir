@@ -15,6 +15,7 @@
         <nav class="navbar navbar-expand-md bg navbar-dark">
             <!-- Brand -->
             <div  id="logo">
+
                 <a class="navbar-brand scroll" href="../"><img alt="logo" class="img-fluid"
                                                                src="{{ asset('build/images/home2.png') }}">
                 <span><strong>Sortir</strong>.com | </span></a>
@@ -27,34 +28,30 @@
 
             <!-- Liens -->
             <div class="collapse navbar-collapse " id="collapsibleNavbar">
-                {% if app.user %}
+
                 <ul class="navbar-nav">
+                    {% if app.user.roles == ["ROLE_ADMIN"] %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('ville_index') }}">Villes</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('site_index') }}">Sites</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('user_index') }}">Utilisateurs</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
                     {% endif %}
-                    {% if app.user is null  %}
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-color" href="{{ path('app_login') }}">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
-                        </li>
-                    {% endif %}
-                    {% if app.user %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('sortie_index') }}">Accueil</a>
                     </li>
-
                         <li class="nav-item utilisateur">
                             {% if app.user.img is empty %}
                                 <a><img alt="logo" class="avatarPetit" src="{{ asset('build/images/iconebar.svg') }}"></a>
@@ -68,12 +65,13 @@
                                 <img alt="logout" class="logout"  src="{{ asset('build/images/cancel.svg') }}">
                             </a>
                         </li>
-                    {% endif %}
+
                 </ul>
             </div>
         </nav>
     </header>
 </div>
+<br>
 {% for label, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert-{{ label }}">
@@ -81,6 +79,7 @@
         </div>
     {% endfor %}
 {% endfor %}
+<br>
     {% block body %}
     {% endblock %}
     {% block javascripts %}{% endblock %}

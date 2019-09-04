@@ -23,7 +23,9 @@
                 <p>Téléphone</p>
                 <p>Email</p>
                 <p>Ville de rattachement</p>
+                {% if app.user.roles == ["ROLE_ADMIN"] %}
                 <p>Rôle de l'utilisateur</p>
+                {% endif %}
             </div>
             <div class="col-6 droit">
                 {% if user.pseudo is empty %}
@@ -52,10 +54,12 @@
                 {% else %}
                     <p>{{ user.site }}</p>
                 {% endif %}
+                {% if app.user.roles == ["ROLE_ADMIN"] %}
                 {% if user.roles is empty %}
                     <p>-</p>
                 {% else %}
                     <p>{{ user.roles | json_encode }}</p>
+                {% endif %}
                 {% endif %}
 
             </div>

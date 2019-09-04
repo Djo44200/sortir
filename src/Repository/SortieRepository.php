@@ -73,7 +73,7 @@ class SortieRepository extends ServiceEntityRepository
 
     public function rechercheParUserInscris($userId){
         return $this->createQueryBuilder('s')
-            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant =: inscris')
+            ->innerJoin('s.inscriptions', 'i', 'WITH', 'i.participant =:inscris')
             ->setParameter('inscris',$userId)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
@@ -83,7 +83,7 @@ class SortieRepository extends ServiceEntityRepository
     public function rechercheParUserNonInscris($userId){
 
         return $this->createQueryBuilder('s')
-            ->where('s.inscriptions != inscris')
+            ->InnerJoin('s.inscriptions', 'i', 'WITH', 'i.participant !=:inscris')
             ->setParameter('inscris',$userId)
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
@@ -94,13 +94,31 @@ class SortieRepository extends ServiceEntityRepository
     public function rechercheParSortiePassee(){
 
         return $this->createQueryBuilder('s')
-            ->where('s.etat =: etat')
+            ->where('s.etat =:etat')
             ->setParameter('etat','PAS')
             ->orderBy('s.nom', 'ASC')
             ->getQuery()
             ->getResult();
 
     }
+
+
+    public function rechercheParCloture(){
+
+        $date = new \DateTime('now');
+
+        return $this->createQueryBuilder('s')
+            ->where('s.dateCloture <=:date')
+            ->setParameter('date',$date)
+            ->andWhere('s.etat !=:etat')
+            ->setParameter('etat','ANN')
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
+
     public function rechercheParSite($site)
     {
         return $this->createQueryBuilder('s')
@@ -122,6 +140,16 @@ class SortieRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+
+    }
+
+    public function rechercheUserSite($id){
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.site', 'i', 'WITH', 'i.users =:user')
+            ->setParameter('user', $id)
+            ->orderBy('s.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
 
     }
 

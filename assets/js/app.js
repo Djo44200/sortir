@@ -11,8 +11,6 @@ require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
-
 const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
@@ -55,6 +53,20 @@ $("#rechercheDeSite").keyup(function () {
         url: path, // La ressource ciblée
         type: 'GET', // Le type de la requête HTTP.
         data: 'recherche=' + recherche,
+        success: function (response) {
+            $('#resultat').html($('.table-responsive',response));
+        },
+
+    });
+});
+
+$("#afficherLieu").keyup(function () {
+    let recherche = $('#rechercher').val();
+    var path = $("#path_SortieLieu").attr("data-path");
+    $.ajax({
+        url: path, // La ressource ciblée
+        type: 'GET', // Le type de la requête HTTP.
+        data: 'lieu=' + recherche,
         success: function (response) {
             $('#resultat').html($('.table-responsive',response));
         },

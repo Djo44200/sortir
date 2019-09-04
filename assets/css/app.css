@@ -6,7 +6,9 @@
 }
 
 body{
+
     background: darksalmon;
+
     font-family: 'Comfortaa', cursive;
 }
 button a{
@@ -138,6 +140,11 @@ button{
 #inscription{
     text-align: center;
 }
+
+.message_erreur {
+    color: red;
+}
+
 /*--------------------Social media Button--------*/
 /* Style all font awesome icons */
 .fa {
@@ -164,8 +171,6 @@ button{
     background: #55ACEE;
     color: white;
 }
-
-
 
 /* ------------------ Footer ------------------ */
 

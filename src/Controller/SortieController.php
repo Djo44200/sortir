@@ -11,14 +11,13 @@ use App\Form\SortieCancelType;
 use App\Form\SortieModificationType;
 use App\Form\SortieRechercheType;
 use App\Form\SortieType;
+use App\Form\VilleType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use \Symfony\Component\Form\FormInterface;
-use \Symfony\Component\Form\ClickableInterface;
 
 /**
  * @Route("/sortie")
@@ -30,19 +29,38 @@ class SortieController extends Controller
      */
     public function index(Request $request, SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
-
+        $sortie = new Sortie();
         $form = $this->createForm(SortieRechercheType::class);
         $form->handleRequest($request);
         $site = $form->get('Site')->getData();
         $search = $form->get('search')->getData();
         $dateDebut = $form->get('dateDebut')->getData();
         $dateFin = $form->get('dateFin')->getData();
-        $check = $form->get('check')->getData();
+        $userOrgan = $form->get('userOrgan')->getData();
+        $userInscris = $form->get('userInscris')->getData();
+        $userNonInscri = $form->get('userNonInscris')->getData();
+        $sortiePassee = $form->get('sortiePassee')->getData();
+
+        //Check des sorties à supprimer
+        $listeSortieACloturer = $entityManager->getRepository('App:Sortie')->rechercheParCloture();
+        // Mettre la liste des sorties en état PAS
+
+        if ($listeSortieACloturer) {
+            foreach ($listeSortieACloturer as $sortie) {
+                $sortie->setEtat('PAS');
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+
+            }
+
+
+
+
         $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($site || $search || $dateDebut || $dateFin || $check) {
+            if ($site || $search || $dateDebut || $dateFin || $userOrgan || $userInscris || $userNonInscri || $sortiePassee) {
                 // Recherche par site
                 if ($site) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
@@ -60,25 +78,23 @@ class SortieController extends Controller
                 if ($dateFin) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateFin($dateFin);
                 }
-                if ($dateDebut&&$dateFin){
-                    $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut,$dateFin);
+                if ($dateDebut && $dateFin) {
+                    $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut, $dateFin);
                 }
                 // Recherche par check user est organisateur
-                if (in_array('userOrgan', $check)) {
+                if ($userOrgan) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserOrga($userId);
                 }
                 // Recherche par check user est inscris à une sortie
-                if (in_array('userInscris', $check)) {
-
+                if ($userInscris) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserInscris($userId);
-
                 }
                 // Recherche par check user est nom incris à une sortie
-                if (in_array('userNonInscris', $check)) {
+                if ($userNonInscri) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserNonInscris($userId);
                 }
                 // Recherche par check d'une sortie passée
-                if (in_array('sortiePassee', $check)) {
+                if ($sortiePassee) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSortiePassee();
                 }
 
@@ -98,12 +114,18 @@ class SortieController extends Controller
             ]);
         }
 
-        $listeSortie = $sortieRepository->findAll();
 
-        return $this->render('sortie/index.html.twig', [
-            'sorties' => $listeSortie,
-            'form' => $form->createView()
-        ]);
+
+
+
+
+            // Affiche la liste de toutes les sorties
+            $listeSortie = $sortieRepository->findAll();
+            return $this->render('sortie/index.html.twig', [
+                'sorties' => $listeSortie,
+                'form' => $form->createView()
+            ]);
+        }
     }
 
     /**
@@ -111,22 +133,26 @@ class SortieController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,EntityManagerInterface $entityManager): Response
     {
         //pour formulaire sortie
         $sortie = new Sortie();
-        $lieu = new Lieu();
         $form = $this->createForm(SortieType::class, $sortie);
-        $formLieu = $this->createForm(LieuType::class, $lieu);
-
         $form->handleRequest($request);
-       //pour formulaire lieu dans la modal
 
-        $formLieu = $this->createForm(LieuType::class,$lieu);
+       //pour formulaire lieu dans la modal
+        $lieu = new Lieu();
+        $formLieu = $this->createForm(LieuType::class, $lieu);
         $formLieu->handleRequest($request);
+
+        //pour formulaire ville dans la modal
+        $ville = new Ville();
+        $formVille = $this->createForm(VilleType::class, $ville);
+        $formVille->handleRequest($request);
 
         //recuperation du site de l'utilisateur qui cree la sortie
         $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
+
         //recuperation des villes
         $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
         //recuperation des lieux
@@ -153,7 +179,6 @@ class SortieController extends Controller
             return $this->redirectToRoute('sortie_index', ['ville' => $villes, 'lieux' => $lieux, 'siteUser' => $siteUser]);
         }
 
-
         //validation formulaire lieu
         //si creation de lieu avec la modale, ajout en BDD
         if ($formLieu->isSubmitted() && $formLieu->isValid()) {
@@ -162,15 +187,26 @@ class SortieController extends Controller
             $entityManager->persist($lieu);
             $entityManager->flush();
             $this->addFlash("info", "Le lieu vient d'être créé");
-            // essai de redirection vers page precedente : return $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        //validation formulaire ville
+        //si creation de ville avec la modale, ajout en BDD
+        if ($formVille->isSubmitted() && $formVille->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ville);
+            $entityManager->flush();
+            $this->addFlash("info", "La ville vient d'être créé");
         }
 
         return $this->render('sortie/new.html.twig', [
             'form' => $form->createView(),
             'sortie' => $sortie,
             'siteUser' => $siteUser,
-            'formLieu' =>$formLieu->createView(),
-            'lieu'=>$lieu
+            'formLieu' => $formLieu->createView(),
+            'lieu' => $lieu,
+            'formVille' => $formVille->createView(),
+            'ville' => $ville
         ]);
     }
 
@@ -184,7 +220,6 @@ class SortieController extends Controller
 
         $listeParticipant = $entityManager->getRepository('App:Inscription')->findBy(['sortie' => $sortie]);
 
-
         //$listeParticipant = $entityManager->getRepository('User')->findBy(['inscriptions' => ])
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie, 'listeParticipant' => $listeParticipant
@@ -197,14 +232,18 @@ class SortieController extends Controller
     public function edit(Request $request, Sortie $sortie): Response
     {
         //pour formulaire sortie
-        $lieu = new Lieu();
         $form = $this->createForm(SortieModificationType::class, $sortie);
-
         $form->handleRequest($request);
-        //pour formulaire lieu dans la modal
 
+        //pour formulaire lieu dans la modal
+        $lieu = new Lieu();
         $formLieu = $this->createForm(LieuType::class,$lieu);
         $formLieu->handleRequest($request);
+
+        //pour formulaire ville dans la modal
+        $ville = new Ville();
+        $formVille = $this->createForm(VilleType::class, $ville);
+        $formVille->handleRequest($request);
 
         //recuperation du site de l'utilisateur qui cree la sortie
         $siteUser = $this->getDoctrine()->getRepository(Site::class)->findById([$this->get('security.token_storage')->getToken()->getUser()->getId()]);
@@ -218,15 +257,12 @@ class SortieController extends Controller
 
             //recuperation de l'organisateur pour l'ajouter a la sortie en BDD
             $sortie->setOrganisateur($this->get('security.token_storage')->getToken()->getUser());
-            //recuperation du site organisateur pour l'ajouter a la sortie en BDD
-            
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
             $this->addFlash("info", "La sortie vient d'être modifiée");
             return $this->redirectToRoute('sortie_index', ['ville' => $villes, 'lieux' => $lieux, 'siteUser' => $siteUser]);
         }
-
 
         //validation formulaire lieu
         //si creation de lieu avec la modale, ajout en BDD
@@ -239,12 +275,24 @@ class SortieController extends Controller
             // essai de redirection vers page precedente : return $this->redirect($_SERVER['HTTP_REFERER']);
         }
 
+        //validation formulaire ville
+        //si creation de ville avec la modale, ajout en BDD
+        if ($formVille->isSubmitted() && $formVille->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ville);
+            $entityManager->flush();
+            $this->addFlash("info", "La ville vient d'être créé");
+        }
+
         return $this->render('sortie/edit.html.twig', [
             'form' => $form->createView(),
             'sortie' => $sortie,
             'siteUser' => $siteUser,
             'formLieu' =>$formLieu->createView(),
-            'lieu'=>$lieu
+            'lieu'=>$lieu,
+            'formVille' => $formVille->createView(),
+            'ville' => $ville
         ]);
     }
 
