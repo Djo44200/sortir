@@ -5,6 +5,8 @@
 {% block body %}
     <h1  class="text-muted">Liste des utilisateurs</h1>
 
+    <br>
+
     <div id="utilisateur">
     <table class="table table-responsive-xl">
         <thead>
@@ -23,13 +25,36 @@
         <tbody>
         {% for user in users %}
             <tr>
-
-                <td>{{ user.pseudo }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.nom }}</td>
-                <td>0{{ user.telephone }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.site }}</td>
+                {% if user.pseudo is null %}
+                    <td>X</td>
+                {% else %}
+                    <td>{{ user.pseudo }}</td>
+                    {% endif %}
+                {% if user.prenom is null %}
+                    <td>X</td>
+                {% else %}
+                    <td>{{ user.prenom }}</td>
+                {% endif %}
+                {% if user.nom is null %}
+                    <td>X</td>
+                {% else %}
+                    <td>{{ user.nom }}</td>
+                {% endif %}
+                {% if user.telephone is null %}
+                    <td>X</td>
+                {% else %}
+                    <td>{{ user.telephone }}</td>
+                {% endif %}
+                {% if user.email is null %}
+                    <td>X</td>
+                {% else %}
+                    <td>{{ user.email }}</td>
+                {% endif %}
+                {% if user.site is null %}
+                    <td>X</td>
+                {% else %}
+                    <td>{{ user.site }}</td>
+                {% endif %}
                 <td>{{ user.roles | json_encode }}</td>
                 <td>
                     <div class="d-inline-block">

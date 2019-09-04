@@ -39,7 +39,7 @@ $("#rechercheDeVille").keyup(function () {
         type: 'GET', // Le type de la requête HTTP.
         data: 'recherche=' + recherche,
         success: function (response) {
-            $('#resultat').html($('.table-responsive',response));
+            $('#resultat').html($('.table-responsive-xl',response));
         },
 
     });
@@ -54,24 +54,23 @@ $("#rechercheDeSite").keyup(function () {
         type: 'GET', // Le type de la requête HTTP.
         data: 'recherche=' + recherche,
         success: function (response) {
-            $('#resultat').html($('.table-responsive',response));
+            $('#resultat').html($('.table-responsive-xl',response));
         },
 
     });
 });
 
-$("#afficherLieu").keyup(function () {
+$("#rechercheDeUser").keyup(function () {
     let recherche = $('#rechercher').val();
-    var path = $("#path_SortieLieu").attr("data-path");
+    var path = $("#path_adrSite").attr("data-path");
     $.ajax({
         url: path, // La ressource ciblée
         type: 'GET', // Le type de la requête HTTP.
-        data: 'lieu=' + recherche,
+        data: 'recherche=' + recherche,
         success: function (response) {
-            $('#resultat').html($('.table-responsive',response));
+            $('#resultat').html($('.table-responsive-xl',response));
         },
 
     });
 });
-
 
