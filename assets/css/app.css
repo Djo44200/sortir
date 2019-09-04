@@ -4,8 +4,12 @@
     text-align: right;
     clear: both;
 }
-
 body{
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+
     background: white;
     font-family: 'Comfortaa', cursive;
 }
@@ -43,8 +47,8 @@ h2{
 
 .nav-link-color{
     color: #ffffffff !important;
-    opacity: 0.5;
-    transition: opacity 0.3s;
+    opacity: 0.8;
+    transition: opacity 0.2s;
 }
 .nav-link-color:hover{
     opacity: 1;
@@ -70,10 +74,14 @@ h2{
     opacity: 1;
 }
 
-
 /* ------------------ Main ------------------ */
-.form-control-lg{
+
+.main {
+    margin-bottom: 50px;
+    padding: 64px;
+    width: 100%;
 }
+
 #imgUpload{
     text-align: center;
     margin-top: 20px;
@@ -168,11 +176,12 @@ button{
 /* ------------------ Footer ------------------ */
 
 footer {
-    position: fixed;
+    padding-bottom: -150px;
+    position: absolute;
+    right: 0;
     left: 0;
     bottom: 0;
     width: 100%;
     text-align: center;
     background-image: linear-gradient(to right, #5bbdff, #94dfff);
-    margin-top: 20px;
 }
