@@ -117,7 +117,6 @@
                                     </td>
                                     <td class="text-center">
                                         <div>
-
                                             {% if app.user != sortie.organisateur %}
                                                 {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
                                                     {% if sortie.estInscris(app.user) == false %}
@@ -142,7 +141,6 @@
                                     <td><a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
                                         >{{ sortie.organisateur }}</a></td>
                                     <td>
-
                                         <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
                                            class="btn btn-primary">
                                             <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>

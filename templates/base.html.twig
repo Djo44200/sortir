@@ -1,71 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Accueil{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
+    {{ encore_entry_link_tags('app') }}
+    <title>Connexion</title>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa|Play&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{ encore_entry_link_tags('app') }}
 </head>
 <body>
+
 <div class="container-fluid" id="containerNav">
     <header>
-        <nav class="navbar navbar-expand-md bg navbar-dark">
+        <nav class="navbar navbar-expand-md navbar-dark">
             <!-- Brand -->
-            <div  id="logo">
-
+            <div id="logo">
                 <a class="navbar-brand scroll" href="../"><img alt="logo" class="img-fluid"
                                                                src="{{ asset('build/images/home2.png') }}">
-                <span><strong>Sortir</strong>.com | </span></a>
+                    <span><strong>Sortir</strong>.com | </span>
+                </a>
             </div>
-
             <!-- Bouton responsive -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+
             <!-- Liens -->
             <div class="collapse navbar-collapse " id="collapsibleNavbar">
-
                 <ul class="navbar-nav">
                     {% if app.user.roles == ["ROLE_ADMIN"] %}
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('ville_index') }}">Villes</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('ville_index') }}">Villes</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('site_index') }}">Sites</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('user_index') }}">Utilisateurs</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('site_index') }}">Sites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('user_index') }}">Utilisateurs</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('lieu_index') }}">Lieux</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-color" href="{{ path('app_register') }}">Inscription</a>
+                        </li>
                     {% endif %}
                     <li class="nav-item">
                         <a class="nav-link nav-link-color" href="{{ path('sortie_index') }}">Accueil</a>
                     </li>
-                        <li class="nav-item utilisateur">
-                            {% if app.user.img is empty %}
-                                <a><img alt="logo" class="avatarPetit" src="{{ asset('build/images/iconebar.svg') }}"></a>
-                            {% else %}
-                                <img alt="logo" class="avatarPetit" src="{{ asset('uploads/photos/') }}{{ app.user.img }}">
-                            {% endif %}
-                            <a class="nav-link nav-link-color scroll" href="{{ url('user_show', { 'id' : app.user.id} )}}">
-                                Bonjour <strong>{{ app.user.pseudo }}</strong> !
-                            </a>
-                            <a class="nav-link nav-link-color scroll" href="{{ path('app_logout') }}">
-                                <img alt="logout" class="logout"  src="{{ asset('build/images/cancel.svg') }}">
-                            </a>
-                        </li>
-
+                    <li class="nav-item utilisateur">
+                        {% if app.user.img is empty %}
+                            <a><img alt="logo" class="avatarPetit" src="{{ asset('build/images/iconebar.svg') }}"></a>
+                        {% else %}
+                            <img alt="logo" class="avatarPetit" src="{{ asset('uploads/photos/') }}{{ app.user.img }}">
+                        {% endif %}
+                        <a class="nav-link nav-link-color scroll" href="{{ url('user_show', { 'id' : app.user.id} ) }}">
+                            Bonjour <strong>{{ app.user.pseudo }}</strong> !
+                        </a>
+                        <a class="nav-link nav-link-color scroll" href="{{ path('app_logout') }}">
+                            <img alt="logout" class="logout" src="{{ asset('build/images/cancel.svg') }}">
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -80,130 +77,126 @@
     {% endfor %}
 {% endfor %}
 <br>
-    {% block body %}
-    {% endblock %}
-    {% block javascripts %}{% endblock %}
+{% block body %}
+{% endblock %}
+{% block javascripts %}{% endblock %}
 <br><br><br>
 
-
+<!-- Footer -->
 <footer class="page-footer font-small blue-grey lighten-5">
+    <div class="container-fluid">
 
-            <div class="container">
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded " data-toggle="modal" data-target="#confidence">
+                    La politique de confidentialité
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded" data-toggle="modal" data-target="#condition">
+                    CGU
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="mailto:info@exemple.com">
+                    Envoyez-nous un e-mail !
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#" class="btn btn-outline-white btn-rounded" data-toggle="modal" data-target="#qui">
+                    Qui sommes nous ?
+                </a>
+            </li>
+        </ul>
+    </div>
 
-                <!-- Call to action -->
-                <ul class="list-unstyled list-inline text-center py-2">
-                    <li class="list-inline-item">
-                        <a href="#" class="btn btn-outline-white btn-rounded " data-toggle="modal"
-                           data-target="#confidence">La politique de confidentialité</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn btn-outline-white btn-rounded"data-toggle="modal"
-                           data-target="#condition">CGU</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="mailto:info@exemple.com">Envoyez-nous un e-mail !</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn btn-outline-white btn-rounded"data-toggle="modal"
-                           data-target="#qui">Qui sommes nous ?</a>
-                    </li>
-                </ul>
-                <!-- Call to action -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2019 Copyright :
+        <a href="{{ path('sortie_index') }}"> Sortir.com</a>
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+    </div>
 
+</footer>
+
+<!-- Modal (liées aux liens du footer) -->
+
+<!-- modal politique de conf -->
+<div class="modal fade" id="confidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Politique de confidentialité</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3 ">© 2019 Copyright:
-                <a href="{{ path('sortie_index') }}"> Sortir.com</a>
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-twitter"></a>
-
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
+                    libero ut eleifend facilisis. Vivamus rutrum nec sapien id fermentum.
+                    Mauris laoreet, sem vulputate fringilla egestas, libero elit viverra elit,
+                    quis venenatis metus dolor id erat. Vestibulum feugiat urna at eros accumsan,
+                    et pellentesque dui laoreet. Nam sed vestibulum lectus, in auctor orci.
+                    Vestibulum sed lacus at mauris ornare luctus. Mauris in scelerisque velit,
+                    eget consequat dui. Phasellus pulvinar non tortor semper convallis.
+                    Ut sit amet tempor lorem. Proin bibendum eros in lectus luctus, id bibendum erat consequat..</p>
             </div>
-
-            <!-- Copyright -->
-
-
-        </footer>
-
-<!-- Modal -->
-
-        <div class="modal fade" id="confidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Politique de confidentialité</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt
-                            libero ut eleifend facilisis. Vivamus rutrum nec sapien id fermentum.
-                            Mauris laoreet, sem vulputate fringilla egestas, libero elit viverra elit,
-                            quis venenatis metus dolor id erat. Vestibulum feugiat urna at eros accumsan,
-                            et pellentesque dui laoreet. Nam sed vestibulum lectus, in auctor orci.
-                            Vestibulum sed lacus at mauris ornare luctus. Mauris in scelerisque velit,
-                            eget consequat dui. Phasellus pulvinar non tortor semper convallis.
-                            Ut sit amet tempor lorem. Proin bibendum eros in lectus luctus, id bibendum erat consequat..</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
-
-        <div class="modal fade" id="condition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">CGU</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Les présentes Conditions Générales d’Utilisation (CGU)
-                            déterminent les règles d’accès et les modalités d’utilisation
-                            du service intitulé  Sortir.com accessible depuis le site web
-                            https://www. Sortir.com, et sur smartphones Android et iPhone
-                            ainsi que sur les autres supports fonctionnants avec les mêmes
-                            systèmes d’exploitation. L’utilisateur du service Sortir.com
-                            reconnait accepter, sans restriction ni réserve, l’ensemble des CGU qui vont suivre. </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+    </div>
+</div>
+<!-- modal CGU -->
+<div class="modal fade" id="condition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CGU</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Les présentes Conditions Générales d’Utilisation (CGU)
+                    déterminent les règles d’accès et les modalités d’utilisation
+                    du service intitulé Sortir.com accessible depuis le site web
+                    https://www. Sortir.com, et sur smartphones Android et iPhone
+                    ainsi que sur les autres supports fonctionnants avec les mêmes
+                    systèmes d’exploitation. L’utilisateur du service Sortir.com
+                    reconnait accepter, sans restriction ni réserve, l’ensemble des CGU qui vont suivre. </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
-
-        <div class="modal fade" id="qui" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Qui sommes nous ?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Fondé en 2019 par la société ENI, Sortir.com est une plateforme Web développée
-                            pour ses stagiaires actifs ainsi que ses anciens stagiaires.
-                            Notre amibtion est de permettre au stagiaires de crérer
-                            du lien extra-formation et ainsi développer la cohésion sociale.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+    </div>
+</div>
+<!-- modal "qui sommes-nous?" -->
+<div class="modal fade" id="qui" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Qui sommes-nous ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Fondé en 2019 par la société ENI, Sortir.com est une plateforme Web développée
+                    pour ses stagiaires actifs ainsi que ses anciens stagiaires.
+                    Notre amibtion est de permettre au stagiaires de crérer
+                    du lien extra-formation et ainsi développer la cohésion sociale.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
-
-</body>
-
+    </div>
+</div>
 {{ encore_entry_script_tags('app') }}
+</body>
 </html>
