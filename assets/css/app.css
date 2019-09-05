@@ -93,6 +93,9 @@ h2 {
     width: 100%;
 }
 
+.table-hover tr:hover > td{
+    background-color: #bfc9ff;
+}
 
 #imgUpload {
     text-align: center;
