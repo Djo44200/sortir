@@ -117,10 +117,10 @@
                             {% for sortie in sorties %}
                                 <tr>
                                     <td>{{ sortie.nom }}</td>
-                                    <td>{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i') : '' }}</td>
-                                    <td>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i') : '' }}</td>
-                                    <td>{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
-                                    <td>
+                                    <td class="text-center">{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i') : '' }}</td>
+                                    <td class="text-center">{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y') : '' }}</td>
+                                    <td class="text-center">{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
+                                    <td class="text-center">
                                         {% if sortie.etat == 'CRE' %}
                                             En création
                                         {% elseif sortie.etat == 'OUV' %}
@@ -163,7 +163,7 @@
                                             {% endif %}
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {% if sortie.organisateur != null %}
                                         <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
                                         >{{ sortie.organisateur }}</a></td>
@@ -171,7 +171,7 @@
                                         <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
                                         >{{ sortie.organisateur.pseudo }}</a></td>
                                     {% endif %}
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
                                            class="btn btn-primary link tooltip-link" data-toggle="tooltip"
                                            data-original-title="Regarder une sortie">
