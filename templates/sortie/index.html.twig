@@ -3,97 +3,97 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <h1 class="text-muted">Liste des sorties</h1>
-    <div class="jour col-11">Date du jour : {{ date('now') | date('d/m/Y') }}</div>
-</div>
-<br>
+    <div class="container-fluid">
+        <h1 class="text-muted">Liste des sorties</h1>
+        <div class="jour col-11">Date du jour : {{ date('now') | date('d/m/Y') }}</div>
+    </div>
+    <br>
 
-<div class="container-fluid">
+    <div class="container-fluid">
+        <!-- Différentes recherches ( search / site / dateDebut / DateFin / Cheack -->
+        <div class="form-group">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    {{ form_label(form.Site) }}
+                    {{ form_widget(form.Site) }}
+                    <div class="message_erreur">
+                        {{ form_errors(form.Site) }}
+                    </div>
+                    <br>
+                    {{ form_label(form.search) }}
+                    {{ form_widget(form.search) }}
+                    <div class="message_erreur">
+                        {{ form_errors(form.search) }}
+                    </div>
+                    <br>
 
-    <div class="form-group">
-        {{ form_start(form) }}
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                {{ form_label(form.Site) }}
-                {{ form_widget(form.Site) }}
-                <div class="message_erreur">
-                    {{ form_errors(form.Site) }}
-                </div>
-                <br>
-                {{ form_label(form.search) }}
-                {{ form_widget(form.search) }}
-                <div class="message_erreur">
-                    {{ form_errors(form.search) }}
-                </div>
-                <br>
-
-                <div class="row">
-                    <div class="col-6">
-                        {{ form_label(form.dateDebut) }}
-                        {{ form_widget(form.dateDebut) }}
-                        <div class="message_erreur">
-                            {{ form_errors(form.dateDebut) }}
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form_label(form.dateDebut) }}
+                            {{ form_widget(form.dateDebut) }}
+                            <div class="message_erreur">
+                                {{ form_errors(form.dateDebut) }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            {{ form_label(form.dateFin) }}
+                            {{ form_widget(form.dateFin) }}
+                            <div class="message_erreur">
+                                {{ form_errors(form.dateFin) }}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        {{ form_label(form.dateFin) }}
-                        {{ form_widget(form.dateFin) }}
+
+                </div>
+
+                <br>
+                <!-- liste des cheack -->
+                <div class="col-lg-6 col-md-6 col-sm-12 align-items-center">
+                    <div class="d-block mt-4">
+                        {{ form_widget(form.userNonInscris) }}
+                        {{ form_label(form.userNonInscris) }}
                         <div class="message_erreur">
-                            {{ form_errors(form.dateFin) }}
+                            {{ form_errors(form.userNonInscris) }}
+                        </div>
+                    </div>
+                    <div class="d-block mt-1">
+                        {{ form_widget(form.userInscris) }}
+                        {{ form_label(form.userInscris) }}
+                        <div class="message_erreur">
+                            {{ form_errors(form.userInscris) }}
+                        </div>
+                    </div>
+                    <div class="d-block mt-1">
+                        {{ form_widget(form.userOrgan) }}
+                        {{ form_label(form.userOrgan) }}
+                        <div class="message_erreur">
+                            {{ form_errors(form.userOrgan) }}
+                        </div>
+                    </div>
+                    <div class="d-block mt-1">
+                        {{ form_widget(form.sortiePassee) }}
+                        {{ form_label(form.sortiePassee) }}
+                        <div class="message_erreur">
+                            {{ form_errors(form.sortiePassee) }}
                         </div>
                     </div>
                 </div>
-
+                <br>
             </div>
+        </div>
+        <div class="col-4 mt-5 align-self-center">
+            {{ form_label(form.submit) }}
+            {{ form_widget(form.submit) }}
 
-            <br>
+            {{ form_end(form) }}
 
-            <div class="col-lg-6 col-md-6 col-sm-12 align-items-center">
-                <div class="d-block mt-4">
-                    {{ form_widget(form.userNonInscris) }}
-                    {{ form_label(form.userNonInscris) }}
-                    <div class="message_erreur">
-                        {{ form_errors(form.userNonInscris) }}
-                    </div>
-                </div>
-                <div class="d-block mt-1">
-                    {{ form_widget(form.userInscris) }}
-                    {{ form_label(form.userInscris) }}
-                    <div class="message_erreur">
-                        {{ form_errors(form.userInscris) }}
-                    </div>
-                </div>
-                <div class="d-block mt-1">
-                    {{ form_widget(form.userOrgan) }}
-                    {{ form_label(form.userOrgan) }}
-                    <div class="message_erreur">
-                        {{ form_errors(form.userOrgan) }}
-                    </div>
-                </div>
-                <div class="d-block mt-1">
-                    {{ form_widget(form.sortiePassee) }}
-                    {{ form_label(form.sortiePassee) }}
-                    <div class="message_erreur">
-                        {{ form_errors(form.sortiePassee) }}
-                    </div>
-                </div>
-            </div>
-            <br>
+            &nbsp &nbsp
+            <a href="{{ path('sortie_new') }}">
+                <button class="btn bouton">Créer une sortie</button>
+            </a>
         </div>
     </div>
-    <div class="col-4 mt-5 align-self-center">
-        {{ form_label(form.submit) }}
-        {{ form_widget(form.submit) }}
-
-        {{ form_end(form) }}
-
-        &nbsp &nbsp
-        <a href="{{ path('sortie_new') }}">
-            <button class="btn bouton">Créer une sortie</button>
-        </a>
-    </div>
-</div>
 
 
     <!-- liste resultat recherche -->
@@ -122,7 +122,8 @@
                                     <td>{{ sortie.nom }}</td>
                                     <td class="text-center">{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i') : '' }}</td>
                                     <td class="text-center">{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y') : '' }}</td>
-                                    <td class="text-center">{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
+                                    <td class="text-center">{{ sortie.nbInscriptions }}
+                                        /{{ sortie.nbInscriptionsMax }}</td>
                                     <td class="text-center">
                                         {% if sortie.etat == 'CRE' %}
                                             En création
@@ -143,7 +144,8 @@
                                                     {% if sortie.estInscris(app.user) == false %}
 
                                                         <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
-                                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                                           class="btn btn-success link tooltip-link"
+                                                           data-toggle="tooltip"
                                                            data-original-title="Vous inscrire">
                                                             <img alt="plus" class="plus"
                                                                  src="{{ asset('build/images/clic.png') }}"></a>
@@ -152,13 +154,14 @@
                                                         <form method="post"
                                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
                                                             <a
-                                                               class="link tooltip-link"
-                                                               data-toggle="tooltip"
-                                                               data-original-title="Supprimer l'inscription">
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button class="btn btn-danger"><img alt="plus" class="plus"
-                                                                                                src="{{ asset('build/images/close.svg') }}">
-                                                            </button>
+                                                                    class="link tooltip-link"
+                                                                    data-toggle="tooltip"
+                                                                    data-original-title="Supprimer l'inscription">
+                                                                <input type="hidden" name="_method" value="POST">
+                                                                <button class="btn btn-danger"><img alt="plus"
+                                                                                                    class="plus"
+                                                                                                    src="{{ asset('build/images/close.svg') }}">
+                                                                </button>
                                                             </a>
                                                         </form>
                                                     {% endif %}
@@ -180,49 +183,49 @@
                                            data-original-title="Regarder une sortie">
                                             <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
                                         {% if sortie.organisateur == app.user and sortie.etat != "ENC" and sortie.etat != "PAS" %}
-                                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
-                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
-                                           data-original-title="Mettre à jour la sortie">
-                                            <img alt="plus" class="plus"
-                                                 src="{{ asset('build/images/update.svg') }}"></a>
-
-
-                                    {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
-                                        <div class="d-inline-block">
-
-                                            <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
-                                               class="btn btn-danger tooltip-link" data-toggle="tooltip"
-                                               data-original-title="Supprimer la sortie">
+                                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                                               class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                               data-original-title="Mettre à jour la sortie">
                                                 <img alt="plus" class="plus"
-                                                     src="{{ asset('build/images/poubelle.png') }}"></a>
-                                        </div>
-
-                                    {% endif %}
+                                                     src="{{ asset('build/images/update.svg') }}"></a>
 
 
-                                {% endif %}
-                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur == app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN"%}
-                                    <div class="d-inline-block">
-                                        <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
-                                           class="btn btn-danger tooltip-link" data-toggle="tooltip"
-                                           data-original-title="Supprimer la sortie">
-                                            <img alt="plus" class="plus"
-                                                 src="{{ asset('build/images/poubelle.png') }}"></a>
-                                    </div>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="9" class="text-muted">Oups aucune sortie trouvée</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                                            {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
+                                                <div class="d-inline-block">
+
+                                                    <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
+                                                       class="btn btn-danger tooltip-link" data-toggle="tooltip"
+                                                       data-original-title="Supprimer la sortie">
+                                                        <img alt="plus" class="plus"
+                                                             src="{{ asset('build/images/poubelle.png') }}"></a>
+                                                </div>
+
+                                            {% endif %}
+
+
+                                        {% endif %}
+                                        {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur == app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN" %}
+                                            <div class="d-inline-block">
+                                                <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
+                                                   class="btn btn-danger tooltip-link" data-toggle="tooltip"
+                                                   data-original-title="Supprimer la sortie">
+                                                    <img alt="plus" class="plus"
+                                                         src="{{ asset('build/images/poubelle.png') }}"></a>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="9" class="text-muted">Oups aucune sortie trouvée</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+
 {% endblock %}

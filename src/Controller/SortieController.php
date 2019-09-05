@@ -42,64 +42,66 @@ class SortieController extends Controller
         $userInscris = $form->get('userInscris')->getData();
         $userNonInscri = $form->get('userNonInscris')->getData();
         $sortiePassee = $form->get('sortiePassee')->getData();
-        //Check des sorties à supprimer
-
-        // $listeSortieACloturer = $entityManager->getRepository('App:Sortie')->rechercheParCloture();
-        // Mettre la liste des sorties en état PAS
-        /*if ($listeSortieACloturer) {
-            foreach ($listeSortieACloturer as $sortie) {
-
-                $sortie->setEtat('PAS');
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->flush();
-            }
-        }*/
 
 
+            // Récupération de l'ID du user en session
             $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
+
             if ($form->isSubmitted() && $form->isValid()) {
+                // Vérification de données de recherches - Si au moins 1 des champs est rempli.
                 if ($site || $search || $dateDebut || $dateFin || $userOrgan || $userInscris || $userNonInscri || $sortiePassee) {
+
                     // Recherche par site
                     if ($site) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSite($site);
                     }
+
                     // Recherche par nom ( contient )
                     if ($search) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParNom($search);
                     }
+
                     // Recherche par date de début de la sortie
                     if ($dateDebut) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateDebut($dateDebut);
                     }
+
                     // Recherche par date de fin de sortie
                     if ($dateFin) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateFin($dateFin);
                     }
+
                     if ($dateDebut && $dateFin) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->recherchePardateDebutDateFin($dateDebut, $dateFin);
                     }
+
                     // Recherche par check user est organisateur
                     if ($userOrgan) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserOrga($userId);
                     }
+
                     // Recherche par check user est inscris à une sortie
                     if ($userInscris) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserInscris($userId);
                     }
+
                     // Recherche par check user est nom incris à une sortie
                     if ($userNonInscri) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParUserNonInscris($userId);
                     }
+
                     // Recherche par check d'une sortie passée
                     if ($sortiePassee) {
                         $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParSortiePassee();
                     }
 
+                    // Retourne la liste des sortie trouvée et le formulaire dans le twig
                     return $this->render('sortie/index.html.twig', [
                         'sorties' => $listeSortie,
                         'form' => $form->createView()
                     ]);
                 }
+                // Retourne la liste de toutes les sorties et le formmulaire dans le twig
                 $listeSortie = $sortieRepository->findAll();
                 return $this->render('sortie/index.html.twig', [
                     'sorties' => $listeSortie,
