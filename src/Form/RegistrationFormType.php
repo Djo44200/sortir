@@ -2,9 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Site;
 use App\Entity\User;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -23,12 +27,25 @@ class RegistrationFormType extends AbstractType
                 'label'=>'Email',
                 'trim'=>true
             ])
-            ->add('pseudo', TextType::class,[
-                'label'=>'Pseudo',
-                'trim'=>true,
-                'required'=>false
+            ->add('roles', CollectionType::class, [
+                'entry_type'   => ChoiceType::class,
+                'label' => 'Role de l\'utilisateur',
+                'entry_options'  => [
+                    'label' => false,
+                    'choices' => [
+                        'User' => 'ROLE_USER',
+                        'Admin' => 'ROLE_ADMIN'
+                    ],
+                    'attr'=> array('class'=>'form-control')
+                ],
             ])
-
+            ->add('site',EntityType::class, [
+                'class'=>Site::class,
+                'choice_label'=>'nom',
+                'label'=>'Organisme de rattachement',
+                'trim'=>true,
+                'attr'=> array('class'=>'form-control')
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -49,10 +66,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-
-                "label" => "Inscrire",]);
-
-        ;
+                "label" => "Inscrire"
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

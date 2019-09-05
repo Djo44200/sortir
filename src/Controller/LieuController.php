@@ -26,6 +26,17 @@ class LieuController extends Controller
     }
 
     /**
+     * @Route("/search", name="lieu_search", methods={"GET"})
+     */
+    public function lieu_search(LieuRepository $lieuRepository): Response
+    {
+
+        return $this->render('lieu/index.html.twig', [
+            'lieus' => $lieuRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="lieu_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -38,7 +49,7 @@ class LieuController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lieu);
             $entityManager->flush();
-
+            $this->addFlash("success", "Le lieu vient d'être ajouté");
             return $this->redirectToRoute('lieu_index');
         }
 
@@ -68,7 +79,7 @@ class LieuController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Le lieu vient d'être modifié");
             return $this->redirectToRoute('lieu_index');
         }
 
@@ -87,6 +98,7 @@ class LieuController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($lieu);
             $entityManager->flush();
+            $this->addFlash("danger", "Le lieu vient d'être supprimé");
         }
 
         return $this->redirectToRoute('lieu_index');

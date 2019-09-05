@@ -29,12 +29,12 @@ class Lieu
     private $rue;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=200)
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=200)
      */
     private $longitude;
 
@@ -68,7 +68,7 @@ class Lieu
 
     public function setNomLieu(string $nomLieu): self
     {
-        $this->nomLieu = $nomLieu;
+        $this->nomLieu = strtoupper($nomLieu);
 
         return $this;
     }
@@ -80,29 +80,29 @@ class Lieu
 
     public function setRue(string $rue): self
     {
-        $this->rue = $rue;
+        $this->rue = strtoupper($rue);
 
         return $this;
     }
 
-    public function getLatitude(): ?int
+    public function getLatitude(): ?String
     {
         return $this->latitude;
     }
 
-    public function setLatitude(int $latitude): self
+    public function setLatitude(String $latitude): self
     {
         $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitude(): ?int
+    public function getLongitude(): ?String
     {
         return $this->longitude;
     }
 
-    public function setLongitude(int $longitude): self
+    public function setLongitude(String $longitude): self
     {
         $this->longitude = $longitude;
 

@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends Controller
 {
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("/index", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -72,7 +72,7 @@ class UserController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
+            $this->addFlash("success", "Votre profil vient d'être modifiée");
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
@@ -91,7 +91,7 @@ class UserController extends Controller
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
+        $this->addFlash("danger", "L'utilisateur vient d'être supprimé");
         return $this->redirectToRoute('user_index');
     }
 }

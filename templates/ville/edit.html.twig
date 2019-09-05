@@ -3,11 +3,42 @@
 {% block title %}Edit Ville{% endblock %}
 
 {% block body %}
-    <h1>Edit Ville</h1>
+    <h1 class="text-muted">Editer une ville </h1>
 
-    {{ include('ville/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('ville_index') }}">back to list</a>
+    {{ form_start(form) }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 ">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom) }}
+                {{ form_errors(form.nom) }}
+                <br>
+                {{ form_label(form.codePostal) }}
+                {{ form_widget(form.codePostal) }}
+                {{ form_errors(form.codePostal) }}
 
-    {{ include('ville/_delete_form.html.twig') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <br>
+                {{ form_label(form.submit) }}
+                {{ form_widget(form.submit) }}
+                {{ form_end(form) }}
+            </div>
+            <div class="col-2">
+                <br>
+                <a href="{{ path('ville_index') }}">
+                    <button class="btn bouton">Retour</button>
+                </a>
+            </div>
+            <div class="col-2">
+                <br>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
 {% endblock %}

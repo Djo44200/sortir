@@ -31,17 +31,15 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Le champ pseudo ne peut pas être vide !")
      * @ORM\Column(type="string", length=180, nullable=true)
      * @return mixed
      */
-
     private $pseudo;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -81,7 +79,6 @@ class User implements UserInterface
      */
     private $telephone;
 
-
     /**
      * @var string
      * @ORM\Column(name="img", type="string", nullable=true)
@@ -108,13 +105,16 @@ class User implements UserInterface
      */
     private $inscriptions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur", orphanRemoval=true)
+     */
+    private $orgaSortie;
 
     public function __construct()
     {
         // Roles des utilisateurs
         $this->roles = ['ROLE_USER'];
         $this->actif = 1;
-
     }
 
     /**
@@ -131,16 +131,13 @@ class User implements UserInterface
     public function setSite(?Site $site): self
     {
         $this->site = $site;
-
         return $this;
     }
-
 
     public function getPseudo()
     {
         return $this->pseudo;
     }
-
 
     /**
      * @param mixed $pseudo
@@ -169,7 +166,6 @@ class User implements UserInterface
 
     /**
      * A visual identifier that represents this user.
-     *
      * @see UserInterface
      */
 
@@ -189,7 +185,6 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -204,7 +199,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -224,7 +218,6 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         $this->plainPassword = null;
     }
-
 
     /**
      * @return string|null
@@ -267,8 +260,7 @@ class User implements UserInterface
 
     public function setNom(string $nom): self
     {
-        $this->nom = $nom;
-
+        $this->nom = strtoupper($nom);
         return $this;
     }
 
@@ -279,8 +271,7 @@ class User implements UserInterface
 
     public function setPrenom(string $prenom): self
     {
-        $this->prenom = $prenom;
-
+        $this->prenom = strtoupper($prenom);
         return $this;
     }
 
@@ -292,7 +283,6 @@ class User implements UserInterface
     public function setTelephone(int $telephone): self
     {
         $this->telephone = $telephone;
-
         return $this;
     }
 
@@ -304,7 +294,6 @@ class User implements UserInterface
     public function setActif($actif): self
     {
         $this->actif = $actif;
-
         return $this;
     }
 
@@ -324,6 +313,43 @@ class User implements UserInterface
     {
         $this->img = $img;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getInscriptions()
+    {
+        return $this->inscriptions;
+    }
+
+    /**
+     * @param mixed $inscriptions
+     */
+    public function setInscriptions($inscriptions): void
+    {
+        $this->inscriptions = $inscriptions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrgaSortie()
+    {
+        return $this->orgaSortie;
+    }
+
+    /**
+     * @param mixed $orgaSortie
+     */
+    public function setOrgaSortie($orgaSortie): void
+    {
+        $this->orgaSortie = $orgaSortie;
+    }
+
+    
+
+
+
 
 
     public function __toString(): ?string

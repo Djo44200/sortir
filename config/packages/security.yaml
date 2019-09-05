@@ -24,7 +24,6 @@ security:
                     - App\Security\UserAuthenticator
             logout:
                 path: app_logout
-            logout_on_user_change: true
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -38,4 +37,18 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+       # - { path: ^/, roles: ROLE_USER }
+        - { path: ^/sortie, roles: ROLE_USER }
+        - { path: ^/ville/, roles: ROLE_ADMIN }
+        - { path: ^/ville/new, roles: ROLE_USER }
+        - { path: ^/lieu/new, roles: ROLE_USER }
+        - { path: ^/lieu/, roles: ROLE_ADMIN }
+        - { path: ^/lieu/edit, roles: ROLE_ADMIN }
+        - { path: ^/site, roles: ROLE_ADMIN }
+        - { path: ^/user/index, roles: ROLE_ADMIN }
+        - { path: ^/register, roles: ROLE_ADMIN }
+        - { path: ^/user/, roles: ROLE_USER }
+        - { path: ^/logout, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+

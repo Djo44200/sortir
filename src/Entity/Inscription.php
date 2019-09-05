@@ -23,7 +23,7 @@ class Inscription
     private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="inscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="inscriptions",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $participant;
@@ -52,11 +52,8 @@ class Inscription
     public function setId($id): self
     {
         $this->id = $id;
-
         return $this;
     }
-
-
 
 
     public function getDateInscription(): ?DateTimeInterface
@@ -67,7 +64,6 @@ class Inscription
     public function setDateInscription(DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
-
         return $this;
     }
 
@@ -79,7 +75,6 @@ class Inscription
     public function setParticipant(?User $participant): self
     {
         $this->participant = $participant;
-
         return $this;
     }
 
@@ -88,10 +83,9 @@ class Inscription
         return $this->sortie;
     }
 
-    public function setSortie(?Sortie $sortie): self
+    public function setSortie(?Sortie $sortie)
     {
         $this->sortie = $sortie;
-
         return $this;
     }
 

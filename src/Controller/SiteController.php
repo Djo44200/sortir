@@ -23,6 +23,7 @@ class SiteController extends Controller
     public function index(SiteRepository $siteRepository): Response
     {
         return $this->render('site/index.html.twig', [
+
             'sites' => $siteRepository->findAll(),
         ]);
     }
@@ -40,7 +41,7 @@ class SiteController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($site);
             $entityManager->flush();
-
+            $this->addFlash("success", "Le site vient d'être ajouté");
             return $this->redirectToRoute('site_index');
         }
 
@@ -70,7 +71,7 @@ class SiteController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Le site vient d'être modifié");
             return $this->redirectToRoute('site_index');
         }
 
@@ -89,6 +90,7 @@ class SiteController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($site);
             $entityManager->flush();
+            $this->addFlash("danger", "Le site vient d'être supprimé");
         }
 
         return $this->redirectToRoute('site_index');

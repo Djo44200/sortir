@@ -12,8 +12,19 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Ville[]    findAll()
  * @method Ville[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class VilleRepository extends ServiceEntityRepository
 {
+    public function getByMotCle($recherche) {
+        $req = $this->createQueryBuilder('v')
+            ->select('v')
+            ->where('v.nom like :recherche')
+            ->setParameter('recherche', "%$recherche%");
+        $query = $req->getQuery();
+        $result = $query->getResult();
+        return $result;
+    }
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Ville::class);

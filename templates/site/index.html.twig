@@ -1,29 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Site index{% endblock %}
+{% block title %}Liste des sites{% endblock %}
 
 {% block body %}
-    <h2>Liste des sites</h2>
+    <h1 class="text-muted">Liste des sites</h1>
+
+    <div id="path_adrSite" data-path="{{ path('site_recherche') }}"></div>
     <h3>Filtrer les sites</h3>
-    <form action="{{ path('site_recherche')}}" method="GET">
-        <div class="d-inline-block">
-            <label for="recherche">Le nom contient</label>
-        </div>
-        <div class="d-inline-block">
-            <input type="text" name="recherche" class="form-control">
-        </div>
-        <div class="d-inline-block">
-            <input type="submit" value="Rechercher">
-        </div>
 
+    <form id="rechercheDeSite">
+        <div class="d-inline-block">
+            <input type="text" name="recherche" class="form-control" id="rechercher">
+        </div>
+        <div class="d-inline-block">
+
+        </div>
     </form>
+    <br>
+    <a href="{{ path('site_new') }}">
+        <button class="btn bouton">Créer un Site</button>
+    </a>
+    <br>
+    <br>
 
-    {% if rechercher is defined %}
-        <div id="site">
-            <table class="table">
+    <div id="resultat">
+        {% if rechercher is defined %}
+        <div class="text-center table-responsive-xl">
+            <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Id</th>
+
                     <th>Nom</th>
                     <th>actions</th>
                 </tr>
@@ -31,13 +37,8 @@
                 <tbody>
                 {% for site in listeSites %}
                     <tr>
-                        <td>{{ site.id }}</td>
                         <td>{{ site.nom }}</td>
                         <td>
-                            <div class="d-inline-block">
-                                <a href="{{ path('site_show', {'id': site.id}) }}" class="btn btn-primary">
-                                    <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                            </div>
                             <div class="d-inline-block">
                                 <a href="{{ path('site_edit', {'id': site.id}) }}" class="btn btn-success">
                                     <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
@@ -51,12 +52,12 @@
                 </tbody>
             </table>
 
-    {% else %}
-            <div id="site">
-                <table class="table">
+            {% else %}
+            <div class="text-center table-responsive-xl">
+                <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Id</th>
+
                         <th>Nom</th>
                         <th>actions</th>
                     </tr>
@@ -64,13 +65,10 @@
                     <tbody>
                     {% for site in sites %}
                         <tr>
-                            <td>{{ site.id }}</td>
+
                             <td>{{ site.nom }}</td>
                             <td>
-                                <div class="d-inline-block">
-                                    <a href="{{ path('site_show', {'id': site.id}) }}" class="btn btn-primary">
-                                        <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                                </div>
+
                                 <div class="d-inline-block">
                                     <a href="{{ path('site_edit', {'id': site.id}) }}" class="btn btn-success">
                                         <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
@@ -82,19 +80,17 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="3">no records found</td>
+                            <td colspan="3">Oups ! Aucun site trouvé</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
 
-    {% endif %}
+                {% endif %}
 
-
-
-        <a href="{{ path('site_new') }}" class="bouton">
-            <img alt="plus" class="plus" src="{{ asset('build/images/add.svg') }}"> Ajouter un site
-        </a>
+            </div>
+        </div>
     </div>
+
 
 {% endblock %}

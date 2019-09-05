@@ -2,8 +2,8 @@
 {% block title %}Modifier Profil{% endblock %}
 
 {% block body %}
-
-<h2>Modifier votre profil</h2>
+    {% if app.user.id == user.id %}
+<h1  class="text-muted">Modifier votre profil</h1>
 
 <div id="profil">
     {{ form_start(form) }}
@@ -16,21 +16,33 @@
         {% endif %}
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             {{ form_row(form.pseudo) }}
             {{ form_row(form.prenom) }}
             {{ form_row(form.nom) }}
             {{ form_row(form.telephone) }}
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             {{ form_row(form.email) }}
             {{ form_row(form.plainPassword) }}
             {{ form_row(form.site) }}
         </div>
     </div>
+    <div class="row">
+        <div class="col-6">
     <button class="bouton">{{ button_label|default('Enregistrer') }}</button>
-    <button class="bouton"><a href="{{ path('user_show', { 'id' : app.user.id}) }}">Annuler</a></button>
-    {{ form_end(form) }}
-</div>
 
+    {{ form_end(form) }}
+        </div>
+        <div class="col-6">
+    <button class="bouton"><a href="{{ path('user_show', { 'id' : app.user.id}) }}">Annuler</a></button>
+        </div>
+    </div>
+</div>
+    {% else %}
+        <h1  class="text-muted">Retente ta chance</h1>
+        <br>
+        <img  class="rounded mx-auto d-block" src="{{ asset('build/images/shame.gif') }}" alt="Noooo"/>
+
+    {% endif %}
 {% endblock %}

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\VilleRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +40,7 @@ class VilleController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ville);
             $entityManager->flush();
-
+            $this->addFlash("success", "La ville vient d'être ajoutée");
             return $this->redirectToRoute('ville_index');
         }
 
@@ -68,7 +70,7 @@ class VilleController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "La ville vient d'être modifiée");
             return $this->redirectToRoute('ville_index');
         }
 
@@ -88,7 +90,21 @@ class VilleController extends Controller
             $entityManager->remove($ville);
             $entityManager->flush();
         }
-
+        $this->addFlash("danger", "La ville vient d'être supprimée");
         return $this->redirectToRoute('ville_index');
+    }
+
+    /**
+     * @Route("/recherche/", name="ville_recherche", methods={"GET"})
+     */
+    public function rechercher(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $rechercher = true;
+        $request= Request::createFromGlobals();
+        $recherche= $request->query->get('recherche');
+        $listeVilles = $entityManager->getRepository('App:Ville')->getByMotCle($recherche);
+         return $this->render("ville/index.html.twig", ["listeVilles" => $listeVilles, "rechercher" => $rechercher]);
+
+
     }
 }

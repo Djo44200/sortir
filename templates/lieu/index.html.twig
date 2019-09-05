@@ -3,39 +3,54 @@
 {% block title %}Lieu index{% endblock %}
 
 {% block body %}
-    <h1>Lieu index</h1>
-
-    <table class="table">
-        <thead>
+    <h1 class="text-muted">Liste des lieux</h1>
+    <a href="{{ path('lieu_new') }}">
+        <button class="btn bouton">Créer un lieu</button>
+    </a>
+    <br><br>
+    <div class="table-responsive-xl">
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <th>Id</th>
+
                 <th>NomLieu</th>
                 <th>Rue</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for lieu in lieus %}
-            <tr>
-                <td>{{ lieu.id }}</td>
-                <td>{{ lieu.nomLieu }}</td>
-                <td>{{ lieu.rue }}</td>
-                <td>{{ lieu.latitude }}</td>
-                <td>{{ lieu.longitude }}</td>
-                <td>
-                    <a href="{{ path('lieu_show', {'id': lieu.id}) }}" class="btn btn-primary"><img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                    <a href="{{ path('lieu_edit', {'id': lieu.id}) }}" class="btn btn-success"> <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for lieu in lieus %}
+                <tr>
 
-    <a href="{{ path('lieu_new') }}">Create new</a>
+                    <td>{{ lieu.nomLieu }}</td>
+                    <td>{{ lieu.rue }}</td>
+                    <td>{{ lieu.latitude }}</td>
+                    <td>{{ lieu.longitude }}</td>
+                    <td>
+                        <a href="{{ path('lieu_edit', {'id': lieu.id}) }}" class="btn btn-success"> <img alt="plus"
+                                                                                                         class="plus"
+                                                                                                         src="{{ asset('build/images/update.svg') }}"></a>
+                        <div class="d-inline-block">
+                            <form method="post" action="{{ path('lieu_delete', {'id': lieu.id}) }}"
+                                  onsubmit="return confirm('Êtes vous sur de vouloir supprimer ce lieu ?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lieu.id) }}">
+                                <button class="btn btn-danger"><img alt="plus" class="plus"
+                                                                    src="{{ asset('build/images/close.svg') }}">
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Oups ! Aucun lieu trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VilleRepository")
@@ -20,11 +21,13 @@ class Ville
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Type("string", message="Le nom de la ville ne peut pas contenir de chiffre.")
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="integer", length=5)
+     * @Assert\Regex(pattern = "/^[0-9]{5}$/", message="Le code postal doit être composé de 5 chiffres. ex: 44000")
      */
     private $codePostal;
 
@@ -52,7 +55,8 @@ class Ville
 
     public function setNom(string $nom): self
     {
-        $this->nom = $nom;
+        $this->nom = strtoupper($nom);
+
 
         return $this;
     }

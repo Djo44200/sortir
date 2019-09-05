@@ -1,11 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Inscription{% endblock %}
+{% block title %}Nouvelle inscription{% endblock %}
 
 {% block body %}
-    <h1>Create new Inscription</h1>
+    <h1 class="text-muted">Nouvelle inscription</h1>
 
-    {{ include('inscription/_form.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header bg-transparent border-success text-muted text-center">{{ sortie.nom }}</div>
+                    <div class="card-body text-success">
+                        <p class="card-title">Date inscription
+                            : {{ date('now') | date ('d/m/Y', "Europe/Paris") }}</p>
+                        <p class="card-text">Participant : {{ app.user.nom }} {{ app.user.prenom }}</p>
+                        <p class="card-text">Sortie : {{ sortie.nom }} </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        <div class="d-inline-block align-items-center text-center">
+                            {{ form_start(form) }}
+                            {{ form_widget(form.submit) }}
+                            {{ form_end(form) }}
 
-    <a href="{{ path('inscription_index') }}">back to list</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <a href="{{ path('sortie_index') }}">
+                        <button class="btn bouton ">Retour à la liste</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

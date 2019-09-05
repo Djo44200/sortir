@@ -3,7 +3,7 @@
 {% block title %}Site index{% endblock %}
 
 {% block body %}
-    <h2>Liste des sites</h2>
+    <h1 class="text-muted">Liste des sites</h1>
     <h3>Filtrer les sites</h3>
     <form>
         <label for="sRecherche">Le nom contient</label>
@@ -40,7 +40,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">no records found</td>
+                    <td colspan="3">Oups ! Aucun site trouvé</td>
                 </tr>
             {% endfor %}
             </tbody>
