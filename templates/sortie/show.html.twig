@@ -49,7 +49,9 @@
                             <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                         {% endif %}
                         <div class="d-inline-block">
-                            {% if sortie.etat != 'PAS' and sortie.etat !='ENC' and sortie.etat != "ANN" %}
+
+                            {% if sortie.etat != 'PAS' and sortie.etat !='ENC' and sortie.etat !='ANN' %}
+
                             <form method="post" action="{{ path('sortie_delete', {'id': sortie.id}) }}"
                                   onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cette sortie ?');">
                                 <input type="hidden" name="_method" value="DELETE">
