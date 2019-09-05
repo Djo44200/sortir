@@ -30,6 +30,12 @@ require('bootstrap-star-rating');
 require('bootstrap-star-rating/css/star-rating.css');
 require('bootstrap-star-rating/themes/krajee-svg/theme.css');
 
+//Afficher les infos bulles
+$(function()
+{
+    $(".tooltip-link").tooltip();
+});
+
 //Ajax recherches
 $("#rechercheDeVille").keyup(function () {
     let recherche = $('#rechercher').val();
@@ -73,4 +79,5 @@ $("#rechercheDeUser").keyup(function () {
 
     });
 });
+
 

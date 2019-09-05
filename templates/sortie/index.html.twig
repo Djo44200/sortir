@@ -138,18 +138,25 @@
                                             {% if app.user != sortie.organisateur %}
                                                 {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
                                                     {% if sortie.estInscris(app.user) == false %}
+
                                                         <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
-                                                           class="btn btn-success">
+                                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                                           data-original-title="Vous inscrire">
                                                             <img alt="plus" class="plus"
                                                                  src="{{ asset('build/images/clic.png') }}"></a>
                                                     {% endif %}
                                                     {% if sortie.estInscris(app.user) %}
                                                         <form method="post"
                                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
+                                                            <a href="#"
+                                                               class="link tooltip-link"
+                                                               data-toggle="tooltip"
+                                                               data-original-title="Supprimer l'inscription">
                                                             <input type="hidden" name="_method" value="POST">
                                                             <button class="btn btn-danger"><img alt="plus" class="plus"
                                                                                                 src="{{ asset('build/images/close.svg') }}">
                                                             </button>
+                                                            </a>
                                                         </form>
                                                     {% endif %}
                                                 {% endif %}
@@ -166,18 +173,21 @@
                                     {% endif %}
                                     <td>
                                         <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
-                                           class="btn btn-primary">
+                                           class="btn btn-primary link tooltip-link" data-toggle="tooltip"
+                                           data-original-title="Regarder une sortie">
                                             <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                                        {% if sortie.organisateur == app.user and sortie.etat != "ENC" and sortie.etat != "PAS"%}
-                                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
-                                               class="btn btn-success">
-                                                <img alt="plus" class="plus"
-                                                     src="{{ asset('build/images/update.svg') }}"></a>
+                                        {% if sortie.organisateur == app.user and sortie.etat != "ENC" and sortie.etat != "PAS" %}
+                                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                           data-original-title="Mettre à jour la sortie">
+                                            <img alt="plus" class="plus"
+                                                 src="{{ asset('build/images/update.svg') }}"></a>
 
-                                        {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC"%}
+                                        {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
                                         <div class="d-inline-block">
                                             <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
-                                               class="btn btn-danger">
+                                               class="btn btn-danger tooltip-link" data-toggle="tooltip"
+                                               data-original-title="Supprimer la sortie">
                                                 <img alt="plus" class="plus"
                                                      src="{{ asset('build/images/poubelle.png') }}"></a>
 
