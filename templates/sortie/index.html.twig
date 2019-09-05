@@ -195,15 +195,13 @@
                                                data-original-title="Supprimer la sortie">
                                                 <img alt="plus" class="plus"
                                                      src="{{ asset('build/images/poubelle.png') }}"></a>
-
-
                                         </div>
 
                                     {% endif %}
 
 
                                 {% endif %}
-                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user%}
+                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat !="ANN" and sortie.etat != "PAS"%}
                                     <div class="d-inline-block">
 
                                         <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
