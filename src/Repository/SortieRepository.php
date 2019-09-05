@@ -118,7 +118,7 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
-
+    // Recherche d'un site sur la page d'accueil
     public function rechercheParSite($site)
     {
         return $this->createQueryBuilder('s')
@@ -131,7 +131,7 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
-
+// Recherche d'un nom d'une sortie sur la page d'accueil
     public function recherche($search){
             return $this->createQueryBuilder('s')
             ->where('s.nom like :nom')
