@@ -2,7 +2,7 @@
 {% block title %}Modifier Profil{% endblock %}
 
 {% block body %}
-    {% if app.user.id == user.id or app.user.roles==["ROLE_ADMIN"] %}
+    {% if app.user.id == user.id %}
 <h1  class="text-muted">Modifier votre profil</h1>
 
 <div id="profil">
@@ -40,8 +40,8 @@
     </div>
 </div>
     {% else %}
-
-        <img  class="align-items-center" src="{{ asset('build/images/geek.jpg') }}" alt="Mon Image"/>
+        <h1  class="text-muted">Retente ta chance</h1>
+        <img  class="align-items-center" src="{{ asset('build/images/shame.gif') }}" alt="Noooo"/>
 
     {% endif %}
 {% endblock %}
