@@ -4,11 +4,14 @@
 
 {% block body %}
 
-    {% if (app.user.roles == ['ROLE_ADMIN']) or (sortie.organisateur==app.user) %}
+
+{% if (app.user.roles ==["ROLE_ADMIN"]) %}
+{#
+    {% if (sortie.organisateur == app.user) or (app.user.roles !=["ROLE_ADMIN"])sortie.etat !="PAS" and sortie.etat !="ANN" and sortie.etat !="ENC" and (sortie.organisateur == app.user) %}
 
     <h1 class="text-muted">Annuler la sortie</h1>
     <br>
-
+#}
 
 
 
