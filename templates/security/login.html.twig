@@ -27,47 +27,76 @@
 </div>
 
 <div class="main">
-<div class="container-fluid text-center">
-    <h1 class="text-muted">Bienvenue sur Sortir.com</h1>
-    <div class="mt-2">
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            <br>
-            <h2 class="text-muted">Connexion</h2>
-            <div class="container-fluid " id="containerLogin" >
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-8 col-sm-12">
-                        <div class="form-group ">
-                            <label for="inputEmail" class="">Email</label>
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="" required autofocus>
+    <div class="container-fluid text-center">
+        <h1 class="text-muted">Bienvenue sur Sortir.com</h1>
+        <div class="mt-2">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <br>
+                <h2 class="text-muted">Connexion</h2>
+                <div class="container-fluid " id="containerLogin" >
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5 col-md-8 col-sm-12">
+                            <div class="form-group ">
+                                <label for="inputEmail" class="">Email</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="" required autofocus>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-8 col-sm-12">
-                        <div class="form-group ">
-                            <label for="inputPassword" class="">Mot de passe</label>
-                            <input type="password" name="password" id="inputPassword" class="form-control"
-                                   placeholder="" required>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5 col-md-8 col-sm-12">
+                            <div class="form-group ">
+                                <label for="inputPassword" class="">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="" required>
+                                <a href="#" class="btn btn-outline-white btn-rounded text-secondary" data-toggle="modal" data-target="#mdpoublie" style="font-size: 14px">
+                                    Mot de passe oublié?
+                                </a>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                        </label>
                     </div>
                 </div>
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                    </label>
-                </div>
-            </div>
-            <button class="btn bouton" type="submit">
-                Connexion
-            </button>
-        </form>
+                <button class="btn bouton" type="submit">
+                    Connexion
+                </button>
+            </form>
+        </div>
     </div>
 </div>
+
+<!-- modal mot de passe oublié -->
+<div class="modal fade" id="mdpoublie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Mot de passe oublié ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-justify row">
+                <label id="email" class="col-3">Email :</label>
+                <input type="email" name="emailmdpoublie" id="emailmdpoublie" class="col-8">
+            </div>
+            <div class="container-fluid text-justify">
+                <p>Entrez votre adresse email pour recevoir un lien de réinitialisation de votre mot de passe.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Valider</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 <!-- Footer -->
 <footer class="page-footer font-small blue-grey lighten-5">
     <div class="container-fluid">
@@ -186,37 +215,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Envoyer</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal "Nous contacter" -->
-<div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Nous contacter</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Votre adresse mail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Votre message</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Envoyer</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
