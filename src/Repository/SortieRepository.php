@@ -103,16 +103,13 @@ class SortieRepository extends ServiceEntityRepository
     }
 
 
-    public function rechercheParCloture(){
+    public function rechercheParEtatOuv(){
 
         $date = new \DateTime('now');
 
         return $this->createQueryBuilder('s')
-            ->where('s.dateDebut <=:date')
-            ->setParameter('date',$date)
-            ->andWhere('s.etat !=:etat')
-            ->setParameter('etat','ANN')
-            ->orderBy('s.nom', 'ASC')
+            ->andWhere('s.etat = :etat')
+            ->setParameter('etat','OUV')
             ->getQuery()
             ->getResult();
 
