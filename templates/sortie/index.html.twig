@@ -95,97 +95,97 @@
     </div>
 </div>
 
-<!-- liste resultat recherche -->
-<div class="container-fluid mt-5">
-    <div class="form-group">
-        <div class="row">
-            <div class="col-12">
-                <div class="table-responsive-xl">
-                    {{ sorties |length }} sorties trouvées.
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Nom de la sortie</th>
-                            <th>Date de la sortie</th>
-                            <th>Clôture des incriptions</th>
-                            <th>Inscris/Places</th>
-                            <th>Etat</th>
-                            <th>Inscris</th>
-                            <th>Organisateur</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for sortie in sorties %}
-                        <tr>
-                            <td>{{ sortie.nom }}</td>
-                            <td>{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i', "Europe/Paris") : '' }}</td>
-                            <td>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i', "Europe/Paris") : '' }}</td>
-                            <td>{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
-                            <td>
-                                {% if sortie.etat == 'CRE' %}
-                                    En création
-                                {% elseif sortie.etat == 'OUV' %}
-                                    Ouverte
-                                {% elseif sortie.etat == 'ENC' %}
-                                    En cours
-                                {% elseif sortie.etat == 'PAS' %}
-                                    Passée
-                                {% elseif sortie.etat == 'ANN' %}
-                                    Fermée
-                                {% endif %}
-                            </td>
-                            <td class="text-center">
-                                <div>
-                                    {% if app.user != sortie.organisateur %}
-                                        {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
-                                            {% if sortie.estInscris(app.user) == false %}
 
-                                                <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
-                                                   class="btn btn-success link tooltip-link"
-                                                   data-toggle="tooltip"
-                                                   data-original-title="Vous inscrire">
-                                                    <img alt="plus" class="plus"
-                                                         src="{{ asset('build/images/clic.png') }}"></a>
-                                            {% endif %}
-                                            {% if sortie.estInscris(app.user) %}
-                                                <form method="post"
-                                                      action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
-                                                    <a href="#"
-                                                       class="link tooltip-link"
-                                                       data-toggle="tooltip"
-                                                       data-original-title="Supprimer l'inscription">
-                                                        <input type="hidden" name="_method" value="POST">
-                                                        <button class="btn btn-danger"><img alt="plus"
-                                                                                            class="plus"
-                                                                                            src="{{ asset('build/images/close.svg') }}">
-                                                        </button>
-                                                    </a>
-                                                </form>
-                                            {% endif %}
+    <!-- liste resultat recherche -->
+    <div class="container-fluid mt-5">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive-xl">
+                        {{ sorties |length }} sorties trouvées.
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nom de la sortie</th>
+                                <th>Date de la sortie</th>
+                                <th>Clôture des incriptions</th>
+                                <th>Inscris/Places</th>
+                                <th>Etat</th>
+                                <th>Inscris</th>
+                                <th>Organisateur</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for sortie in sorties %}
+                                <tr>
+                                    <td>{{ sortie.nom }}</td>
+                                    <td class="text-center">{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i') : '' }}</td>
+                                    <td class="text-center">{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y') : '' }}</td>
+                                    <td class="text-center">{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
+                                    <td class="text-center">
+                                        {% if sortie.etat == 'CRE' %}
+                                            En création
+                                        {% elseif sortie.etat == 'OUV' %}
+                                            Ouverte
+                                        {% elseif sortie.etat == 'ENC' %}
+                                            En cours
+                                        {% elseif sortie.etat == 'PAS' %}
+                                            Passée
+                                        {% elseif sortie.etat == 'ANN' %}
+                                            Fermée
                                         {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <div>
+                                            {% if app.user != sortie.organisateur %}
+                                                {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
+                                                    {% if sortie.estInscris(app.user) == false %}
+
+                                                        <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
+                                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                                           data-original-title="Vous inscrire">
+                                                            <img alt="plus" class="plus"
+                                                                 src="{{ asset('build/images/clic.png') }}"></a>
+                                                    {% endif %}
+                                                    {% if sortie.estInscris(app.user) %}
+                                                        <form method="post"
+                                                              action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
+                                                            <a href="#"
+                                                               class="link tooltip-link"
+                                                               data-toggle="tooltip"
+                                                               data-original-title="Supprimer l'inscription">
+                                                            <input type="hidden" name="_method" value="POST">
+                                                            <button class="btn btn-danger"><img alt="plus" class="plus"
+                                                                                                src="{{ asset('build/images/close.svg') }}">
+                                                            </button>
+                                                            </a>
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        {% if sortie.organisateur != null %}
+                                        <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
+                                        >{{ sortie.organisateur }}</a></td>
+                                    {% else %}
+                                        <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
+                                        >{{ sortie.organisateur.pseudo }}</a></td>
                                     {% endif %}
-                                </div>
-                            </td>
-                            <td>
-                                {% if sortie.organisateur != null %}
-                                <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
-                                >{{ sortie.organisateur }}</a></td>
-                            {% else %}
-                                <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
-                                >{{ sortie.organisateur.pseudo }}</a></td>
-                            {% endif %}
-                            <td>
-                                <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
-                                   class="btn btn-primary link tooltip-link" data-toggle="tooltip"
-                                   data-original-title="Regarder une sortie">
-                                    <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
-                                {% if sortie.organisateur == app.user and sortie.etat != "ENC" and sortie.etat != "PAS" %}
-                                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
-                                       class="btn btn-success link tooltip-link" data-toggle="tooltip"
-                                       data-original-title="Mettre à jour la sortie">
-                                        <img alt="plus" class="plus"
-                                             src="{{ asset('build/images/update.svg') }}"></a>
+                                    <td class="text-center">
+                                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                                           class="btn btn-primary link tooltip-link" data-toggle="tooltip"
+                                           data-original-title="Regarder une sortie">
+                                            <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
+                                        {% if sortie.organisateur == app.user and sortie.etat != "ENC" and sortie.etat != "PAS" %}
+                                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                           data-original-title="Mettre à jour la sortie">
+                                            <img alt="plus" class="plus"
+                                                 src="{{ asset('build/images/update.svg') }}"></a>
+
 
                                     {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
                                         <div class="d-inline-block">
