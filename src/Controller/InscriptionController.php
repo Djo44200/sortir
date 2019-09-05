@@ -33,14 +33,14 @@ class InscriptionController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="inscription_deleteUser", methods={"POST"})
+     * @Route("/delete/{id}", name="inscription_deleteUser")
      *
      */
-    public function delete(Request $request, Inscription $inscription): Response
+    public function delete($id): Response
     {
-
-        if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->request->get('_token'))) {
+        if ($id) {
             $entityManager = $this->getDoctrine()->getManager();
+            $inscription = $entityManager->getRepository('App:Inscription')->findOneBy(array('sortie'=>$id));
             $entityManager->remove($inscription);
             $entityManager->flush();
             $this->addFlash("danger", "L'inscription vient d'être supprimée");
