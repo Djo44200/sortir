@@ -68,7 +68,7 @@ class Lieu
 
     public function setNomLieu(string $nomLieu): self
     {
-        $this->nomLieu = strtoupper($nomLieu);
+        $this->nomLieu = mb_strtoupper($nomLieu);
 
         return $this;
     }
@@ -80,7 +80,7 @@ class Lieu
 
     public function setRue(string $rue): self
     {
-        $this->rue = strtoupper($rue);
+        $this->rue = mb_strtoupper($rue);
 
         return $this;
     }
