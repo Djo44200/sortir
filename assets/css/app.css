@@ -1,9 +1,23 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+@media print {
+    .container {
+        width: auto;
+    }
+}
+
 .jour {
     text-align: right;
     clear: both;
     margin-top: 30px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 body {
@@ -11,9 +25,10 @@ body {
     margin: 0;
     padding-bottom: 6rem;
     min-height: 100%;
-
+    height: auto;
     background: white;
     font-family: 'Comfortaa', cursive;
+    overflow-x: hidden;
 }
 
 button a {
@@ -36,10 +51,16 @@ h2 {
     margin-bottom: 20px;
 }
 
+.titreProfil {
+    color: #353b48;
+    text-align: center !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 /* ------------------ Header ------------------ */
 #containerNav {
     background-image: linear-gradient(to right, #5bbdff, #94dfff);
-    margin-bottom: 20px;
 }
 
 .navbar-dark {
