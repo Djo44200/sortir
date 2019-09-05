@@ -42,16 +42,7 @@ class SortieController extends Controller
         $userInscris = $form->get('userInscris')->getData();
         $userNonInscri = $form->get('userNonInscris')->getData();
         $sortiePassee = $form->get('sortiePassee')->getData();
-        //Check des sorties à supprimer
-        $listeSortieACloturer = $entityManager->getRepository('App:Sortie')->rechercheParCloture();
-        // Mettre la liste des sorties en état PAS
-        if ($listeSortieACloturer) {
-            foreach ($listeSortieACloturer as $sortie) {
-                $sortie->setEtat('PAS');
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->flush();
-            }
-        }
+
             $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
             if ($form->isSubmitted() && $form->isValid()) {
                 if ($site || $search || $dateDebut || $dateFin || $userOrgan || $userInscris || $userNonInscri || $sortiePassee) {
