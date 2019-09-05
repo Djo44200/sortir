@@ -45,7 +45,6 @@ class RegistrationFormType extends AbstractType
                 'choice_label'=>'nom',
                 'label'=>'Organisme de rattachement',
                 'trim'=>true,
-                'required'=>false,
                 'attr'=> array('class'=>'form-control')
             ])
             ->add('plainPassword', RepeatedType::class, [
