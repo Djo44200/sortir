@@ -194,6 +194,11 @@
                                             {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
                                                 <div class="d-inline-block">
 
+
+                                {% endif %}
+                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat !="ANN" and sortie.etat != "PAS"%}
+                                    <div class="d-inline-block">
+
                                                     <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
                                                        class="btn btn-danger tooltip-link" data-toggle="tooltip"
                                                        data-original-title="Supprimer la sortie">
@@ -203,7 +208,7 @@
 
                                             {% endif %}
 
-
+                                        {# EndIf à supprimer ? #}
                                         {% endif %}
                                         {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN" %}
                                             <div class="d-inline-block">

@@ -82,6 +82,7 @@ class SortieController extends Controller
                 // Recherche par date de fin de sortie
                 if ($dateFin) {
                     $listeSortie = $entityManager->getRepository('App:Sortie')->rechercheParDateFin($dateFin);
+
                 }
 
                 if ($dateDebut && $dateFin) {
