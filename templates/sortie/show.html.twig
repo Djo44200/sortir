@@ -44,9 +44,12 @@
             <div class="collapse" id="item3">
                 <div class="card-body">
                     <div class="d-inline-block align-items-center">
+                        {% if sortie.organisateur == app.user and app.user.roles == ['ROLE_ADMIN'] and sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
                         <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-success">
                             <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
+                        {% endif %}
                         <div class="d-inline-block">
+                            {% if sortie.etat != 'PAS' and sortie.etat !='ENC' and sortie.etat !=ANN %}
                             <form method="post" action="{{ path('sortie_delete', {'id': sortie.id}) }}"
                                   onsubmit="return confirm('Êtes vous sur de vouloir supprimer cette sortie ?');">
                                 <input type="hidden" name="_method" value="DELETE">
@@ -54,6 +57,7 @@
                                 <button class="btn btn-danger"><img alt="plus" class="plus"
                                                                     src="{{ asset('build/images/poubelle.png') }}">
                                 </button>
+                                {% endif %}
                             </form>
                             {% if app.user != sortie.organisateur %}
                                 {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
