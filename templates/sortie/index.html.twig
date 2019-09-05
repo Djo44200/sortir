@@ -184,20 +184,20 @@
                                            data-original-title="Regarder une sortie">
                                             <img alt="plus" class="plus" src="{{ asset('build/images/look.svg') }}"></a>
                                         {% if sortie.organisateur == app.user and sortie.etat != "ENC" and sortie.etat != "PAS" %}
-                                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
-                                               class="btn btn-success link tooltip-link" data-toggle="tooltip"
-                                               data-original-title="Mettre à jour la sortie">
-                                                <img alt="plus" class="plus"
-                                                     src="{{ asset('build/images/update.svg') }}"></a>
+                                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                                           class="btn btn-success link tooltip-link" data-toggle="tooltip"
+                                           data-original-title="Mettre à jour la sortie">
+                                            <img alt="plus" class="plus"
+                                                 src="{{ asset('build/images/update.svg') }}"></a>
 
 
-                                            {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
+                                        {% if sortie.etat != "PAS" and sortie.etat != "ANN" and sortie.etat != "ENC" %}
+                                        <div class="d-inline-block">
+
+
+                                            {% endif %}
+                                            {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat !="ANN" and sortie.etat != "PAS" %}
                                                 <div class="d-inline-block">
-
-
-                                {% endif %}
-                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat !="ANN" and sortie.etat != "PAS"%}
-                                    <div class="d-inline-block">
 
                                                     <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
                                                        class="btn btn-danger tooltip-link" data-toggle="tooltip"
@@ -208,17 +208,16 @@
 
                                             {% endif %}
 
-                                        {# EndIf à supprimer ? #}
-                                        {% endif %}
-                                        {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN" %}
-                                            <div class="d-inline-block">
-                                                <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
-                                                   class="btn btn-danger tooltip-link" data-toggle="tooltip"
-                                                   data-original-title="Supprimer la sortie">
-                                                    <img alt="plus" class="plus"
-                                                         src="{{ asset('build/images/poubelle.png') }}"></a>
-                                            </div>
-                                        {% endif %}
+                                            {% endif %}
+                                            {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN" %}
+                                                <div class="d-inline-block">
+                                                    <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
+                                                       class="btn btn-danger tooltip-link" data-toggle="tooltip"
+                                                       data-original-title="Supprimer la sortie">
+                                                        <img alt="plus" class="plus"
+                                                             src="{{ asset('build/images/poubelle.png') }}"></a>
+                                                </div>
+                                            {% endif %}
                                     </td>
                                 </tr>
                             {% else %}
