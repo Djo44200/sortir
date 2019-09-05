@@ -35,9 +35,8 @@ class RegistrationFormType extends AbstractType
                     'choices' => [
                         'User' => 'ROLE_USER',
                         'Admin' => 'ROLE_ADMIN'
-                    ]
-                                    ,'attr'=> array('class'=>'form-control'),
-
+                    ],
+                    'attr'=> array('class'=>'form-control')
                 ],
             ])
             ->add('site',EntityType::class, [
@@ -45,7 +44,6 @@ class RegistrationFormType extends AbstractType
                 'choice_label'=>'nom',
                 'label'=>'Organisme de rattachement',
                 'trim'=>true,
-                'required'=>false,
                 'attr'=> array('class'=>'form-control')
             ])
             ->add('plainPassword', RepeatedType::class, [

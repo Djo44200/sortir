@@ -11,26 +11,39 @@
             <div class="form-group">
                 {{ form_start(form) }}
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         {{ form_label(form.nom) }}
                         {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
-
+                        <div class="message_erreur">
+                            {{ form_errors(form.nom) }}
+                        </div>
                         {{ form_label(form.dateDebut) }}
                         {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
-
+                        <div class="message_erreur">
+                            {{ form_errors(form.dateDebut) }}
+                        </div>
                         {{ form_label(form.dateCloture) }}
                         {{ form_widget(form.dateCloture, {'attr': {'class': 'form-control'}}) }}
-
+                        <div class="message_erreur">
+                            {{ form_errors(form.dateCloture) }}
+                        </div>
                         {{ form_label(form.nbInscriptionsMax) }}
                         {{ form_widget(form.nbInscriptionsMax, {'attr': {'class': 'form-control'}}) }}
-
+                        <div class="message_erreur">
+                            {{ form_errors(form.nbInscriptionsMax) }}
+                        </div>
                         {{ form_label(form.duree) }}
                         {{ form_widget(form.duree, {'attr': {'class': 'form-control'}}) }}
-
+                        <div class="message_erreur">
+                            {{ form_errors(form.duree) }}
+                        </div>
                         {{ form_label(form.descriptionInfos) }}
                         {{ form_widget(form.descriptionInfos, {'attr': {'class': 'form-control'}}) }}
+                        <div class="message_erreur">
+                            {{ form_errors(form.descriptionInfos) }}
+                        </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         <label id="organisateur">Ville Organisatrice : </label>
                         <br>
 
@@ -83,13 +96,13 @@
                             {% endif %}
                             {{ form_end(form) }}
                         </div>
-                        <div><a href="{{ path('sortie_index') }}">
+                        <div>
+                            <a href="{{ path('sortie_index') }}">
                                 <button class="bouton">Annuler</button>
-                            </a></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -172,6 +185,6 @@
         </div>
     {% else %}
         <h1>Retente ta chance !</h1><br>
-        <img src="{{ asset('build/images/shame.gif') }}" alt="shame"/>
+        <img  class="rounded mx-auto d-block" src="{{ asset('build/images/shame.gif') }}" alt="Noooo"/>
     {% endif %}
 {% endblock %}

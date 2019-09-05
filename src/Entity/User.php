@@ -260,7 +260,7 @@ class User implements UserInterface
 
     public function setNom(string $nom): self
     {
-        $this->nom = strtoupper($nom);
+        $this->nom = mb_strtoupper($nom);
         return $this;
     }
 
@@ -271,7 +271,7 @@ class User implements UserInterface
 
     public function setPrenom(string $prenom): self
     {
-        $this->prenom = strtoupper($prenom);
+        $this->prenom = mb_strtoupper($prenom);
         return $this;
     }
 
