@@ -175,8 +175,9 @@
                                         >{{ sortie.organisateur }}</a></td>
                                     {% else %}
                                         <a href="{{ path('user_show', {'id': sortie.organisateur.id}) }}"
-                                        >{{ sortie.organisateur.pseudo }}</a></td>
+                                        >{{ sortie.organisateur.pseudo }}</a>
                                     {% endif %}
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ path('sortie_show', {'id': sortie.id}) }}"
                                            class="btn btn-primary link tooltip-link" data-toggle="tooltip"
@@ -204,7 +205,7 @@
 
 
                                         {% endif %}
-                                        {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur == app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN" %}
+                                        {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user and sortie.etat != "PAS" and sortie.etat != "ENC" and sortie.etat != "ANN" %}
                                             <div class="d-inline-block">
                                                 <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
                                                    class="btn btn-danger tooltip-link" data-toggle="tooltip"
