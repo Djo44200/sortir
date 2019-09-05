@@ -108,7 +108,7 @@ class SortieRepository extends ServiceEntityRepository
         $date = new \DateTime('now');
 
         return $this->createQueryBuilder('s')
-            ->where('s.dateCloture <=:date')
+            ->where('s.dateDebut <=:date')
             ->setParameter('date',$date)
             ->andWhere('s.etat !=:etat')
             ->setParameter('etat','ANN')
