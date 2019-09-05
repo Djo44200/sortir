@@ -203,16 +203,13 @@
 
 
                                 {% endif %}
-                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur != app.user%}
+                                {% if app.user.roles == ['ROLE_ADMIN'] and sortie.organisateur == app.user and sortie.etat != "PAS" and sortie.etat != "ANN"%}
                                     <div class="d-inline-block">
-
                                         <a href="{{ path('sortiecancel', {'id': sortie.id}) }}"
                                            class="btn btn-danger tooltip-link" data-toggle="tooltip"
                                            data-original-title="Supprimer la sortie">
                                             <img alt="plus" class="plus"
                                                  src="{{ asset('build/images/poubelle.png') }}"></a>
-
-
                                     </div>
                                 {% endif %}
                             </td>
