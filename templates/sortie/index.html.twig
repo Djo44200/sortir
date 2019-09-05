@@ -117,8 +117,8 @@
                             {% for sortie in sorties %}
                                 <tr>
                                     <td>{{ sortie.nom }}</td>
-                                    <td>{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i', "Europe/Paris") : '' }}</td>
-                                    <td>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i', "Europe/Paris") : '' }}</td>
+                                    <td>{{ sortie.dateDebut ? sortie.dateDebut|date('d/m/Y H:i') : '' }}</td>
+                                    <td>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i') : '' }}</td>
                                     <td>{{ sortie.nbInscriptions }}/{{ sortie.nbInscriptionsMax }}</td>
                                     <td>
                                         {% if sortie.etat == 'CRE' %}
