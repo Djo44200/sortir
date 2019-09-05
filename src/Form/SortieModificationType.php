@@ -56,18 +56,15 @@ class SortieModificationType extends AbstractType
                 'label'=>'Lieu',
                 'trim'=>true,
                 'attr'=> array('class'=>'form-control'),
-                'required' => false
             ])
             ->add('ville', EntityType::class, [
                 'class'=>Ville::class,
                 'mapped' => false,
-                'required' => false
             ])
             ->add('modifier', SubmitType::class, [
                 'label' => 'Modifier',
                 'attr' => array('class' => 'btn bouton')
-            ])
-            ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -35,9 +35,8 @@ class RegistrationFormType extends AbstractType
                     'choices' => [
                         'User' => 'ROLE_USER',
                         'Admin' => 'ROLE_ADMIN'
-                    ]
-                                    ,'attr'=> array('class'=>'form-control'),
-
+                    ],
+                    'attr'=> array('class'=>'form-control')
                 ],
             ])
             ->add('site',EntityType::class, [

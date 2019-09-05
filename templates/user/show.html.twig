@@ -4,7 +4,7 @@
 
 {% block body %}
 {% if app.user.id == user.id %}
-    <h2>Votre profil</h2>
+    <h1 class="text-muted">Votre profil</h1>
 {% else %}
     <h1 class="text-muted">Profil de {{ user.pseudo }}</h1>
 {% endif %}
