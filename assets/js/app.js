@@ -37,6 +37,7 @@ $(function()
 });
 
 //Ajax recherches
+
 $("#rechercheDeVille").keyup(function () {
     let recherche = $('#rechercher').val();
     var path = $("#path_adrVille").attr("data-path");
