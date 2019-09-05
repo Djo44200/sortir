@@ -61,6 +61,7 @@ h2 {
 /* ------------------ Header ------------------ */
 #containerNav {
     background-image: linear-gradient(to right, #5bbdff, #94dfff);
+    font-family: 'Chelsea Market', cursive;
 }
 
 .navbar-dark {
