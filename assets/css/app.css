@@ -227,6 +227,7 @@ button {
 /* ------------------ Footer ------------------ */
 
 footer {
+    font-family: 'Chelsea Market', cursive;
     padding-bottom: -150px;
     position: absolute;
     right: 0;
