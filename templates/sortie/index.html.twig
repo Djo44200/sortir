@@ -6,6 +6,9 @@
     <div class="container-fluid">
         <h1 class="text-muted">Liste des sorties</h1>
         <div class="jour col-11">Date du jour : {{ date('now') | date('d/m/Y') }}</div>
+        {% if app.user.roles == ['ROLE_ADMIN'] %}
+            <div class="jour col-11 "><strong>Vous êtes connecté en tant qu'administrateur.</strong></div>
+        {% endif %}
         <div class="jour col-11"> Participant : {{ app.user.nom }} {{ app.user.prenom }} {% if app.user.nom is null and app.user.prenom is null%} {{app.user.pseudo}} {% endif %}</div>
     </div>
     <br>
