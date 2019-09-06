@@ -58,7 +58,11 @@
                 {% if user.roles is empty %}
                     <p>-</p>
                 {% else %}
-                    <p>{{ user.roles | json_encode }}</p>
+                    {% if user.roles == ["ROLE_ADMIN"] %}
+                    <p>Administrateur</p>
+                        {% else %}
+                            <p>Utilisateur</p>
+                        {% endif %}
                 {% endif %}
                 {% endif %}
 
