@@ -103,22 +103,19 @@ class SortieRepository extends ServiceEntityRepository
     }
 
 
-    public function rechercheParCloture(){
+    public function rechercheParEtatOuv(){
 
         $date = new \DateTime('now');
 
         return $this->createQueryBuilder('s')
-            ->where('s.dateCloture <=:date')
-            ->setParameter('date',$date)
-            ->andWhere('s.etat !=:etat')
-            ->setParameter('etat','ANN')
-            ->orderBy('s.nom', 'ASC')
+            ->andWhere('s.etat = :etat')
+            ->setParameter('etat','OUV')
             ->getQuery()
             ->getResult();
 
     }
 
-
+    // Recherche d'un site sur la page d'accueil
     public function rechercheParSite($site)
     {
         return $this->createQueryBuilder('s')
@@ -131,7 +128,7 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
-
+// Recherche d'un nom d'une sortie sur la page d'accueil
     public function recherche($search){
             return $this->createQueryBuilder('s')
             ->where('s.nom like :nom')

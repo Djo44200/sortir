@@ -62,14 +62,17 @@
                     {% endif %}
                     <td>{{ user.roles | json_encode }}</td>
                     <td>
+                        {# l'admin ne peut pas modifier le profil du user
                         <div class="d-inline-block">
                             <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success">
                                 <img alt="plus" class="plus" src="{{ asset('build/images/update.svg') }}"></a>
                         </div>
+                        #}
                         <div class="d-inline-block">
                             {{ include('user/_delete_form.html.twig') }}
                         </div>
                     </td>
+
                 </tr>
             {% else %}
                 <tr>

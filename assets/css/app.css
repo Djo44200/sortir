@@ -61,6 +61,7 @@ h2 {
 /* ------------------ Header ------------------ */
 #containerNav {
     background-image: linear-gradient(to right, #5bbdff, #94dfff);
+    font-family: 'Chelsea Market', cursive;
 }
 
 .navbar-dark {
@@ -107,6 +108,7 @@ h2 {
 }
 
 /* ------------------ Main ------------------ */
+
 
 .main {
     margin-bottom: 50px;
@@ -226,6 +228,7 @@ button {
 /* ------------------ Footer ------------------ */
 
 footer {
+    font-family: 'Chelsea Market', cursive;
     padding-bottom: -150px;
     position: absolute;
     right: 0;

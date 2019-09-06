@@ -13,7 +13,7 @@
             </div>
             <div class="collapse show" id="item1">
                 <div class="card-body">
-                    <p class="card-text text-center"> <u>Date limite de l'inscription </u>: <strong>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y H:i') : '' }}</strong></p>
+                    <p class="card-text text-center"> <u>Date limite de l'inscription </u>: <strong>{{ sortie.dateCloture ? sortie.dateCloture|date('d/m/Y') : '' }}</strong></p>
                     <p class="card-text text-center"> <u>Nombre de places </u>: <strong>{{ sortie.nbInscriptionsMax }}</strong></p>
                     <p class="card-text text-center"> <u>Durée </u>: <strong>{{ sortie.duree }} minutes</strong></p>
                     <p class="card-text text-center"> <u>Description et infos </u>: <strong>{{ sortie.descriptionInfos }}</strong></p>
@@ -69,6 +69,7 @@
                                             <img alt="plus" class="plus"
                                                  src="{{ asset('build/images/clic.png') }}"></a>
                                     {% endif %}
+                                    {# bouton non fonctionnel
                                     {% if sortie.estInscris(app.user) %}
                                         <form method="post"
                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
@@ -80,6 +81,7 @@
                                             </button>
                                         </form>
                                     {% endif %}
+                                    #}
                                 {% endif %}
                             {% endif %}
                         </div>

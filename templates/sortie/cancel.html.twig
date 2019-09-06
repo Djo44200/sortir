@@ -4,7 +4,9 @@
 
 {% block body %}
 
-    {% if (app.user.roles == ['ROLE_ADMIN']) or (sortie.organisateur==app.user) %}
+
+{% if (app.user == sortie.organisateur) or app.user.roles == ["ROLE_ADMIN"] and sortie.etat != "ENC" %}
+
 
     <h1 class="text-muted">Annuler la sortie</h1>
     <br>
@@ -28,9 +30,11 @@
             </div>
             <div class="card-footer bg-transparent border-info">
                 <div class="d-inline-block align-items-center">
+
                     {{ form_start(form) }}
                     {{form_widget(form.cancel)}}
                     {{ form_end(form) }}
+
                 </div>
                 <div class="d-inline-block align-items-center">
                     <a href="{{ path('sortie_index') }}"><button class="bouton">Annuler</button></a>
