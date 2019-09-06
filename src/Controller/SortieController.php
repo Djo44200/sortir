@@ -47,12 +47,15 @@ class SortieController extends Controller
         //récupération de la liste des sorties dont les sorties sont en OUV et date de sortie > date du jour ( heure )
         $listeSortieOUV = $entityManager->getRepository('App:Sortie')->rechercheParEtatOuv();
         foreach ($listeSortieOUV as $sortie) {
-
             $dateSortie = $sortie->getDateDebut();
+            $dateDiff = date_diff($dateDuJour,$dateSortie);
+            $dateDiff1 = date_diff($dateDuJour,$dateSortie);
+            $dateDiff2 = date_diff($dateDuJour,$dateSortie);
 
-            if ($dateSortie == $dateDuJour) {
-                dump($sortie);
-                die();
+            if ($dateDiff->d == 0 and $dateDiff1->h ==2 and $dateDiff2->i >=0 ) {
+                $sortie->setEtat('ENC');
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
             }
         }
 
