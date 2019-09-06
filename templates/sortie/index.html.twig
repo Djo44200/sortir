@@ -152,7 +152,9 @@
                                                     {% endif %}
                                                     {% if sortie.estInscris(app.user) == true%}
                                                         incris
-                                                        {#<form method="post"
+                                                        {# Bouton non fonctionnel
+
+                                                        <form method="post"
                                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
                                                             <a
                                                                     class="link tooltip-link"
