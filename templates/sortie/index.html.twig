@@ -140,7 +140,7 @@
                                     <td class="text-center">
                                         <div>
                                             {% if app.user != sortie.organisateur %}
-                                                {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' %}
+                                                {% if sortie.etat != 'PAS' and sortie.etat != 'ANN' and sortie.etat != 'ENC' %}
                                                     {% if sortie.estInscris(app.user) == false %}
 
                                                         <a href="{{ path('inscription_new', {'id': sortie.id}) }}"
