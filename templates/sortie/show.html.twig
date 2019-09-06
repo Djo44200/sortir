@@ -69,6 +69,7 @@
                                             <img alt="plus" class="plus"
                                                  src="{{ asset('build/images/clic.png') }}"></a>
                                     {% endif %}
+                                    {# bouton non fonctionnel
                                     {% if sortie.estInscris(app.user) %}
                                         <form method="post"
                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
@@ -80,6 +81,7 @@
                                             </button>
                                         </form>
                                     {% endif %}
+                                    #}
                                 {% endif %}
                             {% endif %}
                         </div>
