@@ -38,6 +38,7 @@ class InscriptionController extends Controller
      */
     public function delete($id): Response
     {
+
         if ($id) {
             $entityManager = $this->getDoctrine()->getManager();
             $inscription = $entityManager->getRepository('App:Inscription')->findOneBy(array('sortie'=>$id));

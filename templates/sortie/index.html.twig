@@ -150,8 +150,9 @@
                                                             <img alt="plus" class="plus"
                                                                  src="{{ asset('build/images/clic.png') }}"></a>
                                                     {% endif %}
-                                                    {% if sortie.estInscris(app.user) %}
-                                                        <form method="post"
+                                                    {% if sortie.estInscris(app.user) == true%}
+                                                        incris
+                                                        {#<form method="post"
                                                               action="{{ path('inscription_deleteUser', {'id': sortie.id }) }}">
                                                             <a
                                                                     class="link tooltip-link"
@@ -164,6 +165,7 @@
                                                                 </button>
                                                             </a>
                                                         </form>
+                                                        #}
                                                     {% endif %}
                                                 {% endif %}
                                             {% endif %}
