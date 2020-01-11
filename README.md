@@ -1,6 +1,5 @@
 # Sortir
 Projet 2: Analyse, conception et développement d’un site d’organisation d'événements d’entreprises avec PHP et MySQL : définition de tests et d’outils de passage des tests.
-
 1 - Installer PhpStorm + Plugins
 2 - Installer WAMP 
 3 - Installer CMDER
@@ -25,7 +24,6 @@ Projet 2: Analyse, conception et développement d’un site d’organisation d'�
 OU 	=> composer require webserver symfony/routing annotations --dev symfony/profiler-pack annotation twig doctrine maker form security-csrf validator debug security
 
 10 - Installation WebPack 
-	=> yarn config set proxy http://10.100.0.248:8080
 	=> composer require symfony/webpack-encore-bundle
 	=> yarn install
 	=> yarn add --dev @symfony/webpack-encore
