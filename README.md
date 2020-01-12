@@ -16,8 +16,6 @@ Projet 2: Analyse, conception et développement d’un site d’organisation d'�
 
 7 - Installer Yarn
 
-8 - Installation de symfony flex: composer create-project symfony/skeleton "MonProjet" "3.4.*"
-
 9 - Installation des modules
 
 	=> composer req webserver
