@@ -77,6 +77,19 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 		
 		=> Compilation: yarn dev ou yarn watch
 		
+		
+11 - Installer Doctrine : php bin/console doctrine:database:create ( modifier le .env pour MAJ la connexion à la BDD et php.ini  et update avant la création)
+	
+	=> sur php.ini enlever le commentaire pdo_mysql et modifier le timezone ( UTC )
+	
+	=> composer update
 
-11 - php bin/console server:run
 
+
+12 - MAJ BDD : php bin/console doctrine:schema:update --force
+
+
+13 - php bin/console server:run
+
+/!\ Aucun compte de créer pour se connecter. Afin de palier, vous devez commenter - { path: ^/register, roles: ROLE_ADMIN } dans security.yaml et supprimer le {% extends 'base.html.twig' %} se trouvant dans register.html.twig.
+Ensuite se connecter http://127.0.0.1:8000/register
